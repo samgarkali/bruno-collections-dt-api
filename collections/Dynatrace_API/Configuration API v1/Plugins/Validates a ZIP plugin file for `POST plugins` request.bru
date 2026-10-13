@@ -1,0 +1,27 @@
+meta {
+  name: Validates a ZIP plugin file for `POST plugins` request
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{DT_TENANT_URL}}/api/config/v1/plugins/validator
+  body: none
+  auth: none
+}
+
+params:query {
+  ~jsonOnly: 
+}
+
+headers {
+  Authorization: Api-Token {{DT_API_TOKEN}}
+}
+
+docs {
+  # Validates a ZIP plugin file for `POST/plugins` request
+
+  **Auth:** Api-Token only (OAuth not supported by this endpoint). Uses `{{DT_API_TOKEN}}`.
+
+  **API token scopes:** WriteConfig
+}

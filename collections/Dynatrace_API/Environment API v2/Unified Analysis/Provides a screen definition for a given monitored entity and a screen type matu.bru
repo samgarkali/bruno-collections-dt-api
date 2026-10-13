@@ -1,0 +1,26 @@
+meta {
+  name: Provides a screen definition for a given monitored entity and a screen type matu
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{DT_TENANT_URL}}/api/v2/ua/entity
+  body: none
+  auth: inherit
+}
+
+params:query {
+  ~from: 
+  ~to: 
+}
+
+docs {
+  # Provides a screen definition for a given monitored entity and a screen type | maturity=EARLY_ADOPTER
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `unified-analysis:screen-definition:read`
+
+  **API token scopes:** unifiedAnalysis.read
+}

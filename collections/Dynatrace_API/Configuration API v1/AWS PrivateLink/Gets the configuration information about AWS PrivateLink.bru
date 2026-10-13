@@ -1,0 +1,25 @@
+meta {
+  name: Gets the configuration information about AWS PrivateLink
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{DT_TENANT_URL}}/api/config/v1/aws/privateLink
+  body: none
+  auth: none
+}
+
+headers {
+  Authorization: Api-Token {{DT_API_TOKEN}}
+}
+
+docs {
+  # Gets the configuration information about AWS PrivateLink
+
+  Gets all configuration settings for AWS PrivateLink for this tenant
+
+  **Auth:** Api-Token only (OAuth not supported by this endpoint). Uses `{{DT_API_TOKEN}}`.
+
+  **API token scopes:** ReadConfig
+}

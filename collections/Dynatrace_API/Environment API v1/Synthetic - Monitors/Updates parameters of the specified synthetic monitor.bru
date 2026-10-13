@@ -1,0 +1,93 @@
+meta {
+  name: Updates parameters of the specified synthetic monitor
+  type: http
+  seq: 4
+}
+
+put {
+  url: {{DT_TENANT_URL}}/api/v1/synthetic/monitors/:monitorId
+  body: json
+  auth: inherit
+}
+
+params:path {
+  monitorId: 
+}
+
+body:json {
+  {
+    "anomalyDetection": {
+      "loadingTimeThresholds": {
+        "enabled": true,
+        "thresholds": [
+          {
+            "requestIndex": 1,
+            "type": "TOTAL",
+            "valueMs": 100
+          }
+        ]
+      },
+      "outageHandling": {
+        "globalOutage": true,
+        "localOutage": true,
+        "localOutagePolicy": {
+          "affectedLocations": 1,
+          "consecutiveRuns": 3
+        }
+      }
+    },
+    "enabled": true,
+    "events": [],
+    "frequencyMin": 5,
+    "keyPerformanceMetrics": {
+      "loadActionKpm": "VISUALLY_COMPLETE",
+      "xhrActionKpm": "VISUALLY_COMPLETE"
+    },
+    "locations": [
+      "GEOLOCATION-9999453BE4BDB3CD",
+      "SYNTHETIC_LOCATION-DF80ACFB688C583B"
+    ],
+    "manuallyAssignedApps": [
+      "APPLICATION-4ADF0EF407C7C545"
+    ],
+    "name": "Browser Monitor Example",
+    "script": {
+      "configuration": {
+        "device": {
+          "deviceName": "Desktop",
+          "orientation": "landscape"
+        }
+      },
+      "events": [
+        {
+          "description": "Loading of \"example.com\"",
+          "type": "navigate",
+          "url": "http://example.com",
+          "wait": {
+            "waitFor": "page_complete"
+          }
+        }
+      ],
+      "type": "availability",
+      "version": "1.0"
+    },
+    "tags": [
+      "example"
+    ],
+    "type": "BROWSER"
+  }
+}
+
+docs {
+  # Updates parameters of the specified synthetic monitor
+
+  **Deprecated**
+
+  Deprecated since version 1.340.x. Please use `api/v2/synthetic/monitors/{monitorId}`
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `environment-api:synthetic-monitors:write`
+
+  **API token scopes:** ExternalSyntheticIntegration
+}

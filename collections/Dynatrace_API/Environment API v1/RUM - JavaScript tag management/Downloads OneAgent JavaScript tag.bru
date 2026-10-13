@@ -1,0 +1,31 @@
+meta {
+  name: Downloads OneAgent JavaScript tag
+  type: http
+  seq: 7
+}
+
+get {
+  url: {{DT_TENANT_URL}}/api/v1/rum/jsTag/:entity
+  body: none
+  auth: inherit
+}
+
+params:path {
+  entity: 
+}
+
+docs {
+  # Downloads OneAgent JavaScript tag
+
+  **Deprecated**
+
+  Returns the OneAgent JavaScript tag. This is a complete configuration and monitoring code to be manually inserted into your web application code.
+
+   The monitoring code is loaded as a separate file from a CDN.
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `environment-api:rum:read`
+
+  **API token scopes:** RumJavaScriptTagManagement
+}

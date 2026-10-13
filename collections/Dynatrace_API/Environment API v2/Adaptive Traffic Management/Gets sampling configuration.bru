@@ -1,0 +1,21 @@
+meta {
+  name: Gets sampling configuration
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{DT_TENANT_URL}}/api/v2/samplingConfiguration
+  body: none
+  auth: inherit
+}
+
+docs {
+  # Gets sampling configuration.
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `adaptive-traffic-management:sampling-configuration:read`
+
+  **API token scopes:** adaptiveTrafficManagement.read
+}

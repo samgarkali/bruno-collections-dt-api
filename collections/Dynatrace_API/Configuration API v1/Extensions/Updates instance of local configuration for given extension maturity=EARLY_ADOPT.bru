@@ -1,0 +1,47 @@
+meta {
+  name: Updates instance of local configuration for given extension maturity=EARLY_ADOPT
+  type: http
+  seq: 14
+}
+
+put {
+  url: {{DT_TENANT_URL}}/api/config/v1/extensions/:id/instances/:configurationId
+  body: json
+  auth: none
+}
+
+params:path {
+  id: 
+  configurationId: 
+}
+
+headers {
+  Authorization: Api-Token {{DT_API_TOKEN}}
+}
+
+body:json {
+  {
+    "activeGate": {
+      "id": "7835970235169136995",
+      "name": "ActiveGate Host Name"
+    },
+    "enabled": true,
+    "hostId": "HOST-01A7DEFA5340A86D",
+    "id": "custom.remote.python.demo",
+    "properties": {
+      "dropdownProperty": "three",
+      "password": "",
+      "serverIp": "127.0.0.1",
+      "username": "dynatrace"
+    },
+    "useGlobal": false
+  }
+}
+
+docs {
+  # Updates instance of local configuration for given extension | maturity=EARLY_ADOPTER
+
+  **Auth:** Api-Token only (OAuth not supported by this endpoint). Uses `{{DT_API_TOKEN}}`.
+
+  **API token scopes:** WriteConfig
+}

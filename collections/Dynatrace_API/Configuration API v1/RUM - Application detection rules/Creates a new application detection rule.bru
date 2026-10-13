@@ -1,0 +1,53 @@
+meta {
+  name: Creates a new application detection rule
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{DT_TENANT_URL}}/api/config/v1/applicationDetectionRules
+  body: json
+  auth: none
+}
+
+params:query {
+  ~position: 
+}
+
+headers {
+  Authorization: Api-Token {{DT_API_TOKEN}}
+}
+
+body:json {
+  {
+    "applicationIdentifier": "APPLICATION-123456",
+    "filterConfig": {
+      "applicationMatchTarget": "DOMAIN",
+      "applicationMatchType": "EQUALS",
+      "pattern": "myapp.example.com"
+    },
+    "id": "12345678-abcd-1234-abcd-1234567890ab",
+    "metadata": {
+      "clusterVersion": "Mock version",
+      "configurationVersions": [
+        4,
+        2
+      ]
+    },
+    "name": "uniqueName"
+  }
+}
+
+docs {
+  # Creates a new application detection rule
+
+  **Deprecated**
+
+  The body must not provide an ID. An ID is assigned automatically by the Dynatrace server. 
+
+  You can only create detection rules for an existing application. If you need to create a rule for an application that doesn't exist yet, [create an application first](https://dt-url.net/vt03khh) and then configure detection rules for it.
+
+  **Auth:** Api-Token only (OAuth not supported by this endpoint). Uses `{{DT_API_TOKEN}}`.
+
+  **API token scopes:** WriteConfig
+}

@@ -1,0 +1,52 @@
+meta {
+  name: Creates a new failure detection rule maturity=EARLY_ADOPTER
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{DT_TENANT_URL}}/api/config/v1/service/failureDetection/parameterSelection/rules
+  body: json
+  auth: none
+}
+
+headers {
+  Authorization: Api-Token {{DT_API_TOKEN}}
+}
+
+body:json {
+  {
+    "conditions": [
+      {
+        "attribute": "SERVICE_NAME",
+        "predicate": {
+          "ignoreCase": false,
+          "type": "STRING_STARTS_WITH",
+          "values": [
+            "shp",
+            "stg_shp"
+          ]
+        }
+      }
+    ],
+    "description": "for requests from shipping module",
+    "enabled": true,
+    "fdpId": "FDP_9",
+    "id": "R_5",
+    "name": "shipping"
+  }
+}
+
+docs {
+  # Creates a new failure detection rule | maturity=EARLY_ADOPTER
+
+  The new rule is appended to the end of the rule list. 
+
+  Rules are evaluated from top to bottom, the first matching rule applies.To enforce a particular order use the reorder request. 
+
+  The failure detection parameter set used by the rule must exist at the time of rule creation.
+
+  **Auth:** Api-Token only (OAuth not supported by this endpoint). Uses `{{DT_API_TOKEN}}`.
+
+  **API token scopes:** WriteConfig
+}

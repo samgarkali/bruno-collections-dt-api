@@ -1,0 +1,68 @@
+meta {
+  name: Creates a new naming rule
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{DT_TENANT_URL}}/api/config/v1/conditionalNaming/:type
+  body: json
+  auth: none
+}
+
+params:path {
+  type: 
+}
+
+headers {
+  Authorization: Api-Token {{DT_API_TOKEN}}
+}
+
+body:json {
+  {
+    "displayName": "TestRule",
+    "enabled": true,
+    "id": "4e88530c-edec-4e31-9cb4-3f2c63abc2b7",
+    "nameFormat": "TestNameFormat",
+    "rules": [
+      {
+        "comparisonInfo": {
+          "negate": "false",
+          "operator": "EQUALS",
+          "type": "SIMPLE_TECH",
+          "value": {
+            "type": "JAVA"
+          }
+        },
+        "key": {
+          "attribute": "PROCESS_GROUP_TECHNOLOGY"
+        }
+      },
+      {
+        "comparisonInfo": {
+          "caseSensitive": true,
+          "negate": "false",
+          "operator": "CONTAINS",
+          "type": "STRING",
+          "value": "test"
+        },
+        "key": {
+          "attribute": "PROCESS_GROUP_PREDEFINED_METADATA",
+          "dynamicKey": "EXE_NAME",
+          "type": "PROCESS_PREDEFINED_METADATA_KEY"
+        }
+      }
+    ],
+    "type": "PROCESS_GROUP"
+  }
+}
+
+docs {
+  # Creates a new naming rule
+
+  The body must not provide an ID. An ID is assigned automatically by the Dynatrace server.
+
+  **Auth:** Api-Token only (OAuth not supported by this endpoint). Uses `{{DT_API_TOKEN}}`.
+
+  **API token scopes:** WriteConfig
+}

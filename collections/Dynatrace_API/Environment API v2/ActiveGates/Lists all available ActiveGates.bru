@@ -1,0 +1,47 @@
+meta {
+  name: Lists all available ActiveGates
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{DT_TENANT_URL}}/api/v2/activeGates
+  body: none
+  auth: inherit
+}
+
+params:query {
+  ~hostname: 
+  ~osType: 
+  ~osArchitecture: 
+  ~networkAddress: 
+  ~loadBalancerAddress: 
+  ~type: 
+  ~networkZone: 
+  ~updateStatus: 
+  ~versionCompareType: 
+  ~version: 
+  ~autoUpdate: 
+  ~group: 
+  ~online: 
+  ~enabledModule: 
+  ~disabledModule: 
+  ~containerized: 
+  ~tokenState: 
+  ~tokenExpirationSet: 
+  ~fipsMode: 
+}
+
+docs {
+  # Lists all available ActiveGates
+
+  **Deprecated**
+
+  The response includes all ActiveGates that are currently connected to the environment or have been connected during last 2 hours. Deprecated since version 1.343. Use DQL Smartscape nodes to query ActiveGate data instead. See https://dt-url.net/mf03894
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `environment-api:activegates:read`, `fleet-management:activegates:read`
+
+  **API token scopes:** activeGates.read
+}

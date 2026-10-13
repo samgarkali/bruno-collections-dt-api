@@ -1,0 +1,34 @@
+meta {
+  name: Gets the audit log of your Dynatrace environment maturity=EARLY_ADOPTER
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{DT_TENANT_URL}}/api/v2/auditlogs
+  body: none
+  auth: inherit
+}
+
+params:query {
+  ~nextPageKey: 
+  ~pageSize: 
+  ~filter: 
+  ~from: 
+  ~to: 
+  ~sort: 
+}
+
+docs {
+  # Gets the audit log of your Dynatrace environment | maturity=EARLY_ADOPTER
+
+  You can limit the output by using pagination: 
+  1. Specify the number of results per page in the **pageSize** query parameter. 
+  2. Use the cursor from the **nextPageKey** field of the previous response in the **nextPageKey** query parameter to obtain subsequent pages.
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `environment-api:audit-logs:read`
+
+  **API token scopes:** auditLogs.read
+}

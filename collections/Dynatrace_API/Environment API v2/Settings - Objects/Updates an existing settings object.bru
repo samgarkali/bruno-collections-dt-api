@@ -1,0 +1,46 @@
+meta {
+  name: Updates an existing settings object
+  type: http
+  seq: 7
+}
+
+put {
+  url: {{DT_TENANT_URL}}/api/v2/settings/objects/:objectId
+  body: json
+  auth: inherit
+}
+
+params:query {
+  ~validateOnly: 
+  ~adminAccess: 
+}
+
+params:path {
+  objectId: 
+}
+
+body:json {
+  {
+    "insertAfter": "Y2ktaGdyb3VwLTEyMythZjhjOThlOS0wN2I0LTMyMGEtOTQzNi02NTEyMmVlNWY4NGQ=",
+    "insertBefore": "Y2ktaGdyb3VwLTEyMythZjhjOThlOS0wN2I0LTMyMGEtOTQzNi02NTEyMmVlNWY4NGQ=",
+    "schemaVersion": "1.0.0",
+    "updateToken": "Y2ktaGdyb3VwLTEyMythZjhjOThlOS0wN2I0LTMyMGEtOTQzNi02NTEyMmVlNWY4NGQ=",
+    "value": {
+      "autoMonitoring": true
+    }
+  }
+}
+
+docs {
+  # Updates an existing settings object
+
+  To update a property of the `secret` type you need to pass the new value unmasked. To keep the current value, send the current masked secret. You can obtain it via [GET an object](https://dt-url.net/kj036oj) endpoint. 
+
+  Some schemas don't allow passing of the masked secret. In that case you need to send the unmasked secret with every update of the object.
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `settings:objects:write`
+
+  **API token scopes:** settings.write
+}

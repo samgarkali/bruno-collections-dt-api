@@ -1,0 +1,40 @@
+meta {
+  name: Lists all available SLOs along with calculated values
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{DT_TENANT_URL}}/api/v2/slo
+  body: none
+  auth: inherit
+}
+
+params:query {
+  ~nextPageKey: 
+  ~pageSize: 
+  ~from: 
+  ~to: 
+  ~sloSelector: 
+  ~sort: 
+  ~timeFrame: 
+  ~demo: 
+  ~evaluate: 
+  ~enabledSlos: 
+  ~showGlobalSlos: 
+}
+
+docs {
+  # Lists all available SLOs along with calculated values
+
+  By default the values are calculated for the SLO's own timeframe. You can use a custom timeframe: 
+
+  1. Set the **timeFrame** parameter to `GTF`. 
+  2. Provide the timeframe in **from** and **to** parameters.
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `environment-api:slo:read`
+
+  **API token scopes:** slo.read
+}

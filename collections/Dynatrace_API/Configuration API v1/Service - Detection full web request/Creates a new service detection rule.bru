@@ -1,0 +1,77 @@
+meta {
+  name: Creates a new service detection rule
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{DT_TENANT_URL}}/api/config/v1/service/detectionRules/FULL_WEB_REQUEST
+  body: json
+  auth: none
+}
+
+params:query {
+  ~position: 
+}
+
+headers {
+  Authorization: Api-Token {{DT_API_TOKEN}}
+}
+
+body:json {
+  {
+    "applicationId": {
+      "valueOverride": "abc"
+    },
+    "conditions": [
+      {
+        "attributeType": "APPLICATION_ID",
+        "compareOperations": [
+          {
+            "ignoreCase": "false",
+            "invert": "false",
+            "type": "STRING_CONTAINS",
+            "values": [
+              "value1",
+              "value2"
+            ]
+          }
+        ]
+      }
+    ],
+    "contextRoot": {
+      "segmentsToCopyFromUrlPath": 2,
+      "transformations": [
+        {
+          "delimiter": "/",
+          "type": "BEFORE"
+        }
+      ]
+    },
+    "description": "REST API example",
+    "enabled": true,
+    "managementZones": [
+      "zone 1"
+    ],
+    "name": "My sample rule",
+    "serverName": {
+      "transformations": [
+        {
+          "delimiter": "-",
+          "type": "BEFORE"
+        }
+      ]
+    },
+    "type": "FULL_WEB_REQUEST"
+  }
+}
+
+docs {
+  # Creates a new service detection rule
+
+  The body must not provide an ID. An ID is assigned automatically by the Dynatrace server.
+
+  **Auth:** Api-Token only (OAuth not supported by this endpoint). Uses `{{DT_API_TOKEN}}`.
+
+  **API token scopes:** WriteConfig
+}

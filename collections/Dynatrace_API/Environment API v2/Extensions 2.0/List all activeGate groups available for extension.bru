@@ -1,0 +1,30 @@
+meta {
+  name: List all activeGate groups available for extension
+  type: http
+  seq: 30
+}
+
+get {
+  url: {{DT_TENANT_URL}}/api/v2/extensions/:extensionName/:extensionVersion/activeGateGroups
+  body: none
+  auth: inherit
+}
+
+params:path {
+  extensionName: 
+  extensionVersion: 
+}
+
+docs {
+  # List all activeGate groups available for extension
+
+  **Deprecated**
+
+  Deprecated since version 1.342. Use the successor API `/platform/extensions/v2` instead.
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `environment-api:extension-configurations:write`
+
+  **API token scopes:** extensionConfigurations.write
+}

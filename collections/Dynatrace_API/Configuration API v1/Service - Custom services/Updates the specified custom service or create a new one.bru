@@ -1,0 +1,51 @@
+meta {
+  name: Updates the specified custom service or create a new one
+  type: http
+  seq: 6
+}
+
+put {
+  url: {{DT_TENANT_URL}}/api/config/v1/service/customServices/:technology/:id
+  body: json
+  auth: inherit
+}
+
+params:path {
+  technology: 
+  id: 
+}
+
+body:json {
+  {
+    "enabled": true,
+    "name": "CustomService",
+    "queueEntryPoint": false,
+    "rules": [
+      {
+        "className": "com.your.company.ClassName",
+        "enabled": true,
+        "methodRules": [
+          {
+            "argumentTypes": [
+              "java.lang.String"
+            ],
+            "methodName": "AMethod",
+            "returnType": "void"
+          }
+        ]
+      }
+    ]
+  }
+}
+
+docs {
+  # Updates the specified custom service or create a new one.
+
+  Will use the config's ´order´ attribute if supplied, otherwise keeps the order of the existing config or appends if no existing config with the supplied ID was found.
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `settings:objects:write`
+
+  **API token scopes:** WriteConfig
+}

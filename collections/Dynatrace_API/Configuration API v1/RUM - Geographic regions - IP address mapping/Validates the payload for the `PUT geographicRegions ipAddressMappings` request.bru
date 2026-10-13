@@ -1,0 +1,46 @@
+meta {
+  name: Validates the payload for the `PUT geographicRegions ipAddressMappings` request
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{DT_TENANT_URL}}/api/config/v1/geographicRegions/ipAddressMappings/validator
+  body: json
+  auth: none
+}
+
+headers {
+  Authorization: Api-Token {{DT_API_TOKEN}}
+}
+
+body:json {
+  {
+    "ipAddressMappingRules": [
+      {
+        "ipAddressMappingLocation": {
+          "city": null,
+          "countryCode": null,
+          "latitude": null,
+          "longitude": null,
+          "regionCode": null
+        },
+        "ipAddressRange": {
+          "address": null,
+          "addressTo": null,
+          "subnetMask": null
+        }
+      }
+    ]
+  }
+}
+
+docs {
+  # Validates the payload for the `PUT /geographicRegions/ipAddressMappings` request
+
+  **Deprecated**
+
+  **Auth:** Api-Token only (OAuth not supported by this endpoint). Uses `{{DT_API_TOKEN}}`.
+
+  **API token scopes:** WriteConfig
+}

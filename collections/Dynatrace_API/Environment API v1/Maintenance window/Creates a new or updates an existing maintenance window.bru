@@ -1,0 +1,58 @@
+meta {
+  name: Creates a new or updates an existing maintenance window
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{DT_TENANT_URL}}/api/v1/maintenance
+  body: json
+  auth: none
+}
+
+headers {
+  Authorization: Api-Token {{DT_API_TOKEN}}
+}
+
+body:json {
+  {
+    "description": "string",
+    "id": "string",
+    "schedule": {
+      "maintenanceEnd": "string",
+      "maintenanceStart": "string",
+      "recurrence": {
+        "day": "FRIDAY",
+        "dayOfMonth": 0,
+        "duration": 0,
+        "start": "string"
+      },
+      "timezoneId": "string",
+      "type": "Day"
+    },
+    "scope": {
+      "entities": [
+        "string"
+      ],
+      "matches": [
+        {
+          "tags": null,
+          "type": null
+        }
+      ]
+    },
+    "suppressAlerts": false,
+    "suppressProblems": false,
+    "type": "Planned"
+  }
+}
+
+docs {
+  # Creates a new or updates an existing maintenance window
+
+  **Deprecated**
+
+  **Auth:** Api-Token only (OAuth not supported by this endpoint). Uses `{{DT_API_TOKEN}}`.
+
+  **API token scopes:** MaintenanceWindows
+}

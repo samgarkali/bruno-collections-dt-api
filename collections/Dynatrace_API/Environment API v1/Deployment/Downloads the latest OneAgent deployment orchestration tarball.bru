@@ -1,0 +1,27 @@
+meta {
+  name: Downloads the latest OneAgent deployment orchestration tarball
+  type: http
+  seq: 22
+}
+
+get {
+  url: {{DT_TENANT_URL}}/api/v1/deployment/orchestration/agent/:orchestrationType/latest
+  body: none
+  auth: inherit
+}
+
+params:path {
+  orchestrationType: 
+}
+
+docs {
+  # Downloads the latest OneAgent deployment orchestration tarball
+
+  Downloading the latest available deployment orchestration script tarball matching the requested Orchestration Type (ansible, puppet).
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `environment-api:deployment:download`, `fleet-management:oneagents:download`
+
+  **API token scopes:** InstallerDownload
+}

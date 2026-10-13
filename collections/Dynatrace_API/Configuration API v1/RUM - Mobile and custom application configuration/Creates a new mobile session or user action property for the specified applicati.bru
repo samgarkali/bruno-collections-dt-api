@@ -1,0 +1,42 @@
+meta {
+  name: Creates a new mobile session or user action property for the specified applicati
+  type: http
+  seq: 8
+}
+
+post {
+  url: {{DT_TENANT_URL}}/api/config/v1/applications/mobile/:applicationId/userActionAndSessionProperties
+  body: json
+  auth: none
+}
+
+params:path {
+  applicationId: 
+}
+
+headers {
+  Authorization: Api-Token {{DT_API_TOKEN}}
+}
+
+body:json {
+  {
+    "aggregation": "AVERAGE",
+    "cleanupRule": "string",
+    "displayName": "string",
+    "key": "string",
+    "name": "string",
+    "origin": "API",
+    "serverSideRequestAttribute": "string",
+    "storeAsSessionProperty": false,
+    "storeAsUserActionProperty": false,
+    "type": "DOUBLE"
+  }
+}
+
+docs {
+  # Creates a new mobile session or user action property for the specified application
+
+  **Auth:** Api-Token only (OAuth not supported by this endpoint). Uses `{{DT_API_TOKEN}}`.
+
+  **API token scopes:** WriteConfig
+}

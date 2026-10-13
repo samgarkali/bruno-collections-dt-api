@@ -1,0 +1,27 @@
+meta {
+  name: Gets the data privacy settings of the default web application
+  type: http
+  seq: 6
+}
+
+get {
+  url: {{DT_TENANT_URL}}/api/config/v1/applications/web/default/dataPrivacy
+  body: none
+  auth: none
+}
+
+headers {
+  Authorization: Api-Token {{DT_API_TOKEN}}
+}
+
+docs {
+  # Gets the data privacy settings of the default web application
+
+  Default application is pre-configured in your Dynatrace environment. By default all the traffic goes to this application. 
+
+  After you configure your own applications, all the traffic, which doesn't fit to any of your applications, goes to the default one.
+
+  **Auth:** Api-Token only (OAuth not supported by this endpoint). Uses `{{DT_API_TOKEN}}`.
+
+  **API token scopes:** ReadConfig
+}

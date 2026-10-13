@@ -1,0 +1,52 @@
+meta {
+  name: Validates the payload for the `POST activeGates autoUpdate` request
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{DT_TENANT_URL}}/api/v2/activeGates/autoUpdate/validator
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "globalSetting": "ENABLED",
+    "metadata": {
+      "clusterVersion": "1.192.1",
+      "configurationVersions": [
+        4,
+        2
+      ],
+      "currentConfigurationVersions": [
+        "1.0.4",
+        "1.23"
+      ]
+    },
+    "targetVersion": "latest",
+    "updateWindows": {
+      "windows": [
+        {
+          "id": null
+        }
+      ]
+    }
+  }
+}
+
+docs {
+  # Validates the payload for the `POST /activeGates/autoUpdate` request.
+
+  **Deprecated**
+
+  Validates the payload for the `POST /activeGates/autoUpdate` request.
+
+  **Deprecation notice:** This endpoint is deprecated. Use the Settings API endpoint `POST /api/v2/settings/objects?validateOnly=true` with schemaId `builtin:deployment.activegate.updates` and `scope=tenant` to validate the global auto-update setting of environment ActiveGates.
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `environment-api:activegates:write`, `fleet-management:activegates:write`
+
+  **API token scopes:** activeGates.write
+}

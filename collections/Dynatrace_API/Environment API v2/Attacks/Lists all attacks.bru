@@ -1,0 +1,31 @@
+meta {
+  name: Lists all attacks
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{DT_TENANT_URL}}/api/v2/attacks
+  body: none
+  auth: inherit
+}
+
+params:query {
+  ~nextPageKey: 
+  ~pageSize: 
+  ~attackSelector: 
+  ~sort: 
+  ~fields: 
+  ~from: 
+  ~to: 
+}
+
+docs {
+  # Lists all attacks
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `environment-api:attacks:read`
+
+  **API token scopes:** attacks.read
+}

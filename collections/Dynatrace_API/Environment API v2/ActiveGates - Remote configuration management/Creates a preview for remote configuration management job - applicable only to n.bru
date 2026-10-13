@@ -1,0 +1,37 @@
+meta {
+  name: Creates a preview for remote configuration management job - applicable only to n
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{DT_TENANT_URL}}/api/v2/activeGates/remoteConfigurationManagement/preview
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "entities": [
+      "0x2b7c0b02",
+      "0x4928065d"
+    ],
+    "operations": [
+      {
+        "attribute": "networkZone",
+        "operation": "set",
+        "value": "exampleNetworkZoneName"
+      }
+    ]
+  }
+}
+
+docs {
+  # Creates a preview for remote configuration management job - applicable only to network zone and ActiveGate group
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `fleet-management:activegates:write`
+
+  **API token scopes:** activeGates.write
+}

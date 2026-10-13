@@ -1,0 +1,37 @@
+meta {
+  name: Validates the payload for the `POST oneagents remoteConfigurationManagement` req
+  type: http
+  seq: 5
+}
+
+post {
+  url: {{DT_TENANT_URL}}/api/v2/oneagents/remoteConfigurationManagement/validator
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "entities": [
+      "HOST-D454A967666E7970",
+      "HOST-811760CFF2A5E872"
+    ],
+    "operations": [
+      {
+        "attribute": "networkZone",
+        "operation": "set",
+        "value": "exampleNetworkZoneName"
+      }
+    ]
+  }
+}
+
+docs {
+  # Validates the payload for the `POST /oneagents/remoteConfigurationManagement` request.
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `fleet-management:oneagents:write`
+
+  **API token scopes:** oneAgents.write
+}

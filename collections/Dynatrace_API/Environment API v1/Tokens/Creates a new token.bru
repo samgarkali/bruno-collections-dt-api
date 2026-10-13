@@ -1,0 +1,40 @@
+meta {
+  name: Creates a new token
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{DT_TENANT_URL}}/api/v1/tokens
+  body: json
+  auth: none
+}
+
+headers {
+  Authorization: Api-Token {{DT_API_TOKEN}}
+}
+
+body:json {
+  {
+    "expiresIn": {
+      "unit": "DAYS",
+      "value": 0
+    },
+    "name": "string",
+    "scopes": [
+      "InstallerDownload"
+    ]
+  }
+}
+
+docs {
+  # Creates a new token
+
+  **Deprecated**
+
+  The newly created token will be owned by the same user who owns the token used for authentication of the call.
+
+  **Auth:** Api-Token only (OAuth not supported by this endpoint). Uses `{{DT_API_TOKEN}}`.
+
+  **API token scopes:** TenantTokenManagement
+}

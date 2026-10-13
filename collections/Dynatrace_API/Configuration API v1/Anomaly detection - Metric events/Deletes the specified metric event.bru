@@ -1,0 +1,31 @@
+meta {
+  name: Deletes the specified metric event
+  type: http
+  seq: 6
+}
+
+delete {
+  url: {{DT_TENANT_URL}}/api/config/v1/anomalyDetection/metricEvents/:id
+  body: none
+  auth: none
+}
+
+params:path {
+  id: 
+}
+
+headers {
+  Authorization: Api-Token {{DT_API_TOKEN}}
+}
+
+docs {
+  # Deletes the specified metric event
+
+  **Deprecated**
+
+  You can't delete events created by plugins.
+
+  **Auth:** Api-Token only (OAuth not supported by this endpoint). Uses `{{DT_API_TOKEN}}`.
+
+  **API token scopes:** WriteConfig
+}

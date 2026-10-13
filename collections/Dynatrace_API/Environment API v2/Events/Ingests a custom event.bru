@@ -1,0 +1,35 @@
+meta {
+  name: Ingests a custom event
+  type: http
+  seq: 6
+}
+
+post {
+  url: {{DT_TENANT_URL}}/api/v2/events/ingest
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "endTime": 0,
+    "entitySelector": "string",
+    "eventType": "AVAILABILITY_EVENT",
+    "properties": {},
+    "startTime": 0,
+    "timeout": 0,
+    "title": "string"
+  }
+}
+
+docs {
+  # Ingests a custom event
+
+  The ingestion of custom events is subject to licensing (see [licensing documentation](https://www.dynatrace.com/support/help/shortlink/dps-events)).
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `openpipeline:events.davis:ingest`, `storage:events:write`, `environment-api:events:write`
+
+  **API token scopes:** events.ingest
+}

@@ -1,0 +1,23 @@
+meta {
+  name: Gets the supported file format version for iOS symbol files
+  type: http
+  seq: 4
+}
+
+get {
+  url: {{DT_TENANT_URL}}/api/config/v1/symfiles/ios/supportedversion
+  body: none
+  auth: none
+}
+
+headers {
+  Authorization: Api-Token {{DT_API_TOKEN}}
+}
+
+docs {
+  # Gets the supported file format version for iOS symbol files
+
+  **Auth:** Api-Token only (OAuth not supported by this endpoint). Uses `{{DT_API_TOKEN}}`.
+
+  **API token scopes:** DssFileManagement
+}

@@ -1,0 +1,28 @@
+meta {
+  name: Deletes all unused metrics within the specified number of days
+  type: http
+  seq: 2
+}
+
+delete {
+  url: {{DT_TENANT_URL}}/api/v2/metrics
+  body: none
+  auth: inherit
+}
+
+params:query {
+  metricSelector: 
+  minUnusedDays: 
+}
+
+docs {
+  # Deletes all unused metrics within the specified number of days
+
+  You can only delete metrics that have been ingested via the Metrics v2 API. Deleted metrics cannot be recovered.
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `environment-api:metrics:write`
+
+  **API token scopes:** metrics.write
+}

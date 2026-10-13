@@ -1,0 +1,35 @@
+meta {
+  name: Activates the environment configuration from the specified version of the extens
+  type: http
+  seq: 14
+}
+
+post {
+  url: {{DT_TENANT_URL}}/api/v2/extensions/:extensionName/environmentConfiguration
+  body: json
+  auth: inherit
+}
+
+params:path {
+  extensionName: 
+}
+
+body:json {
+  {
+    "version": "1.2.3"
+  }
+}
+
+docs {
+  # Activates the environment configuration from the specified version of the extension 2.0
+
+  **Deprecated**
+
+  Deprecated since version 1.342. Use the successor API `/platform/extensions/v2` instead.
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `environment-api:extensions:write`
+
+  **API token scopes:** extensionEnvironment.write, extensions.write
+}

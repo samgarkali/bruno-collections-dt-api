@@ -1,0 +1,27 @@
+meta {
+  name: Deletes all symbol file belonging for a mobile app
+  type: http
+  seq: 6
+}
+
+delete {
+  url: {{DT_TENANT_URL}}/api/config/v1/symfiles/:applicationId
+  body: none
+  auth: none
+}
+
+params:path {
+  applicationId: 
+}
+
+headers {
+  Authorization: Api-Token {{DT_API_TOKEN}}
+}
+
+docs {
+  # Deletes all symbol file belonging for a mobile app
+
+  **Auth:** Api-Token only (OAuth not supported by this endpoint). Uses `{{DT_API_TOKEN}}`.
+
+  **API token scopes:** DssFileManagement
+}

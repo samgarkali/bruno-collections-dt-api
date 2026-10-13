@@ -1,0 +1,42 @@
+meta {
+  name: Validates the payload for the `POST applications mobile {applicationId} userActi
+  type: http
+  seq: 9
+}
+
+post {
+  url: {{DT_TENANT_URL}}/api/config/v1/applications/mobile/:applicationId/userActionAndSessionProperties/validator
+  body: json
+  auth: none
+}
+
+params:path {
+  applicationId: 
+}
+
+headers {
+  Authorization: Api-Token {{DT_API_TOKEN}}
+}
+
+body:json {
+  {
+    "aggregation": "AVERAGE",
+    "cleanupRule": "string",
+    "displayName": "string",
+    "key": "string",
+    "name": "string",
+    "origin": "API",
+    "serverSideRequestAttribute": "string",
+    "storeAsSessionProperty": false,
+    "storeAsUserActionProperty": false,
+    "type": "DOUBLE"
+  }
+}
+
+docs {
+  # Validates the payload for the `POST /applications/mobile/{applicationId}/userActionAndSessionProperties` request
+
+  **Auth:** Api-Token only (OAuth not supported by this endpoint). Uses `{{DT_API_TOKEN}}`.
+
+  **API token scopes:** WriteConfig
+}

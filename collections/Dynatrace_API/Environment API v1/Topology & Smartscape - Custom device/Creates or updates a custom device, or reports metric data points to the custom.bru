@@ -1,0 +1,66 @@
+meta {
+  name: Creates or updates a custom device, or reports metric data points to the custom
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{DT_TENANT_URL}}/api/v1/entity/infrastructure/custom/:customDeviceId
+  body: json
+  auth: none
+}
+
+params:path {
+  customDeviceId: 
+}
+
+headers {
+  Authorization: Api-Token {{DT_API_TOKEN}}
+}
+
+body:json {
+  {
+    "configUrl": "http://coffee-machine.dynatrace.internal.com/coffeemachine/manage",
+    "displayName": "coffeeMachine",
+    "favicon": "https://www.freefavicon.com/freefavicons/food/cup-of-coffee-152-78475.png",
+    "group": "myCustomDeviceGroup",
+    "hostNames": [
+      "coffee-machine.dynatrace.internal.com"
+    ],
+    "ipAddresses": [
+      "10.0.0.1"
+    ],
+    "listenPorts": [
+      80
+    ],
+    "properties": {},
+    "series": [
+      {
+        "dataPoints": [
+          [
+            1521542929000,
+            13
+          ]
+        ],
+        "dimensions": {
+          "office": "Linz"
+        },
+        "timeseriesId": "custom:created.coffee.metric"
+      }
+    ],
+    "tags": [
+      "office-linz"
+    ],
+    "type": "coffee machine"
+  }
+}
+
+docs {
+  # Creates or updates a custom device, or reports metric data points to the custom device.
+
+  **Deprecated**
+
+  **Auth:** Api-Token only (OAuth not supported by this endpoint). Uses `{{DT_API_TOKEN}}`.
+
+  **API token scopes:** DataExport
+}

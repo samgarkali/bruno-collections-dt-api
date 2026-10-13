@@ -1,0 +1,60 @@
+meta {
+  name: Pushes third-party synthetic monitors, locations, and results to Dynatrace
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{DT_TENANT_URL}}/api/v1/synthetic/ext/tests
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "locations": [
+      {
+        "id": "string",
+        "ip": "string",
+        "name": "string"
+      }
+    ],
+    "messageTimestamp": 0,
+    "syntheticEngineIconUrl": "string",
+    "syntheticEngineName": "string",
+    "testResults": [
+      {
+        "id": "string",
+        "locationResults": [],
+        "totalStepCount": 0
+      }
+    ],
+    "tests": [
+      {
+        "deleted": false,
+        "description": "string",
+        "drilldownLink": "string",
+        "editLink": "string",
+        "enabled": false,
+        "expirationTimestamp": 0,
+        "id": "string",
+        "locations": [],
+        "noDataTimeout": 0,
+        "scheduleIntervalInSeconds": 0,
+        "steps": [],
+        "testSetup": "string",
+        "title": "string"
+      }
+    ]
+  }
+}
+
+docs {
+  # Pushes third-party synthetic monitors, locations, and results to Dynatrace
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `environment-api:synthetic-third-party-monitors:write`
+
+  **API token scopes:** ExternalSyntheticIntegration
+}

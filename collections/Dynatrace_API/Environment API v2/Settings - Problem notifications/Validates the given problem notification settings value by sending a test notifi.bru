@@ -1,0 +1,33 @@
+meta {
+  name: Validates the given problem notification settings value by sending a test notifi
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{DT_TENANT_URL}}/api/v2/settings/problemNotifications:sendTestNotification
+  body: json
+  auth: none
+}
+
+headers {
+  Authorization: Api-Token {{DT_API_TOKEN}}
+}
+
+body:json {
+  {
+    "value": {
+      "autoMonitoring": true
+    }
+  }
+}
+
+docs {
+  # Validates the given problem notification settings value by sending a test notification.
+
+  Validates the given problem notification settings value by sending a test notification.
+
+  **Auth:** Api-Token only (OAuth not supported by this endpoint). Uses `{{DT_API_TOKEN}}`.
+
+  **API token scopes:** settings.write
+}

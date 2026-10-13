@@ -1,0 +1,38 @@
+meta {
+  name: Gets the audit logs of monitoring configuration of given extension
+  type: http
+  seq: 26
+}
+
+get {
+  url: {{DT_TENANT_URL}}/api/v2/extensions/:extensionName/monitoringConfigurations/:configurationId/audit
+  body: none
+  auth: inherit
+}
+
+params:query {
+  ~nextPageKey: 
+  ~pageSize: 
+  ~from: 
+  ~to: 
+  ~sort: 
+}
+
+params:path {
+  extensionName: 
+  configurationId: 
+}
+
+docs {
+  # Gets the audit logs of monitoring configuration of given extension
+
+  **Deprecated**
+
+  Deprecated since version 1.342. Use the successor API `/platform/extensions/v2` instead.
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `environment-api:extension-configurations:read`
+
+  **API token scopes:** extensionConfigurations.read
+}

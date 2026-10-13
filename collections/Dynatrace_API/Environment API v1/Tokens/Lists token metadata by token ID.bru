@@ -1,0 +1,31 @@
+meta {
+  name: Lists token metadata by token ID
+  type: http
+  seq: 4
+}
+
+get {
+  url: {{DT_TENANT_URL}}/api/v1/tokens/:id
+  body: none
+  auth: none
+}
+
+params:path {
+  id: 
+}
+
+headers {
+  Authorization: Api-Token {{DT_API_TOKEN}}
+}
+
+docs {
+  # Lists token metadata by token ID
+
+  **Deprecated**
+
+  The token itself is **not** exposed.
+
+  **Auth:** Api-Token only (OAuth not supported by this endpoint). Uses `{{DT_API_TOKEN}}`.
+
+  **API token scopes:** TenantTokenManagement
+}

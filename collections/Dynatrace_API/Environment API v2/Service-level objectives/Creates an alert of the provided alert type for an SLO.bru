@@ -1,0 +1,39 @@
+meta {
+  name: Creates an alert of the provided alert type for an SLO
+  type: http
+  seq: 6
+}
+
+post {
+  url: {{DT_TENANT_URL}}/api/v2/slo/:id/alert
+  body: json
+  auth: inherit
+}
+
+params:query {
+  ~from: 
+  ~to: 
+  ~timeFrame: 
+}
+
+params:path {
+  id: 
+}
+
+body:json {
+  {
+    "alertName": "Payment service availability burn rate alert",
+    "alertThreshold": 10,
+    "alertType": "BURN_RATE"
+  }
+}
+
+docs {
+  # Creates an alert of the provided alert type for an SLO
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `environment-api:slo:write`
+
+  **API token scopes:** slo.write
+}

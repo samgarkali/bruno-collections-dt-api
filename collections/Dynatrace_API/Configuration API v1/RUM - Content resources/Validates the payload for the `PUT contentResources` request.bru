@@ -1,0 +1,54 @@
+meta {
+  name: Validates the payload for the `PUT contentResources` request
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{DT_TENANT_URL}}/api/config/v1/contentResources/validator
+  body: json
+  auth: none
+}
+
+headers {
+  Authorization: Api-Token {{DT_API_TOKEN}}
+}
+
+body:json {
+  {
+    "resourceProviders": [
+      {
+        "brandIconUrl": "string",
+        "domainNamePatterns": [
+          "string"
+        ],
+        "resourceName": "string",
+        "resourceType": "CDN_RESOURCES"
+      }
+    ],
+    "resourceTypes": [
+      {
+        "primaryResourceType": "CSS",
+        "regularExpression": "string",
+        "secondaryResourceType": "string"
+      }
+    ],
+    "resourceUrlCleanupRules": [
+      {
+        "regularExpression": "string",
+        "replaceWith": "string",
+        "resourceName": "string"
+      }
+    ]
+  }
+}
+
+docs {
+  # Validates the payload for the `PUT /contentResources` request
+
+  **Deprecated**
+
+  **Auth:** Api-Token only (OAuth not supported by this endpoint). Uses `{{DT_API_TOKEN}}`.
+
+  **API token scopes:** WriteConfig
+}

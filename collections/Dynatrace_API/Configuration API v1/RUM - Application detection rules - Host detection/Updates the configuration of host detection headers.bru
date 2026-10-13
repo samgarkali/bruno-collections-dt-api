@@ -1,0 +1,43 @@
+meta {
+  name: Updates the configuration of host detection headers
+  type: http
+  seq: 2
+}
+
+put {
+  url: {{DT_TENANT_URL}}/api/config/v1/applicationDetectionRules/hostDetection
+  body: json
+  auth: none
+}
+
+headers {
+  Authorization: Api-Token {{DT_API_TOKEN}}
+}
+
+body:json {
+  {
+    "hostDetectionHeaders": [
+      "X-Host",
+      "X-Forwarded-Host"
+    ],
+    "metadata": {
+      "clusterVersion": "Mock version",
+      "configurationVersions": [
+        4,
+        2
+      ]
+    }
+  }
+}
+
+docs {
+  # Updates the configuration of host detection headers
+
+  **Deprecated**
+
+  The request overwrites the existing configuration. Any headers not presented in the payload will be lost.
+
+  **Auth:** Api-Token only (OAuth not supported by this endpoint). Uses `{{DT_API_TOKEN}}`.
+
+  **API token scopes:** WriteConfig
+}

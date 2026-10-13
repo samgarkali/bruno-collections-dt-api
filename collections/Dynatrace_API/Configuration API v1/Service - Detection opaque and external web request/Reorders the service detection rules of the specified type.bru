@@ -1,0 +1,46 @@
+meta {
+  name: Reorders the service detection rules of the specified type
+  type: http
+  seq: 3
+}
+
+put {
+  url: {{DT_TENANT_URL}}/api/config/v1/service/detectionRules/OPAQUE_AND_EXTERNAL_WEB_REQUEST/order
+  body: json
+  auth: none
+}
+
+headers {
+  Authorization: Api-Token {{DT_API_TOKEN}}
+}
+
+body:json {
+  {
+    "values": [
+      {
+        "description": "Dynatrace entity 1 for the REST API example",
+        "id": "6a98d7bc-abb9-44f8-ae6a-73e68e71812a",
+        "name": "Dynatrace entity 1"
+      },
+      {
+        "id": "ee70f7d3-9a4e-4f5f-94d2-c9d6156f1618",
+        "name": "Dynatrace entity 2"
+      },
+      {
+        "id": "8cdabe77-9e1a-4be8-b3df-269dd6fa9d7f"
+      }
+    ]
+  }
+}
+
+docs {
+  # Reorders the service detection rules of the specified type
+
+  The request reorders the rules of the specified type according to the order of the IDs in the body of the request. 
+
+   Rules that are omitted in the body of the request will retain their relative order but will be placed *after* all those present in the request.
+
+  **Auth:** Api-Token only (OAuth not supported by this endpoint). Uses `{{DT_API_TOKEN}}`.
+
+  **API token scopes:** WriteConfig
+}

@@ -1,0 +1,28 @@
+meta {
+  name: Deletes an existing configuration of the extension maturity=EARLY_ADOPTER
+  type: http
+  seq: 15
+}
+
+delete {
+  url: {{DT_TENANT_URL}}/api/config/v1/extensions/:id/instances/:configurationId
+  body: none
+  auth: none
+}
+
+params:path {
+  id: 
+  configurationId: 
+}
+
+headers {
+  Authorization: Api-Token {{DT_API_TOKEN}}
+}
+
+docs {
+  # Deletes an existing configuration of the extension | maturity=EARLY_ADOPTER
+
+  **Auth:** Api-Token only (OAuth not supported by this endpoint). Uses `{{DT_API_TOKEN}}`.
+
+  **API token scopes:** WriteConfig
+}

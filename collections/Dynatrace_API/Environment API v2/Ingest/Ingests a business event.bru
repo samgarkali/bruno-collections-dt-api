@@ -1,0 +1,43 @@
+meta {
+  name: Ingests a business event
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{DT_TENANT_URL}}/api/v2/bizevents/ingest
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "specversion": "1.0",
+    "id": "1",
+    "source": "custom.source",
+    "type": "com.mycompany.shop.checkout",
+    "dtcontext": "dt.session_id=\"234234234324235345345\",dt.entity.rum_application=\"APPLICATION-53453458340758\",host.name=\"123.123.123.123\"",
+    "dataschema": "http://dynatrace.com/schema/bizevents/generic/1.0",
+    "traceparent": "00-4bf92f3577b34da6a3ce929d0e0e4736-00f067aa0ba902b7-00",
+    "data": {
+      "id": "OR-838475",
+      "paymentType": "paypal",
+      "plannedDeliveryDate": "01.01.2021",
+      "total": 234
+    }
+  }
+}
+
+docs {
+  # Ingests a business event
+
+  The maximum payload size of a single request is **5 MiB**. Requests with a greater payload are rejected, and the API returns a 413 response code. 
+
+  The ingestion of business events is subject to licensing (see [licensing documentation](https://www.dynatrace.com/support/help/shortlink/dps-events)).
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `storage:events:write`, `openpipeline:bizevents:ingest`
+
+  **API token scopes:** bizevents.ingest
+}

@@ -1,0 +1,31 @@
+meta {
+  name: Lists monitoring states of entities
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{DT_TENANT_URL}}/api/v2/monitoringstate
+  body: none
+  auth: inherit
+}
+
+params:query {
+  ~nextPageKey: 
+  ~pageSize: 
+  ~entitySelector: 
+  ~from: 
+  ~to: 
+}
+
+docs {
+  # Lists monitoring states of entities
+
+  Only process group instances are supported.
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `environment-api:entities:read`
+
+  **API token scopes:** entities.read
+}

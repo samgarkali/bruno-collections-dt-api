@@ -1,0 +1,32 @@
+meta {
+  name: Download the JavaScript tag
+  type: http
+  seq: 2
+}
+
+get {
+  url: {{DT_TENANT_URL}}/api/v2/rum/javaScriptTag/:applicationId
+  body: none
+  auth: inherit
+}
+
+params:query {
+  ~scriptExecutionAttribute: 
+  ~crossOriginAnonymous: 
+}
+
+params:path {
+  applicationId: 
+}
+
+docs {
+  # Download the JavaScript tag
+
+  Returns the JavaScript tag, which references an external file containing monitoring code and configuration. Due to its dynamic update mechanism, it is recommended for most use cases.
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `environment-api:rum:read`
+
+  **API token scopes:** rumManualInsertionTags.read
+}

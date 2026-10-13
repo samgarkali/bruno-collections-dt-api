@@ -1,0 +1,21 @@
+meta {
+  name: Lists all synthetic nodes available in your environment
+  type: http
+  seq: 8
+}
+
+get {
+  url: {{DT_TENANT_URL}}/api/v1/synthetic/nodes
+  body: none
+  auth: inherit
+}
+
+docs {
+  # Lists all synthetic nodes available in your environment
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `environment-api:synthetic:read`
+
+  **API token scopes:** DataExport, ExternalSyntheticIntegration, ReadSyntheticData
+}

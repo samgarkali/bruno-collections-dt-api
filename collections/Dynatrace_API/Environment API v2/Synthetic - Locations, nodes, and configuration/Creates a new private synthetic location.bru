@@ -1,0 +1,53 @@
+meta {
+  name: Creates a new private synthetic location
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{DT_TENANT_URL}}/api/v2/synthetic/locations
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "autoUpdateChromium": true,
+    "availabilityLocationNodeOutageDelayInMinutes": 5,
+    "availabilityLocationOutage": false,
+    "availabilityNodeOutage": false,
+    "availabilityNotificationsEnabled": true,
+    "browserExecutionSupported": true,
+    "city": "Linz",
+    "countryCode": "AT",
+    "deploymentType": "STANDARD",
+    "fipsMode": "DISABLED",
+    "latitude": 48.306351,
+    "longitude": 14.287399,
+    "maxActiveGateCount": 5,
+    "minActiveGateCount": 2,
+    "namExecutionSupported": false,
+    "name": "Linz Location",
+    "nodeNames": {
+      "93302281": "ActiveGate 1"
+    },
+    "nodeSize": "S",
+    "nodes": [
+      "93302281"
+    ],
+    "regionCode": "04",
+    "status": "ENABLED",
+    "type": "PRIVATE",
+    "useNewKubernetesVersion": true
+  }
+}
+
+docs {
+  # Creates a new private synthetic location
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `environment-api:synthetic:write`
+
+  **API token scopes:** syntheticLocations.write
+}

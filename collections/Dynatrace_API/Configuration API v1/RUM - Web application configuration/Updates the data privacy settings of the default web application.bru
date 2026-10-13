@@ -1,0 +1,57 @@
+meta {
+  name: Updates the data privacy settings of the default web application
+  type: http
+  seq: 7
+}
+
+put {
+  url: {{DT_TENANT_URL}}/api/config/v1/applications/web/default/dataPrivacy
+  body: json
+  auth: none
+}
+
+headers {
+  Authorization: Api-Token {{DT_API_TOKEN}}
+}
+
+body:json {
+  {
+    "dataCaptureOptInEnabled": false,
+    "doNotTrackBehaviour": "CAPTURE_ANONYMIZED",
+    "metadata": {
+      "clusterVersion": "1.192.1",
+      "configurationVersions": [
+        4,
+        2
+      ],
+      "currentConfigurationVersions": [
+        "1.0.4",
+        "1.23"
+      ]
+    },
+    "persistentCookieForUserTracking": false,
+    "sessionReplayDataPrivacy": {
+      "contentMaskingSettings": {
+        "playbackMaskingSettings": null,
+        "recordingMaskingSettings": null,
+        "recordingMaskingSettingsVersion": 2
+      },
+      "optInModeEnabled": false,
+      "urlExclusionRules": [
+        "string"
+      ]
+    }
+  }
+}
+
+docs {
+  # Updates the data privacy settings of the default web application
+
+  Default application is pre-configured in your Dynatrace environment. By default all traffic goes to this application. 
+
+  After you configure your own applications, all the traffic, which doesn't fit to any of your applications, goes to the default one.
+
+  **Auth:** Api-Token only (OAuth not supported by this endpoint). Uses `{{DT_API_TOKEN}}`.
+
+  **API token scopes:** DataPrivacy
+}

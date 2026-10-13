@@ -1,0 +1,49 @@
+meta {
+  name: Updates the global data privacy and security settings
+  type: http
+  seq: 2
+}
+
+put {
+  url: {{DT_TENANT_URL}}/api/config/v1/dataPrivacy
+  body: json
+  auth: none
+}
+
+headers {
+  Authorization: Api-Token {{DT_API_TOKEN}}
+}
+
+body:json {
+  {
+    "logAuditEvents": false,
+    "maskIpAddressesAndGpsCoordinates": false,
+    "maskPersonalDataInUris": false,
+    "maskUserActionNames": false,
+    "metadata": {
+      "clusterVersion": "1.192.1",
+      "configurationVersions": [
+        4,
+        2
+      ],
+      "currentConfigurationVersions": [
+        "1.0.4",
+        "1.23"
+      ]
+    }
+  }
+}
+
+docs {
+  # Updates the global data privacy and security settings
+
+  **Deprecated**
+
+  This request updates global settings, affecting all your applications. 
+
+   To update application-specific data privacy settings, use the [**PUT data privacy of a web application**](https://dt-url.net/q403sv9) request.
+
+  **Auth:** Api-Token only (OAuth not supported by this endpoint). Uses `{{DT_API_TOKEN}}`.
+
+  **API token scopes:** DataPrivacy
+}

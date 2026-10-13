@@ -1,0 +1,28 @@
+meta {
+  name: Lists all synthetic locations (both public and private) available for your envir
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{DT_TENANT_URL}}/api/v1/synthetic/locations
+  body: none
+  auth: none
+}
+
+params:query {
+  ~cloudPlatform: 
+  ~type: 
+}
+
+headers {
+  Authorization: Api-Token {{DT_API_TOKEN}}
+}
+
+docs {
+  # Lists all synthetic locations (both public and private) available for your environment
+
+  **Auth:** Api-Token only (OAuth not supported by this endpoint). Uses `{{DT_API_TOKEN}}`.
+
+  **API token scopes:** DataExport, ExternalSyntheticIntegration, ReadSyntheticData
+}

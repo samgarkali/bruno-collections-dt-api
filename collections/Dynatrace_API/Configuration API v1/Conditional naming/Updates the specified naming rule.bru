@@ -1,0 +1,69 @@
+meta {
+  name: Updates the specified naming rule
+  type: http
+  seq: 5
+}
+
+put {
+  url: {{DT_TENANT_URL}}/api/config/v1/conditionalNaming/:type/:id
+  body: json
+  auth: none
+}
+
+params:path {
+  type: 
+  id: 
+}
+
+headers {
+  Authorization: Api-Token {{DT_API_TOKEN}}
+}
+
+body:json {
+  {
+    "displayName": "TestRule",
+    "enabled": true,
+    "id": "4e88530c-edec-4e31-9cb4-3f2c63abc2b7",
+    "nameFormat": "TestNameFormat",
+    "rules": [
+      {
+        "comparisonInfo": {
+          "negate": "false",
+          "operator": "EQUALS",
+          "type": "SIMPLE_TECH",
+          "value": {
+            "type": "JAVA"
+          }
+        },
+        "key": {
+          "attribute": "PROCESS_GROUP_TECHNOLOGY"
+        }
+      },
+      {
+        "comparisonInfo": {
+          "caseSensitive": true,
+          "negate": "false",
+          "operator": "CONTAINS",
+          "type": "STRING",
+          "value": "test"
+        },
+        "key": {
+          "attribute": "PROCESS_GROUP_PREDEFINED_METADATA",
+          "dynamicKey": "EXE_NAME",
+          "type": "PROCESS_PREDEFINED_METADATA_KEY"
+        }
+      }
+    ],
+    "type": "PROCESS_GROUP"
+  }
+}
+
+docs {
+  # Updates the specified naming rule
+
+  If the rule with the specified ID doesn't exist, a new rule will be created at the end of the rules list and will be the last to evaluate.
+
+  **Auth:** Api-Token only (OAuth not supported by this endpoint). Uses `{{DT_API_TOKEN}}`.
+
+  **API token scopes:** WriteConfig
+}

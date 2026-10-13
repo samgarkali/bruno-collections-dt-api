@@ -1,0 +1,42 @@
+meta {
+  name: Creates a new notification configuration
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{DT_TENANT_URL}}/api/config/v1/notifications
+  body: json
+  auth: none
+}
+
+headers {
+  Authorization: Api-Token {{DT_API_TOKEN}}
+}
+
+body:json {
+  {
+    "active": true,
+    "alertingProfile": "4f5e00f4-39b3-455a-820b-3514843615f3",
+    "description": "{ProblemDetailsText}",
+    "id": "acbed0c4-4ef1-4303-991f-102510a69322",
+    "issueType": "Task",
+    "name": "REST example",
+    "password": "",
+    "projectKey": "DEV",
+    "summary": "Problem {ProblemID}: {ProblemTitle}",
+    "type": "JIRA",
+    "url": "https://my-jira.atlassian.net/rest/api/2/",
+    "username": "john.smith"
+  }
+}
+
+docs {
+  # Creates a new notification configuration
+
+  **Deprecated**
+
+  **Auth:** Api-Token only (OAuth not supported by this endpoint). Uses `{{DT_API_TOKEN}}`.
+
+  **API token scopes:** WriteConfig
+}

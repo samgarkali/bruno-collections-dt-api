@@ -1,0 +1,37 @@
+meta {
+  name: Gets the checksum of the specified BOSH release tarball
+  type: http
+  seq: 2
+}
+
+get {
+  url: {{DT_TENANT_URL}}/api/v1/deployment/boshrelease/agent/:osType/version/:version/checksum
+  body: none
+  auth: inherit
+}
+
+params:query {
+  ~skipMetadata: 
+  ~networkZone: 
+}
+
+params:path {
+  osType: 
+  version: 
+}
+
+docs {
+  # Gets the checksum of the specified BOSH release tarball
+
+  The checksum is the sha256 hash of the installer file. 
+
+  Result is not stable if **skipMetadata** is set to `false`.
+
+  For SaaS only works on environment ActiveGates version 1.176 or higher
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `environment-api:deployment:download`, `fleet-management:oneagents:download`
+
+  **API token scopes:** InstallerDownload
+}

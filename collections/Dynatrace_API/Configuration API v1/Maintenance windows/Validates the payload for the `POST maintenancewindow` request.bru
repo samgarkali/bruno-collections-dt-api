@@ -1,0 +1,72 @@
+meta {
+  name: Validates the payload for the `POST maintenancewindow` request
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{DT_TENANT_URL}}/api/config/v1/maintenanceWindows/validator
+  body: json
+  auth: none
+}
+
+headers {
+  Authorization: Api-Token {{DT_API_TOKEN}}
+}
+
+body:json {
+  {
+    "description": "An example Maintenance window",
+    "metadata": {
+      "clusterVersion": "Mock version",
+      "configurationVersions": [
+        4,
+        2
+      ]
+    },
+    "name": "Example Window",
+    "schedule": {
+      "end": "2019-02-27 00:00",
+      "recurrence": {
+        "dayOfMonth": "23",
+        "durationMinutes": "60",
+        "startTime": "16:28"
+      },
+      "recurrenceType": "MONTHLY",
+      "start": "2018-08-02 00:00",
+      "zoneId": "Europe/Vienna"
+    },
+    "scope": {
+      "entities": [
+        "HOST-0000000000123456"
+      ],
+      "matches": [
+        {
+          "mzId": "123456789",
+          "tagCombination": "AND",
+          "tags": [
+            {
+              "context": "AWS",
+              "key": "testkey",
+              "value": "testvalue"
+            }
+          ],
+          "type": "HOST"
+        }
+      ]
+    },
+    "suppressSyntheticMonitorsExecution": "true",
+    "suppression": "DETECT_PROBLEMS_AND_ALERT",
+    "type": "UNPLANNED"
+  }
+}
+
+docs {
+  # Validates the payload for the `POST /maintenancewindow` request
+
+  **Deprecated**
+
+  **Auth:** Api-Token only (OAuth not supported by this endpoint). Uses `{{DT_API_TOKEN}}`.
+
+  **API token scopes:** WriteConfig
+}

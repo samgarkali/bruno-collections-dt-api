@@ -1,0 +1,44 @@
+meta {
+  name: Creates a new calculated metric for a mobile or custom app
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{DT_TENANT_URL}}/api/config/v1/calculatedMetrics/mobile
+  body: json
+  auth: none
+}
+
+headers {
+  Authorization: Api-Token {{DT_API_TOKEN}}
+}
+
+body:json {
+  {
+    "applicationIdentifier": "MOBILE_APPLICATION-1234",
+    "dimensions": [
+      {
+        "dimension": "GEOLOCATION",
+        "topX": 20
+      }
+    ],
+    "enabled": true,
+    "metricKey": "calc:apps.mobile.mymetric",
+    "metricType": "USER_ACTION_DURATION",
+    "name": "MyMetric",
+    "userActionFilter": {
+      "country": "GEOLOCATION-1234",
+      "hasHttpError": true,
+      "osVersion": "OS-1234"
+    }
+  }
+}
+
+docs {
+  # Creates a new calculated metric for a mobile or custom app
+
+  **Auth:** Api-Token only (OAuth not supported by this endpoint). Uses `{{DT_API_TOKEN}}`.
+
+  **API token scopes:** WriteConfig
+}

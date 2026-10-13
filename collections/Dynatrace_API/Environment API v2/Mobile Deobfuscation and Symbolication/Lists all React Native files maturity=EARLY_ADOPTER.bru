@@ -1,0 +1,26 @@
+meta {
+  name: Lists all React Native files maturity=EARLY_ADOPTER
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{DT_TENANT_URL}}/api/v2/rnMappingFiles
+  body: none
+  auth: inherit
+}
+
+params:query {
+  ~nextPageKey: 
+  ~pageSize: 
+}
+
+docs {
+  # Lists all React Native files | maturity=EARLY_ADOPTER
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `environment-api:symbol-files:read`, `deobfuscation:symbol-files:read`
+
+  **API token scopes:** DssFileManagement
+}

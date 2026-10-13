@@ -1,0 +1,27 @@
+meta {
+  name: Shows the properties of the specified service detection rule
+  type: http
+  seq: 5
+}
+
+get {
+  url: {{DT_TENANT_URL}}/api/config/v1/service/detectionRules/OPAQUE_AND_EXTERNAL_WEB_REQUEST/:id
+  body: none
+  auth: none
+}
+
+params:path {
+  id: 
+}
+
+headers {
+  Authorization: Api-Token {{DT_API_TOKEN}}
+}
+
+docs {
+  # Shows the properties of the specified service detection rule
+
+  **Auth:** Api-Token only (OAuth not supported by this endpoint). Uses `{{DT_API_TOKEN}}`.
+
+  **API token scopes:** ReadConfig
+}

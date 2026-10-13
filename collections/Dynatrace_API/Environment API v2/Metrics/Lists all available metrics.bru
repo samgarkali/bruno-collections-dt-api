@@ -1,0 +1,40 @@
+meta {
+  name: Lists all available metrics
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{DT_TENANT_URL}}/api/v2/metrics
+  body: none
+  auth: inherit
+}
+
+params:query {
+  ~nextPageKey: 
+  ~pageSize: 
+  ~metricSelector: 
+  ~text: 
+  ~fields: 
+  ~writtenSince: 
+  ~writtenSinceMode: 
+  ~metadataSelector: 
+}
+
+docs {
+  # Lists all available metrics
+
+  You can narrow down the output by selecting metrics in the **metricSelector** field. 
+
+  You can additionally limit the output by using pagination: 
+
+  1. Specify the number of results per page in the **pageSize** query parameter. 
+
+  2. Then use the cursor from the **nextPageKey** field of the response in the **nextPageKey** query parameter to obtain subsequent pages. All other query parameters must be omitted.
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `environment-api:metrics:read`
+
+  **API token scopes:** metrics.read
+}

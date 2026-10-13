@@ -1,0 +1,25 @@
+meta {
+  name: Deletes an SLO
+  type: http
+  seq: 5
+}
+
+delete {
+  url: {{DT_TENANT_URL}}/api/v2/slo/:id
+  body: none
+  auth: inherit
+}
+
+params:path {
+  id: 
+}
+
+docs {
+  # Deletes an SLO
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `environment-api:slo:write`
+
+  **API token scopes:** slo.write
+}

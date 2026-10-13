@@ -1,0 +1,30 @@
+meta {
+  name: Deletes the specified tag from the specified entities
+  type: http
+  seq: 3
+}
+
+delete {
+  url: {{DT_TENANT_URL}}/api/v2/tags
+  body: none
+  auth: inherit
+}
+
+params:query {
+  key: 
+  ~value: 
+  ~deleteAllWithKey: 
+  entitySelector: 
+  ~from: 
+  ~to: 
+}
+
+docs {
+  # Deletes the specified tag from the specified entities
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `environment-api:entities:write`
+
+  **API token scopes:** entities.write
+}

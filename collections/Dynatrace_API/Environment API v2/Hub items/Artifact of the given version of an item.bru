@@ -1,0 +1,28 @@
+meta {
+  name: Artifact of the given version of an item
+  type: http
+  seq: 4
+}
+
+get {
+  url: {{DT_TENANT_URL}}/api/v2/hub/extensions1/:extension1FQN/releases/:version
+  body: none
+  auth: none
+}
+
+params:path {
+  extension1FQN: 
+  version: 
+}
+
+headers {
+  Authorization: Api-Token {{DT_API_TOKEN}}
+}
+
+docs {
+  # Artifact of the given version of an item
+
+  **Auth:** Api-Token only (OAuth not supported by this endpoint). Uses `{{DT_API_TOKEN}}`.
+
+  **API token scopes:** hub.read
+}

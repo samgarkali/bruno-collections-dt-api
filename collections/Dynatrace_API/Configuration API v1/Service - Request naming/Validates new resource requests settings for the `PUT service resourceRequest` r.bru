@@ -1,0 +1,44 @@
+meta {
+  name: Validates new resource requests settings for the `PUT service resourceRequest` r
+  type: http
+  seq: 11
+}
+
+post {
+  url: {{DT_TENANT_URL}}/api/config/v1/service/resourceNaming/validator
+  body: json
+  auth: none
+}
+
+headers {
+  Authorization: Api-Token {{DT_API_TOKEN}}
+}
+
+body:json {
+  {
+    "binary": [
+      ".exe",
+      ".zip"
+    ],
+    "image": [
+      ".jpg",
+      ".png",
+      ".gif",
+      ".jpeg",
+      ".bmp",
+      ".svg",
+      ".ico",
+      ".woff",
+      ".ttf",
+      ".otf"
+    ]
+  }
+}
+
+docs {
+  # Validates new resource requests settings for the `PUT /service/resourceRequest` request.
+
+  **Auth:** Api-Token only (OAuth not supported by this endpoint). Uses `{{DT_API_TOKEN}}`.
+
+  **API token scopes:** WriteConfig
+}

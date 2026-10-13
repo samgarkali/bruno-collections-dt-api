@@ -1,0 +1,29 @@
+meta {
+  name: Downloads the synchronous code snippet
+  type: http
+  seq: 11
+}
+
+get {
+  url: {{DT_TENANT_URL}}/api/v1/rum/syncCS/:entity
+  body: none
+  auth: inherit
+}
+
+params:path {
+  entity: 
+}
+
+docs {
+  # Downloads the synchronous code snippet
+
+  This code provides configuration and basic code to be manually inserted into your web application code.
+
+   The full functionality of the monitoring code is loaded synchronously.
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `environment-api:rum:read`
+
+  **API token scopes:** RumJavaScriptTagManagement
+}

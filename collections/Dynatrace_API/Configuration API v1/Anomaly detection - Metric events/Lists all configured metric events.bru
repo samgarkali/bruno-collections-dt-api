@@ -1,0 +1,29 @@
+meta {
+  name: Lists all configured metric events
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{DT_TENANT_URL}}/api/config/v1/anomalyDetection/metricEvents
+  body: none
+  auth: none
+}
+
+params:query {
+  ~includeEntityFilterMetricEvents: 
+}
+
+headers {
+  Authorization: Api-Token {{DT_API_TOKEN}}
+}
+
+docs {
+  # Lists all configured metric events
+
+  **Deprecated**
+
+  **Auth:** Api-Token only (OAuth not supported by this endpoint). Uses `{{DT_API_TOKEN}}`.
+
+  **API token scopes:** ReadConfig
+}

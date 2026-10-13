@@ -1,0 +1,28 @@
+meta {
+  name: Lists metadata of JavaScript mapping files (2)
+  type: http
+  seq: 4
+}
+
+get {
+  url: {{DT_TENANT_URL}}/api/v2/jsMappingFiles/metadata
+  body: none
+  auth: inherit
+}
+
+params:query {
+  ~nextPageKey: 
+  ~pageSize: 
+  ~minifiedJsFileUrl: 
+  ~fileType: 
+}
+
+docs {
+  # Lists metadata of JavaScript mapping files
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `deobfuscation:symbol-files:read`
+
+  **API token scopes:** javaScriptMappingFiles.read
+}

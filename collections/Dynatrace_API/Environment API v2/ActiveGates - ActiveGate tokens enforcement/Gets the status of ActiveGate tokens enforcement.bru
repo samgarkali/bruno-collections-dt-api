@@ -1,0 +1,21 @@
+meta {
+  name: Gets the status of ActiveGate tokens enforcement
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{DT_TENANT_URL}}/api/v2/activeGates/tokenEnforcement
+  body: none
+  auth: inherit
+}
+
+docs {
+  # Gets the status of ActiveGate tokens enforcement
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `fleet-management:activegates:read`
+
+  **API token scopes:** activeGates.read
+}

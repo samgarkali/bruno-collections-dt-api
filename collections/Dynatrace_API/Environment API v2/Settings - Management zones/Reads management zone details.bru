@@ -1,0 +1,27 @@
+meta {
+  name: Reads management zone details
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{DT_TENANT_URL}}/api/v2/settings/managementZones/:objectId
+  body: none
+  auth: inherit
+}
+
+params:path {
+  objectId: 
+}
+
+docs {
+  # Reads management zone details.
+
+  Allows to convert from an objectId to the ID of the management zone, and can serve as a replacement for [the old config endpoint](index.jsp?urls.primaryName=Configuration%20API#/Management%20zones) for that purpose.
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `settings:objects:read`
+
+  **API token scopes:** settings.read
+}

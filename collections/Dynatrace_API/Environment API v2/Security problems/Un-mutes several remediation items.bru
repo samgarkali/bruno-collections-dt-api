@@ -1,0 +1,35 @@
+meta {
+  name: Un-mutes several remediation items
+  type: http
+  seq: 10
+}
+
+post {
+  url: {{DT_TENANT_URL}}/api/v2/securityProblems/:id/remediationItems/unmute
+  body: json
+  auth: inherit
+}
+
+params:path {
+  id: 
+}
+
+body:json {
+  {
+    "comment": "string",
+    "reason": "AFFECTED",
+    "remediationItemIds": [
+      "string"
+    ]
+  }
+}
+
+docs {
+  # Un-mutes several remediation items
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `environment-api:security-problems:write`
+
+  **API token scopes:** securityProblems.write
+}

@@ -1,0 +1,45 @@
+meta {
+  name: Gets the checksum of a non-customized OneAgent installer
+  type: http
+  seq: 14
+}
+
+get {
+  url: {{DT_TENANT_URL}}/api/v1/deployment/installer/agent/:osType/:installerType/version/:version/checksum
+  body: none
+  auth: inherit
+}
+
+params:query {
+  ~flavor: 
+  ~arch: 
+  ~bitness: 
+  ~include: 
+  ~networkZone: 
+}
+
+params:path {
+  osType: 
+  installerType: 
+  version: 
+}
+
+headers {
+  ~If-None-Match: 
+}
+
+docs {
+  # Gets the checksum of a non-customized OneAgent installer
+
+  The checksum is the sha256 hash of the installer file.
+
+  Compare this checksum only with a non-customized OneAgent installer.
+
+  To get a non-customized installer, set the **skipMetadata** query parameter of the download endpoint to `true`.
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `environment-api:deployment:download`, `fleet-management:oneagents:download`
+
+  **API token scopes:** InstallerDownload
+}

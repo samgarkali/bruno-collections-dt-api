@@ -1,0 +1,26 @@
+meta {
+  name: Deletes the specified JavaScript mapping file
+  type: http
+  seq: 2
+}
+
+delete {
+  url: {{DT_TENANT_URL}}/api/v2/jsMappingFiles
+  body: none
+  auth: inherit
+}
+
+params:query {
+  minifiedJsFileUrl: 
+  fileType: 
+}
+
+docs {
+  # Deletes the specified JavaScript mapping file
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `deobfuscation:symbol-files:delete`
+
+  **API token scopes:** javaScriptMappingFiles.write
+}

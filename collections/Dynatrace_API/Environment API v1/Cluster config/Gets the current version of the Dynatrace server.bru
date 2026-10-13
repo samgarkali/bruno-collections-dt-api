@@ -1,0 +1,21 @@
+meta {
+  name: Gets the current version of the Dynatrace server
+  type: http
+  seq: 2
+}
+
+get {
+  url: {{DT_TENANT_URL}}/api/v1/config/clusterversion
+  body: none
+  auth: inherit
+}
+
+docs {
+  # Gets the current version of the Dynatrace server
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `environment-api:cluster-version:read`
+
+  **API token scopes:** DataExport
+}

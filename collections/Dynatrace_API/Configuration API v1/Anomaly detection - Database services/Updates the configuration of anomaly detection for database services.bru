@@ -1,0 +1,60 @@
+meta {
+  name: Updates the configuration of anomaly detection for database services
+  type: http
+  seq: 2
+}
+
+put {
+  url: {{DT_TENANT_URL}}/api/config/v1/anomalyDetection/databaseServices
+  body: json
+  auth: none
+}
+
+headers {
+  Authorization: Api-Token {{DT_API_TOKEN}}
+}
+
+body:json {
+  {
+    "databaseConnectionFailureCount": {
+      "connectionFailsCount": 5,
+      "enabled": "true",
+      "timePeriodMinutes": 5
+    },
+    "failureRateIncrease": {
+      "detectionMode": "DETECT_USING_FIXED_THRESHOLDS",
+      "thresholds": {
+        "sensitivity": "LOW",
+        "threshold": 10
+      }
+    },
+    "loadDrop": {
+      "enabled": true,
+      "loadDropPercent": 40,
+      "minAbnormalStateDurationInMinutes": 5
+    },
+    "loadSpike": {
+      "enabled": false
+    },
+    "responseTimeDegradation": {
+      "automaticDetection": {
+        "loadThreshold": "ONE_REQUEST_PER_MINUTE",
+        "responseTimeDegradationMilliseconds": 250,
+        "responseTimeDegradationPercent": 90,
+        "slowestResponseTimeDegradationMilliseconds": 500,
+        "slowestResponseTimeDegradationPercent": 200
+      },
+      "detectionMode": "DETECT_AUTOMATICALLY"
+    }
+  }
+}
+
+docs {
+  # Updates the configuration of anomaly detection for database services
+
+  **Deprecated**
+
+  **Auth:** Api-Token only (OAuth not supported by this endpoint). Uses `{{DT_API_TOKEN}}`.
+
+  **API token scopes:** WriteConfig
+}

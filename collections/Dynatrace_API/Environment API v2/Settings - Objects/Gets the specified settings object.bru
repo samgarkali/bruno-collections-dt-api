@@ -1,0 +1,29 @@
+meta {
+  name: Gets the specified settings object
+  type: http
+  seq: 6
+}
+
+get {
+  url: {{DT_TENANT_URL}}/api/v2/settings/objects/:objectId
+  body: none
+  auth: inherit
+}
+
+params:query {
+  ~adminAccess: 
+}
+
+params:path {
+  objectId: 
+}
+
+docs {
+  # Gets the specified settings object
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `settings:objects:read`
+
+  **API token scopes:** settings.read
+}

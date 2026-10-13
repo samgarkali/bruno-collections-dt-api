@@ -1,0 +1,60 @@
+meta {
+  name: Updates the configuration of the specified OneAgent or JMX extension maturity=EA
+  type: http
+  seq: 9
+}
+
+put {
+  url: {{DT_TENANT_URL}}/api/config/v1/extensions/:id/global
+  body: json
+  auth: none
+}
+
+params:path {
+  id: 
+}
+
+headers {
+  Authorization: Api-Token {{DT_API_TOKEN}}
+}
+
+body:json {
+  {
+    "id": "custom.remote.python.demo",
+    "properties": [
+      {
+        "defaultValue": "127.0.0.1",
+        "key": "serverIp",
+        "type": "STRING"
+      },
+      {
+        "defaultValue": "",
+        "key": "password",
+        "type": "PASSWORD"
+      },
+      {
+        "defaultValue": "dynatrace",
+        "key": "username",
+        "type": "STRING"
+      },
+      {
+        "defaultValue": "one",
+        "dropdownValues": [
+          "one",
+          "two",
+          "three"
+        ],
+        "key": "dropdownProperty",
+        "type": "DROPDOWN"
+      }
+    ]
+  }
+}
+
+docs {
+  # Updates the configuration of the specified OneAgent or JMX extension | maturity=EARLY_ADOPTER
+
+  **Auth:** Api-Token only (OAuth not supported by this endpoint). Uses `{{DT_API_TOKEN}}`.
+
+  **API token scopes:** WriteConfig
+}

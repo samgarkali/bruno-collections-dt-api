@@ -1,0 +1,31 @@
+meta {
+  name: Get current permissions of the accessor on this object
+  type: http
+  seq: 14
+}
+
+get {
+  url: {{DT_TENANT_URL}}/api/v2/settings/objects/:objectId/permissions/:accessorType/:accessorId
+  body: none
+  auth: inherit
+}
+
+params:query {
+  ~adminAccess: 
+}
+
+params:path {
+  objectId: 
+  accessorType: 
+  accessorId: 
+}
+
+docs {
+  # Get current permissions of the accessor on this object.
+
+  Get current permissions of the accessor on this object.
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `settings:objects:read`
+}

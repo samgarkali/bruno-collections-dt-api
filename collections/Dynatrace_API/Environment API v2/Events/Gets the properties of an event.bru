@@ -1,0 +1,29 @@
+meta {
+  name: Gets the properties of an event
+  type: http
+  seq: 7
+}
+
+get {
+  url: {{DT_TENANT_URL}}/api/v2/events/:eventId
+  body: none
+  auth: inherit
+}
+
+params:path {
+  eventId: 
+}
+
+docs {
+  # Gets the properties of an event
+
+  **Deprecated**
+
+  **Deprecation notice:** This endpoint is deprecated. Use the [Grail Query API](https://dt-url.net/zb0381u) instead.
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `environment-api:events:read`
+
+  **API token scopes:** events.read
+}

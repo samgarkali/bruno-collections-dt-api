@@ -1,0 +1,25 @@
+meta {
+  name: Deletes the specified request naming rule
+  type: http
+  seq: 7
+}
+
+delete {
+  url: {{DT_TENANT_URL}}/api/config/v1/service/requestNaming/:id
+  body: none
+  auth: inherit
+}
+
+params:path {
+  id: 
+}
+
+docs {
+  # Deletes the specified request naming rule
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `settings:objects:write`
+
+  **API token scopes:** WriteConfig
+}

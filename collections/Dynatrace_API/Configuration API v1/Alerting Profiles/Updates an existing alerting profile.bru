@@ -1,0 +1,81 @@
+meta {
+  name: Updates an existing alerting profile
+  type: http
+  seq: 5
+}
+
+put {
+  url: {{DT_TENANT_URL}}/api/config/v1/alertingProfiles/:id
+  body: json
+  auth: none
+}
+
+params:path {
+  id: 
+}
+
+headers {
+  Authorization: Api-Token {{DT_API_TOKEN}}
+}
+
+body:json {
+  {
+    "displayName": "sampleAlertingProfile",
+    "eventTypeFilters": [
+      {
+        "predefinedEventFilter": {
+          "eventType": "OSI_HIGH_CPU",
+          "negate": true
+        }
+      },
+      {
+        "customEventFilter": {
+          "customDescriptionFilter": {
+            "caseInsensitive": false,
+            "enabled": false,
+            "negate": true,
+            "operator": "CONTAINS",
+            "value": "filterValue"
+          },
+          "customTitleFilter": {
+            "caseInsensitive": true,
+            "enabled": true,
+            "negate": false,
+            "operator": "EQUALS",
+            "value": "filterValue"
+          }
+        }
+      }
+    ],
+    "id": "12345678-abcd-1234-abcd-1234567890ab",
+    "mzId": "1",
+    "rules": [
+      {
+        "delayInMinutes": 60,
+        "severityLevel": "AVAILABILITY",
+        "tagFilter": {
+          "includeMode": "INCLUDE_ALL",
+          "tagFilters": [
+            {
+              "context": "AWS",
+              "key": "tagKey",
+              "value": "tagValue"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}
+
+docs {
+  # Updates an existing alerting profile
+
+  **Deprecated**
+
+  If an alerting profile with the specified ID doesn't exist, a new one is created.
+
+  **Auth:** Api-Token only (OAuth not supported by this endpoint). Uses `{{DT_API_TOKEN}}`.
+
+  **API token scopes:** WriteConfig
+}

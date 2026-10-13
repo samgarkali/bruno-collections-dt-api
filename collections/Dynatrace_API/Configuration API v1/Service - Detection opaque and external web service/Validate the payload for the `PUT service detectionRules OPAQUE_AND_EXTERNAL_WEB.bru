@@ -1,0 +1,62 @@
+meta {
+  name: Validate the payload for the `PUT service detectionRules OPAQUE_AND_EXTERNAL_WEB
+  type: http
+  seq: 8
+}
+
+post {
+  url: {{DT_TENANT_URL}}/api/config/v1/service/detectionRules/OPAQUE_AND_EXTERNAL_WEB_SERVICE/:id/validator
+  body: json
+  auth: none
+}
+
+params:path {
+  id: 
+}
+
+headers {
+  Authorization: Api-Token {{DT_API_TOKEN}}
+}
+
+body:json {
+  {
+    "conditions": [
+      {
+        "attributeType": "URL_PATH",
+        "compareOperations": [
+          {
+            "ignoreCase": "false",
+            "invert": "false",
+            "type": "STRING_CONTAINS",
+            "values": [
+              "value1",
+              "value2"
+            ]
+          }
+        ]
+      }
+    ],
+    "description": "REST API example",
+    "detectAsWebRequestService": false,
+    "enabled": true,
+    "managementZones": [
+      "zone 1"
+    ],
+    "name": "My sample rule",
+    "port": {
+      "doNotUseForServiceId": "true"
+    },
+    "type": "OPAQUE_AND_EXTERNAL_WEB_SERVICE",
+    "urlPath": {
+      "valueOverride": "abc"
+    }
+  }
+}
+
+docs {
+  # Validate the payload for the `PUT /service/detectionRules/OPAQUE_AND_EXTERNAL_WEB_SERVICE/{id}` request
+
+  **Auth:** Api-Token only (OAuth not supported by this endpoint). Uses `{{DT_API_TOKEN}}`.
+
+  **API token scopes:** WriteConfig
+}

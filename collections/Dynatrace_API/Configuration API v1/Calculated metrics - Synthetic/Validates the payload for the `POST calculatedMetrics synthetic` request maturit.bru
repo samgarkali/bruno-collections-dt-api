@@ -1,0 +1,42 @@
+meta {
+  name: Validates the payload for the `POST calculatedMetrics synthetic` request maturit
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{DT_TENANT_URL}}/api/config/v1/calculatedMetrics/synthetic/validator
+  body: json
+  auth: none
+}
+
+headers {
+  Authorization: Api-Token {{DT_API_TOKEN}}
+}
+
+body:json {
+  {
+    "dimensions": [
+      {
+        "dimension": "Location"
+      }
+    ],
+    "enabled": true,
+    "filter": {
+      "event": "SYNTHETIC_TEST_STEP-1234",
+      "hasError": true
+    },
+    "metric": "UserActionDuration",
+    "metricKey": "calc:synthetic.browser.mymetric",
+    "monitorIdentifier": "SYNTHETIC_TEST-1234",
+    "name": "MyMetric"
+  }
+}
+
+docs {
+  # Validates the payload for the `POST /calculatedMetrics/synthetic` request | maturity=EARLY_ADOPTER
+
+  **Auth:** Api-Token only (OAuth not supported by this endpoint). Uses `{{DT_API_TOKEN}}`.
+
+  **API token scopes:** WriteConfig
+}

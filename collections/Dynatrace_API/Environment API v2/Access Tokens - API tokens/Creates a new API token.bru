@@ -1,0 +1,38 @@
+meta {
+  name: Creates a new API token
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{DT_TENANT_URL}}/api/v2/apiTokens
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "expirationDate": "now+14d",
+    "name": "tokenName",
+    "personalAccessToken": false,
+    "scopes": [
+      "metrics.read"
+    ]
+  }
+}
+
+docs {
+  # Creates a new API token
+
+  **Deprecated**
+
+  The newly created token will be owned by the same user who owns the token used for authentication of the call. 
+
+   Creating personal access tokens requires the `environment:roles:viewer` permission. Creating access tokens requires the `environment:roles:manage-settings` permission.
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `environment-api:api-tokens:write`, `api-tokens:tokens:write`
+
+  **API token scopes:** apiTokens.write
+}

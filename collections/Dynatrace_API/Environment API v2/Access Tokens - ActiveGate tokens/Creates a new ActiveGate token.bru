@@ -1,0 +1,32 @@
+meta {
+  name: Creates a new ActiveGate token
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{DT_TENANT_URL}}/api/v2/activeGateTokens
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "activeGateType": "ENVIRONMENT",
+    "expirationDate": "now+6M",
+    "name": "myToken",
+    "seedToken": false
+  }
+}
+
+docs {
+  # Creates a new ActiveGate token
+
+  The newly created token will be owned by the same user who owns the token used for authentication of the call.
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `environment-api:activegate-tokens:create`, `environment-api:activegate-tokens:write`, `fleet-management:activegate.tokens:create`, `fleet-management:activegate.tokens:write`
+
+  **API token scopes:** activeGateTokenManagement.create, activeGateTokenManagement.write
+}

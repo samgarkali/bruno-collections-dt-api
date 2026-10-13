@@ -1,0 +1,36 @@
+meta {
+  name: Executes Data Source action of Active Gate or Host
+  type: http
+  seq: 25
+}
+
+put {
+  url: {{DT_TENANT_URL}}/api/v2/extensions/:extensionName/monitoringConfigurations/:configurationId/actions
+  body: json
+  auth: inherit
+}
+
+params:path {
+  extensionName: 
+  configurationId: 
+}
+
+body:json {
+  {
+    "actions": {}
+  }
+}
+
+docs {
+  # Executes Data Source action of Active Gate or Host
+
+  **Deprecated**
+
+  Deprecated since version 1.342. Use the successor API `/platform/extensions/v2` instead.
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `environment-api:extension-configuration-actions:write`
+
+  **API token scopes:** extensionConfigurationActions.write
+}

@@ -1,0 +1,32 @@
+meta {
+  name: Mutes a security problem
+  type: http
+  seq: 6
+}
+
+post {
+  url: {{DT_TENANT_URL}}/api/v2/securityProblems/:id/mute
+  body: json
+  auth: inherit
+}
+
+params:path {
+  id: 
+}
+
+body:json {
+  {
+    "comment": "string",
+    "reason": "CONFIGURATION_NOT_AFFECTED"
+  }
+}
+
+docs {
+  # Mutes a security problem
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `environment-api:security-problems:write`
+
+  **API token scopes:** securityProblems.write
+}

@@ -1,0 +1,127 @@
+meta {
+  name: Validates the configuration of anomaly detection for hosts for the `PUT anomalyD
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{DT_TENANT_URL}}/api/config/v1/anomalyDetection/hosts/validator
+  body: json
+  auth: none
+}
+
+headers {
+  Authorization: Api-Token {{DT_API_TOKEN}}
+}
+
+body:json {
+  {
+    "connectionLostDetection": {
+      "enabled": true,
+      "enabledOnGracefulShutdowns": true
+    },
+    "diskLowInodesDetection": {
+      "customThresholds": {
+        "freeInodesPercentage": 10
+      },
+      "enabled": true
+    },
+    "diskLowSpaceDetection": {
+      "customThresholds": {
+        "freeSpacePercentage": 10
+      },
+      "enabled": true
+    },
+    "diskSlowWritesAndReadsDetection": {
+      "customThresholds": {
+        "writeAndReadTime": 300
+      },
+      "enabled": true
+    },
+    "highCpuSaturationDetection": {
+      "customThresholds": {
+        "cpuSaturation": 90
+      },
+      "enabled": true
+    },
+    "highGcActivityDetection": {
+      "customThresholds": {
+        "gcSuspensionPercentage": 20,
+        "gcTimePercentage": 35
+      },
+      "enabled": true
+    },
+    "highMemoryDetection": {
+      "customThresholds": {
+        "pageFaultsPerSecondNonWindows": 10,
+        "pageFaultsPerSecondWindows": 50,
+        "usedMemoryPercentageNonWindows": 85,
+        "usedMemoryPercentageWindows": 85
+      },
+      "enabled": true
+    },
+    "highNetworkDetection": {
+      "customThresholds": {
+        "utilizationPercentage": 88
+      },
+      "enabled": true
+    },
+    "metadata": {
+      "clusterVersion": "Mock version",
+      "configurationVersions": [
+        4,
+        2
+      ]
+    },
+    "networkDroppedPacketsDetection": {
+      "customThresholds": {
+        "droppedPacketsPercentage": 8,
+        "totalPacketsRate": 8
+      },
+      "enabled": true
+    },
+    "networkErrorsDetection": {
+      "customThresholds": {
+        "errorsPercentage": 9,
+        "totalPacketsRate": 9
+      },
+      "enabled": true
+    },
+    "networkHighRetransmissionDetection": {
+      "customThresholds": {
+        "retransmissionRatePercentage": 15,
+        "retransmittedPacketsNumberPerMinute": 15
+      },
+      "enabled": true
+    },
+    "networkTcpProblemsDetection": {
+      "customThresholds": {
+        "failedConnectionsNumberPerMinute": 5,
+        "newConnectionFailuresPercentage": 5
+      },
+      "enabled": true
+    },
+    "outOfMemoryDetection": {
+      "customThresholds": {
+        "outOfMemoryExceptionsNumber": 2
+      },
+      "enabled": true
+    },
+    "outOfThreadsDetection": {
+      "customThresholds": {
+        "outOfThreadsExceptionsNumber": 2
+      },
+      "enabled": true
+    }
+  }
+}
+
+docs {
+  # Validates the configuration of anomaly detection for hosts for the `PUT /anomalyDetection/hosts` request
+
+  **Deprecated**
+
+  **Auth:** Api-Token only (OAuth not supported by this endpoint). Uses `{{DT_API_TOKEN}}`.
+
+  **API token scopes:** WriteConfig
+}

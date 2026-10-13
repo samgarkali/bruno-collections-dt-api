@@ -1,0 +1,37 @@
+meta {
+  name: Upload a symbol file
+  type: http
+  seq: 8
+}
+
+put {
+  url: {{DT_TENANT_URL}}/api/config/v1/symfiles/:applicationId/:packageName/:os/:versionCode/:versionName
+  body: text
+  auth: none
+}
+
+params:path {
+  applicationId: 
+  packageName: 
+  os: 
+  versionCode: 
+  versionName: 
+}
+
+headers {
+  Authorization: Api-Token {{DT_API_TOKEN}}
+  ~content-type: 
+}
+
+body:text {
+}
+
+docs {
+  # Upload a symbol file
+
+  The file should be either a ProGuard file for Android or a zip file containing all the iOS dSYM files.
+
+  **Auth:** Api-Token only (OAuth not supported by this endpoint). Uses `{{DT_API_TOKEN}}`.
+
+  **API token scopes:** DssFileManagement
+}

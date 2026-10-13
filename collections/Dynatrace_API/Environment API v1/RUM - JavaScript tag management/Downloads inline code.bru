@@ -1,0 +1,29 @@
+meta {
+  name: Downloads inline code
+  type: http
+  seq: 5
+}
+
+get {
+  url: {{DT_TENANT_URL}}/api/v1/rum/jsInlineScript/:entity
+  body: none
+  auth: inherit
+}
+
+params:path {
+  entity: 
+}
+
+docs {
+  # Downloads inline code
+
+  **Deprecated**
+
+  Returns the inline code of the most recent OneAgent JavaScript. This is a complete configuration and monitoring code to be manually inserted into your web application code.
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `environment-api:rum:read`
+
+  **API token scopes:** RumJavaScriptTagManagement
+}

@@ -1,0 +1,48 @@
+meta {
+  name: Validates the payload for the `POST calculatedMetrics rum` request
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{DT_TENANT_URL}}/api/config/v1/calculatedMetrics/rum/validator
+  body: json
+  auth: none
+}
+
+headers {
+  Authorization: Api-Token {{DT_API_TOKEN}}
+}
+
+body:json {
+  {
+    "applicationIdentifier": "APPLICATION-1234",
+    "dimensions": [
+      {
+        "dimension": "GeoLocation",
+        "topX": 20
+      }
+    ],
+    "enabled": true,
+    "metricDefinition": {
+      "metric": "UserActionDuration"
+    },
+    "metricKey": "calc:apps.web.mymetric",
+    "name": "MyMetric",
+    "userActionFilter": {
+      "browserType": "BROWSER-1234",
+      "country": "GEOLOCATION-1234",
+      "loadAction": true
+    }
+  }
+}
+
+docs {
+  # Validates the payload for the `POST /calculatedMetrics/rum` request
+
+  The body must not provide an ID.
+
+  **Auth:** Api-Token only (OAuth not supported by this endpoint). Uses `{{DT_API_TOKEN}}`.
+
+  **API token scopes:** WriteConfig
+}

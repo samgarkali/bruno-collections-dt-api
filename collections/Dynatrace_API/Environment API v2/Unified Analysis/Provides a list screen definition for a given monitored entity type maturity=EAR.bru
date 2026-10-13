@@ -1,0 +1,26 @@
+meta {
+  name: Provides a list screen definition for a given monitored entity type maturity=EAR
+  type: http
+  seq: 5
+}
+
+post {
+  url: {{DT_TENANT_URL}}/api/v2/ua/list
+  body: none
+  auth: inherit
+}
+
+params:query {
+  ~from: 
+  ~to: 
+}
+
+docs {
+  # Provides a list screen definition for a given monitored entity type | maturity=EARLY_ADOPTER
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `unified-analysis:screen-definition:read`
+
+  **API token scopes:** unifiedAnalysis.read
+}

@@ -1,0 +1,44 @@
+meta {
+  name: Validates the payload for the `POST calculatedMetrics mobile` request
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{DT_TENANT_URL}}/api/config/v1/calculatedMetrics/mobile/validator
+  body: json
+  auth: none
+}
+
+headers {
+  Authorization: Api-Token {{DT_API_TOKEN}}
+}
+
+body:json {
+  {
+    "applicationIdentifier": "MOBILE_APPLICATION-1234",
+    "dimensions": [
+      {
+        "dimension": "GEOLOCATION",
+        "topX": 20
+      }
+    ],
+    "enabled": true,
+    "metricKey": "calc:apps.mobile.mymetric",
+    "metricType": "USER_ACTION_DURATION",
+    "name": "MyMetric",
+    "userActionFilter": {
+      "country": "GEOLOCATION-1234",
+      "hasHttpError": true,
+      "osVersion": "OS-1234"
+    }
+  }
+}
+
+docs {
+  # Validates the payload for the `POST /calculatedMetrics/mobile` request
+
+  **Auth:** Api-Token only (OAuth not supported by this endpoint). Uses `{{DT_API_TOKEN}}`.
+
+  **API token scopes:** WriteConfig
+}

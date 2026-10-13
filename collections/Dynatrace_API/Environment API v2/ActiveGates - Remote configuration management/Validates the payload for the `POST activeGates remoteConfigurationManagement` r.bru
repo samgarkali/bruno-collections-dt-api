@@ -1,0 +1,37 @@
+meta {
+  name: Validates the payload for the `POST activeGates remoteConfigurationManagement` r
+  type: http
+  seq: 5
+}
+
+post {
+  url: {{DT_TENANT_URL}}/api/v2/activeGates/remoteConfigurationManagement/validator
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "entities": [
+      "0x2b7c0b02",
+      "0x4928065d"
+    ],
+    "operations": [
+      {
+        "attribute": "networkZone",
+        "operation": "set",
+        "value": "exampleNetworkZoneName"
+      }
+    ]
+  }
+}
+
+docs {
+  # Validates the payload for the `POST /activeGates/remoteConfigurationManagement` request.
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `fleet-management:activegates:write`
+
+  **API token scopes:** activeGates.write
+}

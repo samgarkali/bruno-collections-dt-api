@@ -1,0 +1,44 @@
+meta {
+  name: Creates a new SLO
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{DT_TENANT_URL}}/api/v2/slo
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "description": "Rate of successful payments per week",
+    "enabled": true,
+    "errorBudgetBurnRate": {
+      "burnRateVisualizationEnabled": true,
+      "fastBurnThreshold": 1.5
+    },
+    "evaluationType": "AGGREGATE",
+    "filter": "type(\"SERVICE\")",
+    "metricDenominator": "builtin:service.requestCount.server",
+    "metricExpression": "(100)*(builtin:service.errors.server.successCount:splitBy())/(builtin:service.requestCount.server:splitBy())",
+    "metricName": "payment_service_availability",
+    "metricNumerator": "builtin:service.errors.server.successCount",
+    "metricRate": "builtin:service.successes.server.rate",
+    "name": "Payment service availability",
+    "target": 95,
+    "timeframe": "-1d",
+    "useRateMetric": true,
+    "warning": 97.5
+  }
+}
+
+docs {
+  # Creates a new SLO
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `environment-api:slo:write`
+
+  **API token scopes:** slo.write
+}

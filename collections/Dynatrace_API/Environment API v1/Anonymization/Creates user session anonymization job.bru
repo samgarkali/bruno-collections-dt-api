@@ -1,0 +1,38 @@
+meta {
+  name: Creates user session anonymization job
+  type: http
+  seq: 1
+}
+
+put {
+  url: {{DT_TENANT_URL}}/api/v1/anonymize/anonymizationJobs
+  body: none
+  auth: none
+}
+
+params:query {
+  ~startTimestamp: 
+  ~endTimestamp: 
+  ~userIds: 
+  ~ips: 
+  ~internalApplicationId: 
+  ~additionalField: 
+}
+
+headers {
+  Authorization: Api-Token {{DT_API_TOKEN}}
+}
+
+docs {
+  # Creates user session anonymization job
+
+  The job anonymizes all user sessions in the specified timeframe by masking the specified fields.
+
+  To identify user sessions to be anonymized you can specify either userID, IP address, an internal application ID or all of them. If you specify multiple criteria, the **OR** logic applies.
+
+  You can't undo the anonymization.
+
+  **Auth:** Api-Token only (OAuth not supported by this endpoint). Uses `{{DT_API_TOKEN}}`.
+
+  **API token scopes:** UserSessionAnonymization
+}

@@ -1,0 +1,47 @@
+meta {
+  name: Pushes log records to Dynatrace
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{DT_TENANT_URL}}/api/v2/logs/ingest
+  body: json
+  auth: inherit
+}
+
+params:query {
+  ~content-type: 
+  ~structure: 
+}
+
+headers {
+  ~X-Dynatrace-Attr: 
+  ~X-Dynatrace-Options: 
+}
+
+body:json {
+  {}
+}
+
+docs {
+  # Pushes log records to Dynatrace
+
+  Ingested logs are stored in Dynatrace.
+
+  If you are using this API endpoint on an Environment ActiveGate, the Log Analytics Collector module must be enabled.
+  This endpoint is not available on Containerized ActiveGate (including Kubernetes deployments).
+
+  This endpoint accepts arbitrary query parameters, which are processed as log attribute key-value pairs and added to each ingested log record following the standard rules for log attributes.
+
+  <br />
+  **Error handling:**
+
+  It is recommended to use an exponential backoff strategy when retrying requests.
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `openpipeline:logs:ingest`, `storage:logs:write`
+
+  **API token scopes:** logs.ingest
+}

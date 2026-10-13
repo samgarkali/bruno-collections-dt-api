@@ -1,0 +1,111 @@
+meta {
+  name: Creates a synthetic monitor definition. maturity=EARLY_ADOPTER
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{DT_TENANT_URL}}/api/v2/synthetic/monitors
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "description": "My network availability monitor description",
+    "enabled": "true",
+    "frequencyMin": "60",
+    "locations": [
+      "SYNTHETIC_LOCATION-D3A5BFD8676A4F19"
+    ],
+    "name": "My network availability monitor",
+    "performanceThresholds": {
+      "enabled": "true",
+      "thresholds": [
+        {
+          "aggregation": "AVG",
+          "dealertingSamples": "5",
+          "samples": "5",
+          "stepIndex": "0",
+          "threshold": "200",
+          "violatingSamples": "3"
+        }
+      ]
+    },
+    "primaryGrailTags": [
+      {
+        "key": "sample key",
+        "value": "sample value"
+      },
+      {
+        "key": "another sample key",
+        "value": "another sample value"
+      }
+    ],
+    "steps": [
+      {
+        "constraints": [
+          {
+            "properties": {
+              "operator": ">=",
+              "value": "95"
+            },
+            "type": "SUCCESS_RATE_PERCENT"
+          }
+        ],
+        "name": "Step 1",
+        "properties": {
+          "ICMP_IP_VERSION": "4",
+          "ICMP_NUMBER_OF_PACKETS": "8",
+          "ICMP_TIMEOUT_FOR_REPLY": "PT1S"
+        },
+        "requestConfigurations": [
+          {
+            "constraints": [
+              {
+                "properties": {
+                  "operator": "=",
+                  "value": "100"
+                },
+                "type": "ICMP_SUCCESS_RATE_PERCENT"
+              }
+            ]
+          }
+        ],
+        "requestType": "ICMP",
+        "targetFilter": "ipMask == 127.0.0.1/24",
+        "targetList": [
+          "127.0.0.1",
+          "127.0.0.2"
+        ]
+      }
+    ],
+    "syntheticMonitorOutageHandlingSettings": {
+      "globalConsecutiveOutageCountThreshold": "1",
+      "globalOutages": "true",
+      "localConsecutiveOutageCountThreshold": "3",
+      "localLocationOutageCountThreshold": "3",
+      "localOutages": "true"
+    },
+    "tags": [
+      {
+        "key": "sample key",
+        "value": "sample value"
+      },
+      {
+        "key": "sample key"
+      }
+    ],
+    "type": "MULTI_PROTOCOL"
+  }
+}
+
+docs {
+  # Creates a synthetic monitor definition. | maturity=EARLY_ADOPTER
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `environment-api:synthetic-monitors:write`
+
+  **API token scopes:** settings.write
+}

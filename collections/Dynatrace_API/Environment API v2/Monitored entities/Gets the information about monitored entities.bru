@@ -1,0 +1,43 @@
+meta {
+  name: Gets the information about monitored entities
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{DT_TENANT_URL}}/api/v2/entities
+  body: none
+  auth: inherit
+}
+
+params:query {
+  ~nextPageKey: 
+  ~pageSize: 
+  ~entitySelector: 
+  ~from: 
+  ~to: 
+  ~fields: 
+  ~sort: 
+}
+
+docs {
+  # Gets the information about monitored entities
+
+  Lists entities observed within the specified timeframe along with their properties. 
+
+  When you query entities of the `SERVICE_METHOD` type, only the following requests are returned: 
+
+  * [Key requests](https://dt-url.net/a903u9s) 
+  * Top X requests that are used for [baselining](https://dt-url.net/0j23uqb) 
+  * Requests that have caused a [problem](https://dt-url.net/pf43uqg) 
+
+  You can limit the output by using pagination: 
+  1. Specify the number of results per page in the **pageSize** query parameter. 
+  2. Use the cursor from the **nextPageKey** field of the previous response in the **nextPageKey** query parameter to obtain subsequent pages.
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `environment-api:entities:read`
+
+  **API token scopes:** entities.read
+}

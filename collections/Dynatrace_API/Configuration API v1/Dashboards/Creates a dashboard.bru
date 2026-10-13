@@ -1,0 +1,116 @@
+meta {
+  name: Creates a dashboard
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{DT_TENANT_URL}}/api/config/v1/dashboards
+  body: json
+  auth: none
+}
+
+headers {
+  Authorization: Api-Token {{DT_API_TOKEN}}
+}
+
+body:json {
+  {
+    "dashboardMetadata": {
+      "dashboardFilter": {
+        "managementZone": {
+          "id": "3438779970106539862",
+          "name": "Example Management Zone"
+        },
+        "timeframe": "l_72_HOURS"
+      },
+      "dynamicFilters": {
+        "filters": [
+          "SERVICE_TYPE"
+        ]
+      },
+      "name": "Example Dashboard",
+      "owner": "Example Owner",
+      "shared": true
+    },
+    "metadata": {
+      "clusterVersion": "Mock version",
+      "configurationVersions": [
+        4,
+        2
+      ]
+    },
+    "tiles": [
+      {
+        "bounds": {
+          "height": 38,
+          "left": 0,
+          "top": 0,
+          "width": 304
+        },
+        "configured": true,
+        "name": "Hosts",
+        "tileFilter": {},
+        "tileType": "HEADER"
+      },
+      {
+        "bounds": {
+          "height": 38,
+          "left": 304,
+          "top": 0,
+          "width": 304
+        },
+        "configured": true,
+        "name": "Applications",
+        "tileFilter": {},
+        "tileType": "HEADER"
+      },
+      {
+        "bounds": {
+          "height": 304,
+          "left": 0,
+          "top": 38,
+          "width": 304
+        },
+        "chartVisible": true,
+        "configured": true,
+        "name": "Host health",
+        "tileFilter": {
+          "managementZone": {
+            "id": "3438779970106539862",
+            "name": "Example Management Zone"
+          }
+        },
+        "tileType": "HOSTS"
+      },
+      {
+        "bounds": {
+          "height": 304,
+          "left": 304,
+          "top": 38,
+          "width": 304
+        },
+        "chartVisible": true,
+        "configured": true,
+        "name": "Application health",
+        "tileFilter": {
+          "managementZone": {
+            "id": "3438779970106539862",
+            "name": "Example Management Zone"
+          }
+        },
+        "tileType": "APPLICATIONS"
+      }
+    ]
+  }
+}
+
+docs {
+  # Creates a dashboard
+
+  The body must not provide an ID. An ID is assigned automatically by Dynatrace.
+
+  **Auth:** Api-Token only (OAuth not supported by this endpoint). Uses `{{DT_API_TOKEN}}`.
+
+  **API token scopes:** WriteConfig
+}

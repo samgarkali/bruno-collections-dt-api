@@ -1,0 +1,36 @@
+meta {
+  name: Lists all synthetic monitors in your Dynatrace environment
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{DT_TENANT_URL}}/api/v1/synthetic/monitors
+  body: none
+  auth: inherit
+}
+
+params:query {
+  ~managementZone: 
+  ~tag: 
+  ~location: 
+  ~assignedApps: 
+  ~type: 
+  ~enabled: 
+  ~credentialId: 
+  ~credentialOwner: 
+}
+
+docs {
+  # Lists all synthetic monitors in your Dynatrace environment
+
+  **Deprecated**
+
+  Deprecated since version 1.340.x. Please use `api/v2/synthetic/monitors`. The full list can be lengthy, but you can narrow it down by specifying filter query parameters.
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `environment-api:synthetic-monitors:read`
+
+  **API token scopes:** ExternalSyntheticIntegration, DataExport, ReadSyntheticData
+}

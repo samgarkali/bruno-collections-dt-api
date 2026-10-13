@@ -1,0 +1,33 @@
+meta {
+  name: Downloads BOSH release tarballs of the specified version, OneAgent included
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{DT_TENANT_URL}}/api/v1/deployment/boshrelease/agent/:osType/version/:version
+  body: none
+  auth: inherit
+}
+
+params:query {
+  ~skipMetadata: 
+  ~networkZone: 
+}
+
+params:path {
+  osType: 
+  version: 
+}
+
+docs {
+  # Downloads BOSH release tarballs of the specified version, OneAgent included
+
+  For SaaS, the call is executed on an Environment ActiveGate. Be sure to use the base of an ActiveGate, **not** the environment.
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `environment-api:deployment:download`, `fleet-management:oneagents:download`
+
+  **API token scopes:** InstallerDownload
+}

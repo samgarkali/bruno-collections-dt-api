@@ -1,0 +1,47 @@
+meta {
+  name: Lists all monitored processes along with their parameters
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{DT_TENANT_URL}}/api/v1/entity/infrastructure/processes
+  body: none
+  auth: none
+}
+
+params:query {
+  ~startTimestamp: 
+  ~endTimestamp: 
+  ~relativeTime: 
+  ~tag: 
+  ~entity: 
+  ~hostTag: 
+  ~host: 
+  ~actualMonitoringState: 
+  ~expectedMonitoringState: 
+  ~managementZone: 
+  ~includeDetails: 
+  ~pageSize: 
+  ~nextPageKey: 
+}
+
+headers {
+  Authorization: Api-Token {{DT_API_TOKEN}}
+}
+
+docs {
+  # Lists all monitored processes along with their parameters
+
+  **Deprecated**
+
+  You can narrow down the output by specifying filtering parameters for the request. 
+
+  You can additionally limit the output by using pagination: 
+  1. Specify the number of results per page in the **pageSize** query parameter. 
+  2. Then use the URL-encoded cursor from the **Next-Page-Key** response header in the **nextPageKey** query parameter to obtain subsequent pages.
+
+  **Auth:** Api-Token only (OAuth not supported by this endpoint). Uses `{{DT_API_TOKEN}}`.
+
+  **API token scopes:** DataExport
+}

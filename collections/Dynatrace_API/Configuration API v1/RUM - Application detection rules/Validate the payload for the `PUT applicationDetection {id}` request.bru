@@ -1,0 +1,49 @@
+meta {
+  name: Validate the payload for the `PUT applicationDetection {id}` request
+  type: http
+  seq: 8
+}
+
+post {
+  url: {{DT_TENANT_URL}}/api/config/v1/applicationDetectionRules/:id/validator
+  body: json
+  auth: none
+}
+
+params:path {
+  id: 
+}
+
+headers {
+  Authorization: Api-Token {{DT_API_TOKEN}}
+}
+
+body:json {
+  {
+    "applicationIdentifier": "APPLICATION-123456",
+    "filterConfig": {
+      "applicationMatchTarget": "DOMAIN",
+      "applicationMatchType": "EQUALS",
+      "pattern": "myapp.example.com"
+    },
+    "id": "12345678-abcd-1234-abcd-1234567890ab",
+    "metadata": {
+      "clusterVersion": "Mock version",
+      "configurationVersions": [
+        4,
+        2
+      ]
+    },
+    "name": "uniqueName"
+  }
+}
+
+docs {
+  # Validate the payload for the `PUT /applicationDetection/{id}` request
+
+  **Deprecated**
+
+  **Auth:** Api-Token only (OAuth not supported by this endpoint). Uses `{{DT_API_TOKEN}}`.
+
+  **API token scopes:** WriteConfig
+}

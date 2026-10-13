@@ -1,0 +1,252 @@
+meta {
+  name: Validates the configuration of the web application for the `POST applications we
+  type: http
+  seq: 10
+}
+
+post {
+  url: {{DT_TENANT_URL}}/api/config/v1/applications/web/validator
+  body: json
+  auth: none
+}
+
+headers {
+  Authorization: Api-Token {{DT_API_TOKEN}}
+}
+
+body:json {
+  {
+    "conversionGoals": [
+      {
+        "destinationDetails": {
+          "caseSensitive": false,
+          "matchType": "Begins",
+          "urlOrPath": "url or path"
+        },
+        "name": "conversionGoalName",
+        "type": "UserAction",
+        "userActionDetails": {
+          "actionType": "Load",
+          "caseSensitive": true,
+          "matchEntity": "ActionName",
+          "matchType": "Ends",
+          "value": "value to match"
+        },
+        "visitDurationDetails": {
+          "durationInMillis": 1
+        },
+        "visitNumActionDetails": {
+          "numUserActions": 2
+        }
+      }
+    ],
+    "costControlUserSessionPercentage": 100,
+    "customActionApdexSettings": {
+      "frustratingFallbackThreshold": 12000,
+      "frustratingThreshold": 12000,
+      "toleratedFallbackThreshold": 3000,
+      "toleratedThreshold": 3000
+    },
+    "loadActionApdexSettings": {
+      "frustratingFallbackThreshold": 12000,
+      "frustratingThreshold": 12000,
+      "toleratedFallbackThreshold": 3000,
+      "toleratedThreshold": 3000
+    },
+    "loadActionKeyPerformanceMetric": "VISUALLY_COMPLETE",
+    "metaDataCaptureSettings": [
+      {
+        "capturingName": "variableName",
+        "name": "display name",
+        "type": "JAVA_SCRIPT_VARIABLE"
+      }
+    ],
+    "monitoringSettings": {
+      "advancedJavaScriptTagSettings": {
+        "additionalEventHandlers": {
+          "blurEventHandler": false,
+          "changeEventHandler": false,
+          "clickEventHandler": false,
+          "maxDomNodesToInstrument": 5000,
+          "mouseupEventHandler": false,
+          "toStringMethod": false,
+          "userMouseupEventForClicks": false
+        },
+        "eventWrapperSettings": {
+          "blur": false,
+          "change": false,
+          "click": false,
+          "mouseUp": false,
+          "touchEnd": false,
+          "touchStart": false
+        },
+        "globalEventCaptureSettings": {
+          "additionalEventCapturedAsUserInput": "",
+          "click": true,
+          "doubleClick": true,
+          "keyDown": true,
+          "keyUp": true,
+          "mouseDown": true,
+          "mouseUp": true,
+          "scroll": true
+        },
+        "instrumentUnsupportedAjaxFrameworks": false,
+        "maxActionNameLength": 100,
+        "maxErrorsToCapture": 10,
+        "specialCharactersToEscape": "",
+        "syncBeaconFirefox": false,
+        "syncBeaconInternetExplorer": false
+      },
+      "browserRestrictionSettings": {
+        "browserRestrictions": [
+          {
+            "browserType": "INTERNET_EXPLORER",
+            "browserVersion": "0",
+            "comparator": "EQUALS",
+            "platform": "ALL"
+          }
+        ],
+        "mode": "EXCLUDE"
+      },
+      "cacheControlHeaderOptimizations": true,
+      "contentCapture": {
+        "javaScriptErrors": true,
+        "resourceTimingSettings": {
+          "nonW3cResourceTimings": false,
+          "nonW3cResourceTimingsInstrumentationDelay": 50,
+          "w3cResourceTimings": true
+        },
+        "timeoutSettings": {
+          "temporaryActionLimit": 0,
+          "temporaryActionTotalTimeout": 100,
+          "timedActionSupport": false
+        },
+        "visuallyCompleteAndSpeedIndex": true
+      },
+      "cookiePlacementDomain": "",
+      "correlationHeaderInclusionRegex": "",
+      "customConfigurationProperties": "",
+      "excludeXhrRegex": "",
+      "fetchRequests": true,
+      "injectionMode": "JAVASCRIPT_TAG",
+      "ipAddressRestrictionSettings": {
+        "ipAddressRestrictions": [
+          {
+            "address": "10.0.0.1",
+            "subnetMask": 3
+          },
+          {
+            "address": "10.0.0.1",
+            "addressTo": "10.0.0.2"
+          }
+        ],
+        "mode": "EXCLUDE"
+      },
+      "javaScriptFrameworkSupport": {
+        "activeXObject": false,
+        "angular": true,
+        "dojo": false,
+        "extJS": false,
+        "icefaces": false,
+        "jQuery": true,
+        "mooTools": false,
+        "prototype": true
+      },
+      "javaScriptInjectionRules": [
+        {
+          "enabled": true,
+          "htmlPattern": "</title>",
+          "rule": "AFTER_SPECIFIC_HTML",
+          "urlOperator": "CONTAINS",
+          "urlPattern": "/lorem/ipsum.jsp"
+        }
+      ],
+      "libraryFileLocation": "",
+      "monitoringDataPath": "",
+      "secureCookieAttribute": false,
+      "serverRequestPathId": "",
+      "xmlHttpRequest": true
+    },
+    "name": "application name",
+    "realUserMonitoringEnabled": true,
+    "sessionReplayConfig": {
+      "costControlPercentage": 100,
+      "cssResourceCapturingExclusionRules": [
+        "rule"
+      ],
+      "enableCssResourceCapturing": true,
+      "enabled": true
+    },
+    "type": "AUTO_INJECTED",
+    "userActionNamingSettings": {
+      "ignoreCase": true,
+      "loadActionNamingRules": [
+        {
+          "conditions": [
+            {
+              "operand1": "{myPlaceholder}",
+              "operand2": "foo",
+              "operator": "CONTAINS"
+            }
+          ],
+          "template": "Loading of {myPlaceholder}"
+        }
+      ],
+      "placeholders": [
+        {
+          "input": "PAGE_URL",
+          "name": "myPlaceholder",
+          "processingPart": "ALL",
+          "processingSteps": [
+            {
+              "patternAfter": ".*a",
+              "patternAfterSearchType": "LAST",
+              "patternBefore": ".*b",
+              "patternBeforeSearchType": "FIRST",
+              "replacement": "value",
+              "type": "SUBSTRING"
+            }
+          ],
+          "useGuessedElementIdentifier": false
+        }
+      ],
+      "splitUserActionsByDomain": true,
+      "xhrActionNamingRules": [
+        {
+          "conditions": [
+            {
+              "operand1": "{myPlaceholder}",
+              "operand2": "foo",
+              "operator": "CONTAINS"
+            }
+          ],
+          "template": "Loading of {myPlaceholder}"
+        }
+      ]
+    },
+    "waterfallSettings": {
+      "resourceBrowserCachingThreshold": 50,
+      "resourcesThreshold": 100000,
+      "slowCdnResourcesThreshold": 200000,
+      "slowFirstPartyResourcesThreshold": 200000,
+      "slowThirdPartyResourcesThreshold": 200000,
+      "speedIndexVisuallyCompleteRatioThreshold": 50,
+      "uncompressedResourcesThreshold": 860
+    },
+    "xhrActionApdexSettings": {
+      "frustratingFallbackThreshold": 12000,
+      "frustratingThreshold": 10000,
+      "toleratedFallbackThreshold": 3000,
+      "toleratedThreshold": 2500
+    },
+    "xhrActionKeyPerformanceMetric": "ACTION_DURATION"
+  }
+}
+
+docs {
+  # Validates the configuration of the web application for the `POST /applications/web` request
+
+  **Auth:** Api-Token only (OAuth not supported by this endpoint). Uses `{{DT_API_TOKEN}}`.
+
+  **API token scopes:** WriteConfig
+}

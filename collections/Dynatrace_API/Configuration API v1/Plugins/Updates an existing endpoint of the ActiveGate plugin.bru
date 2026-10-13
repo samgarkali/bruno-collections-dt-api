@@ -1,0 +1,46 @@
+meta {
+  name: Updates an existing endpoint of the ActiveGate plugin
+  type: http
+  seq: 12
+}
+
+put {
+  url: {{DT_TENANT_URL}}/api/config/v1/plugins/:id/endpoints/:endpointId
+  body: json
+  auth: none
+}
+
+params:path {
+  id: 
+  endpointId: 
+}
+
+headers {
+  Authorization: Api-Token {{DT_API_TOKEN}}
+}
+
+body:json {
+  {
+    "activeGatePluginModule": {
+      "id": "-8844900174269363000"
+    },
+    "enabled": true,
+    "id": "-2183662974968812535",
+    "name": "Demo endpoint",
+    "pluginId": "custom.remote.python.demo",
+    "properties": {
+      "dropdownProperty": "two",
+      "password": "",
+      "serverIp": "127.0.0.1",
+      "username": "dynatrace"
+    }
+  }
+}
+
+docs {
+  # Updates an existing endpoint of the ActiveGate plugin
+
+  **Auth:** Api-Token only (OAuth not supported by this endpoint). Uses `{{DT_API_TOKEN}}`.
+
+  **API token scopes:** WriteConfig
+}

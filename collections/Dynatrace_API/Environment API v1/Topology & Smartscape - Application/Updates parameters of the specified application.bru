@@ -1,0 +1,38 @@
+meta {
+  name: Updates parameters of the specified application
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{DT_TENANT_URL}}/api/v1/entity/applications/:meIdentifier
+  body: json
+  auth: none
+}
+
+params:path {
+  meIdentifier: 
+}
+
+headers {
+  Authorization: Api-Token {{DT_API_TOKEN}}
+}
+
+body:json {
+  {
+    "tags": [
+      "office-linz",
+      "office-klagenfurt"
+    ]
+  }
+}
+
+docs {
+  # Updates parameters of the specified application
+
+  **Deprecated**
+
+  **Auth:** Api-Token only (OAuth not supported by this endpoint). Uses `{{DT_API_TOKEN}}`.
+
+  **API token scopes:** DataExport
+}

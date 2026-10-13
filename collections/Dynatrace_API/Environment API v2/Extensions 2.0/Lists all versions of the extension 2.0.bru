@@ -1,0 +1,34 @@
+meta {
+  name: Lists all versions of the extension 2.0
+  type: http
+  seq: 11
+}
+
+get {
+  url: {{DT_TENANT_URL}}/api/v2/extensions/:extensionName
+  body: none
+  auth: inherit
+}
+
+params:query {
+  ~nextPageKey: 
+  ~pageSize: 
+}
+
+params:path {
+  extensionName: 
+}
+
+docs {
+  # Lists all versions of the extension 2.0
+
+  **Deprecated**
+
+  Deprecated since version 1.342. Use the successor API `/platform/extensions/v2` instead.
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `environment-api:extensions:read`
+
+  **API token scopes:** extensions.read
+}

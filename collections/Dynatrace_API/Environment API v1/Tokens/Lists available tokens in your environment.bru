@@ -1,0 +1,39 @@
+meta {
+  name: Lists available tokens in your environment
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{DT_TENANT_URL}}/api/v1/tokens
+  body: none
+  auth: none
+}
+
+params:query {
+  ~limit: 
+  ~user: 
+  ~permissions: 
+  ~from: 
+  ~to: 
+}
+
+headers {
+  Authorization: Api-Token {{DT_API_TOKEN}}
+}
+
+docs {
+  # Lists available tokens in your environment
+
+  **Deprecated**
+
+  You can narrow down the output by adding parameters. The token has to match *all* the specified parameters. 
+
+   You can also specify the limit of returned tokens.
+
+   **This list may contain tokens which were created automatically** (e.g. InstallerDownload, Mobile, ...) and are not visible on the `Settings` page. Deleting those might have unintended side-effects as they might still be in use.
+
+  **Auth:** Api-Token only (OAuth not supported by this endpoint). Uses `{{DT_API_TOKEN}}`.
+
+  **API token scopes:** TenantTokenManagement
+}

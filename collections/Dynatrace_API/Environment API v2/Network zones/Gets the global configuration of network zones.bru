@@ -1,0 +1,21 @@
+meta {
+  name: Gets the global configuration of network zones
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{DT_TENANT_URL}}/api/v2/networkZoneSettings
+  body: none
+  auth: inherit
+}
+
+docs {
+  # Gets the global configuration of network zones
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `environment-api:network-zones:read`, `fleet-management:network-zones:read`
+
+  **API token scopes:** networkZones.read
+}

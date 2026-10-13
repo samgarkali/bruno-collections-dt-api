@@ -1,0 +1,25 @@
+meta {
+  name: Gets the specified remote configuration management job
+  type: http
+  seq: 6
+}
+
+get {
+  url: {{DT_TENANT_URL}}/api/v2/activeGates/remoteConfigurationManagement/:id
+  body: none
+  auth: inherit
+}
+
+params:path {
+  id: 
+}
+
+docs {
+  # Gets the specified remote configuration management job
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `fleet-management:activegates:read`
+
+  **API token scopes:** activeGates.read
+}

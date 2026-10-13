@@ -1,0 +1,27 @@
+meta {
+  name: The details of the given extension version 1
+  type: http
+  seq: 3
+}
+
+get {
+  url: {{DT_TENANT_URL}}/api/v2/hub/extensions1/:extension1FQN
+  body: none
+  auth: none
+}
+
+params:path {
+  extension1FQN: 
+}
+
+headers {
+  Authorization: Api-Token {{DT_API_TOKEN}}
+}
+
+docs {
+  # The details of the given extension version 1
+
+  **Auth:** Api-Token only (OAuth not supported by this endpoint). Uses `{{DT_API_TOKEN}}`.
+
+  **API token scopes:** hub.read
+}

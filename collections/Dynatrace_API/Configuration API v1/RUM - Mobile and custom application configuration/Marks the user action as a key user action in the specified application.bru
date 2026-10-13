@@ -1,0 +1,28 @@
+meta {
+  name: Marks the user action as a key user action in the specified application
+  type: http
+  seq: 5
+}
+
+post {
+  url: {{DT_TENANT_URL}}/api/config/v1/applications/mobile/:applicationId/keyUserActions/:actionName
+  body: none
+  auth: none
+}
+
+params:path {
+  applicationId: 
+  actionName: 
+}
+
+headers {
+  Authorization: Api-Token {{DT_API_TOKEN}}
+}
+
+docs {
+  # Marks the user action as a key user action in the specified application
+
+  **Auth:** Api-Token only (OAuth not supported by this endpoint). Uses `{{DT_API_TOKEN}}`.
+
+  **API token scopes:** WriteConfig
+}

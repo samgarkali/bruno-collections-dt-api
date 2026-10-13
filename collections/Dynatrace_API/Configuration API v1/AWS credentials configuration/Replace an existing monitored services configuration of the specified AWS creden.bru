@@ -1,0 +1,49 @@
+meta {
+  name: Replace an existing monitored services configuration of the specified AWS creden
+  type: http
+  seq: 8
+}
+
+put {
+  url: {{DT_TENANT_URL}}/api/config/v1/aws/credentials/:id/services
+  body: json
+  auth: none
+}
+
+params:path {
+  id: 
+}
+
+headers {
+  Authorization: Api-Token {{DT_API_TOKEN}}
+}
+
+body:json {
+  {
+    "metadata": {
+      "clusterVersion": "1.192.1",
+      "configurationVersions": [
+        4,
+        2
+      ],
+      "currentConfigurationVersions": [
+        "1.0.4",
+        "1.23"
+      ]
+    },
+    "services": [
+      {
+        "monitoredMetrics": [],
+        "name": "string"
+      }
+    ]
+  }
+}
+
+docs {
+  # Replace an existing monitored services configuration of the specified AWS credentials
+
+  **Auth:** Api-Token only (OAuth not supported by this endpoint). Uses `{{DT_API_TOKEN}}`.
+
+  **API token scopes:** WriteConfig
+}

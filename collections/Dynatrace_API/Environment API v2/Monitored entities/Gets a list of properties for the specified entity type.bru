@@ -1,0 +1,25 @@
+meta {
+  name: Gets a list of properties for the specified entity type
+  type: http
+  seq: 7
+}
+
+get {
+  url: {{DT_TENANT_URL}}/api/v2/entityTypes/:type
+  body: none
+  auth: inherit
+}
+
+params:path {
+  type: 
+}
+
+docs {
+  # Gets a list of properties for the specified entity type
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `environment-api:entities:read`
+
+  **API token scopes:** entities.read
+}

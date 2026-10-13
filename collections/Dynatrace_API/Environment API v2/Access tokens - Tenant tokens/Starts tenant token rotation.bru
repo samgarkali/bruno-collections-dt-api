@@ -1,0 +1,23 @@
+meta {
+  name: Starts tenant token rotation
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{DT_TENANT_URL}}/api/v2/tenantTokenRotation/start
+  body: none
+  auth: inherit
+}
+
+docs {
+  # Starts tenant token rotation
+
+  To learn how to rotate tokens, see [Token rotation](https://dt-url.net/1543sf6) in Dynatrace Documentation.
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `environment-api:tenant-token-rotation:write`, `fleet-management:tenant-token:rotate`
+
+  **API token scopes:** tenantTokenRotation.write
+}

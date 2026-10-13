@@ -1,0 +1,23 @@
+meta {
+  name: Migrate all dashboards to replace Custom Charting tiles with DataExplorer ones m
+  type: http
+  seq: 3
+}
+
+get {
+  url: {{DT_TENANT_URL}}/api/config/v1/dashboards/migrateAll
+  body: none
+  auth: none
+}
+
+headers {
+  Authorization: Api-Token {{DT_API_TOKEN}}
+}
+
+docs {
+  # Migrate all dashboards to replace Custom Charting tiles with DataExplorer ones | maturity=EARLY_ADOPTER
+
+  **Auth:** Api-Token only (OAuth not supported by this endpoint). Uses `{{DT_API_TOKEN}}`.
+
+  **API token scopes:** WriteConfig
+}

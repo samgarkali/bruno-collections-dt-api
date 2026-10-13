@@ -1,0 +1,27 @@
+meta {
+  name: Deletes the specified web application
+  type: http
+  seq: 13
+}
+
+delete {
+  url: {{DT_TENANT_URL}}/api/config/v1/applications/web/:id
+  body: none
+  auth: none
+}
+
+params:path {
+  id: 
+}
+
+headers {
+  Authorization: Api-Token {{DT_API_TOKEN}}
+}
+
+docs {
+  # Deletes the specified web application
+
+  **Auth:** Api-Token only (OAuth not supported by this endpoint). Uses `{{DT_API_TOKEN}}`.
+
+  **API token scopes:** WriteConfig
+}

@@ -1,0 +1,23 @@
+meta {
+  name: Get the latest version names of the OneAgent for AWS Lambda
+  type: http
+  seq: 20
+}
+
+get {
+  url: {{DT_TENANT_URL}}/api/v1/deployment/lambda/agent/latest
+  body: none
+  auth: inherit
+}
+
+docs {
+  # Get the latest version names of the OneAgent for AWS Lambda
+
+  Get the latest version names of the OneAgent for the Java, Node.js, and Python AWS Lambda runtimes, also including names for layers that are combined with the log collector, as well as for the standalone log collector layer.
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `environment-api:deployment:download`, `fleet-management:oneagents:download`
+
+  **API token scopes:** InstallerDownload
+}

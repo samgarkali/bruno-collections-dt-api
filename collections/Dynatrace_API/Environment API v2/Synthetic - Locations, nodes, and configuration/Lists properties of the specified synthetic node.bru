@@ -1,0 +1,25 @@
+meta {
+  name: Lists properties of the specified synthetic node
+  type: http
+  seq: 17
+}
+
+get {
+  url: {{DT_TENANT_URL}}/api/v2/synthetic/nodes/:nodeId
+  body: none
+  auth: inherit
+}
+
+params:path {
+  nodeId: 
+}
+
+docs {
+  # Lists properties of the specified synthetic node
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `environment-api:synthetic:read`
+
+  **API token scopes:** syntheticLocations.read
+}

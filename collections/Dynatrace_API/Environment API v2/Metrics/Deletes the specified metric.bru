@@ -1,0 +1,27 @@
+meta {
+  name: Deletes the specified metric
+  type: http
+  seq: 5
+}
+
+delete {
+  url: {{DT_TENANT_URL}}/api/v2/metrics/:metricKey
+  body: none
+  auth: inherit
+}
+
+params:path {
+  metricKey: 
+}
+
+docs {
+  # Deletes the specified metric
+
+  Deletion cannot be undone! You can't delete a metric if it has data points ingested within the last two hours.
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `environment-api:metrics:write`
+
+  **API token scopes:** metrics.write
+}

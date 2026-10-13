@@ -1,0 +1,37 @@
+meta {
+  name: Changes the ID of the specified failure detection parameter set maturity=EARLY_A
+  type: http
+  seq: 7
+}
+
+put {
+  url: {{DT_TENANT_URL}}/api/config/v1/service/failureDetection/parameterSelection/parameterSets/:id/changeId
+  body: json
+  auth: none
+}
+
+params:path {
+  id: 
+}
+
+headers {
+  Authorization: Api-Token {{DT_API_TOKEN}}
+}
+
+body:json {
+  {
+    "description": "Dynatrace entity for the REST API example",
+    "id": "6a98d7bc-abb9-44f8-ae6a-73e68e71812a",
+    "name": "Dynatrace entity"
+  }
+}
+
+docs {
+  # Changes the ID of the specified failure detection parameter set | maturity=EARLY_ADOPTER
+
+  Rules that use the set will be automatically adapted to the new ID.
+
+  **Auth:** Api-Token only (OAuth not supported by this endpoint). Uses `{{DT_API_TOKEN}}`.
+
+  **API token scopes:** WriteConfig
+}

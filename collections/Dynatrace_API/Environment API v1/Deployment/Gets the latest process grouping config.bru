@@ -1,0 +1,31 @@
+meta {
+  name: Gets the latest process grouping config
+  type: http
+  seq: 8
+}
+
+get {
+  url: {{DT_TENANT_URL}}/api/v1/deployment/installer/agent/processgroupingconfig
+  body: none
+  auth: inherit
+}
+
+params:query {
+  ~kubernetesClusterId: 
+}
+
+headers {
+  ~If-None-Match: 
+}
+
+docs {
+  # Gets the latest process grouping config.
+
+  Returns the latest process grouping config in cbor format. Passing the kubernetes cluster id will return the cluster config, otherwise config is read on environment level.
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `environment-api:deployment:download`, `fleet-management:oneagents:download`
+
+  **API token scopes:** InstallerDownload
+}

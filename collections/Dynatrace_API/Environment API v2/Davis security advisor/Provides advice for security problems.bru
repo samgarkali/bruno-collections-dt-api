@@ -1,0 +1,29 @@
+meta {
+  name: Provides advice for security problems
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{DT_TENANT_URL}}/api/v2/davis/securityAdvices
+  body: none
+  auth: inherit
+}
+
+params:query {
+  ~managementZoneFilter: 
+  ~nextPageKey: 
+  ~pageSize: 
+}
+
+docs {
+  # Provides advice for security problems.
+
+  You can narrow down the output by providing the management zone and pagination. If you specify a management zone, only problems originating from that zone are included to the request.
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `environment-api:security-problems:read`
+
+  **API token scopes:** securityProblems.read
+}

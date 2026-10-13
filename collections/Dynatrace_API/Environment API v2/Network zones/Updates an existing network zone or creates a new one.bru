@@ -1,0 +1,43 @@
+meta {
+  name: Updates an existing network zone or creates a new one
+  type: http
+  seq: 5
+}
+
+put {
+  url: {{DT_TENANT_URL}}/api/v2/networkZones/:id
+  body: json
+  auth: inherit
+}
+
+params:path {
+  id: 
+}
+
+body:json {
+  {
+    "alternativeZones": [
+      "string"
+    ],
+    "description": "string",
+    "fallbackMode": "ANY_ACTIVE_GATE"
+  }
+}
+
+docs {
+  # Updates an existing network zone or creates a new one
+
+  **Deprecated**
+
+  If the network zone with the specified ID does not exist, a new network zone is created. 
+
+   The ID is not case sensitive. Dynatrace stores the ID in lowercase.
+
+  **Deprecation notice:** This endpoint is deprecated. Use the Settings API endpoint `POST /api/v2/settings/objects` with schema `builtin:networkzones.zones` to create or update a network zone.
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `environment-api:network-zones:write`, `fleet-management:network-zones:write`
+
+  **API token scopes:** networkZones.write
+}

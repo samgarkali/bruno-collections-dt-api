@@ -1,0 +1,33 @@
+meta {
+  name: Get the effective settings permissions of the calling user in the environment
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{DT_TENANT_URL}}/api/v2/settings/effective-permissions:resolve
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "permissions": [
+      {
+        "context": {
+          "schemaId": null,
+          "scope": null
+        },
+        "permission": "settings:objects:write"
+      }
+    ]
+  }
+}
+
+docs {
+  # Get the effective settings permissions of the calling user in the environment
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `settings:objects:write`, `settings:objects:read`, `settings:schemas:read`
+}

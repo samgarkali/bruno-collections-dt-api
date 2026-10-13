@@ -1,0 +1,26 @@
+meta {
+  name: Gets the parameters of the specified update job
+  type: http
+  seq: 5
+}
+
+get {
+  url: {{DT_TENANT_URL}}/api/v2/activeGates/:agId/updateJobs/:jobId
+  body: none
+  auth: inherit
+}
+
+params:path {
+  agId: 
+  jobId: 
+}
+
+docs {
+  # Gets the parameters of the specified update job
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `environment-api:activegates:read`, `fleet-management:activegates:read`
+
+  **API token scopes:** activeGates.read
+}

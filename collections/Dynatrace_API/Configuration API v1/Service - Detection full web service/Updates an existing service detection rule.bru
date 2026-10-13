@@ -1,0 +1,84 @@
+meta {
+  name: Updates an existing service detection rule
+  type: http
+  seq: 6
+}
+
+put {
+  url: {{DT_TENANT_URL}}/api/config/v1/service/detectionRules/FULL_WEB_SERVICE/:id
+  body: json
+  auth: none
+}
+
+params:path {
+  id: 
+}
+
+headers {
+  Authorization: Api-Token {{DT_API_TOKEN}}
+}
+
+body:json {
+  {
+    "applicationId": {
+      "valueOverride": "abc"
+    },
+    "conditions": [
+      {
+        "attributeType": "APPLICATION_ID",
+        "compareOperations": [
+          {
+            "ignoreCase": "false",
+            "invert": "false",
+            "type": "STRING_CONTAINS",
+            "values": [
+              "value1",
+              "value2"
+            ]
+          }
+        ]
+      }
+    ],
+    "contextRoot": {
+      "segmentsToCopyFromUrlPath": 2,
+      "transformations": [
+        {
+          "delimiter": "/",
+          "type": "BEFORE"
+        }
+      ]
+    },
+    "description": "REST API example",
+    "detectAsWebRequestService": false,
+    "enabled": true,
+    "managementZones": [
+      "zone 1"
+    ],
+    "name": "My sample rule",
+    "serverName": {
+      "transformations": [
+        {
+          "delimiter": "-",
+          "type": "BEFORE"
+        }
+      ]
+    },
+    "type": "FULL_WEB_SERVICE",
+    "webServiceName": {
+      "valueOverride": "abc"
+    },
+    "webServiceNameSpace": {
+      "valueOverride": "abc"
+    }
+  }
+}
+
+docs {
+  # Updates an existing service detection rule
+
+  If the rule with the specified ID doesn't exist, a new rule will be created and appended to the end of the rule list.
+
+  **Auth:** Api-Token only (OAuth not supported by this endpoint). Uses `{{DT_API_TOKEN}}`.
+
+  **API token scopes:** WriteConfig
+}

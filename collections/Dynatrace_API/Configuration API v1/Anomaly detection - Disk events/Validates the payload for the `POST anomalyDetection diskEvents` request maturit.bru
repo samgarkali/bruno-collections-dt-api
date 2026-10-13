@@ -1,0 +1,59 @@
+meta {
+  name: Validates the payload for the `POST anomalyDetection diskEvents` request maturit
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{DT_TENANT_URL}}/api/config/v1/anomalyDetection/diskEvents/validator
+  body: json
+  auth: none
+}
+
+headers {
+  Authorization: Api-Token {{DT_API_TOKEN}}
+}
+
+body:json {
+  {
+    "diskNameFilter": {
+      "operator": "CONTAINS",
+      "value": "string"
+    },
+    "enabled": false,
+    "hostGroupId": "string",
+    "metadata": {
+      "clusterVersion": "1.192.1",
+      "configurationVersions": [
+        4,
+        2
+      ],
+      "currentConfigurationVersions": [
+        "1.0.4",
+        "1.23"
+      ]
+    },
+    "metric": "LOW_DISK_SPACE",
+    "name": "string",
+    "samples": 10,
+    "tagFilters": [
+      {
+        "context": "AWS",
+        "key": "string",
+        "value": "string"
+      }
+    ],
+    "threshold": 0,
+    "violatingSamples": 8
+  }
+}
+
+docs {
+  # Validates the payload for the `POST /anomalyDetection/diskEvents` request | maturity=EARLY_ADOPTER
+
+  **Deprecated**
+
+  **Auth:** Api-Token only (OAuth not supported by this endpoint). Uses `{{DT_API_TOKEN}}`.
+
+  **API token scopes:** WriteConfig
+}

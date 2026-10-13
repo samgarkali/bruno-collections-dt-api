@@ -1,0 +1,44 @@
+meta {
+  name: Creates a new settings object
+  type: http
+  seq: 5
+}
+
+post {
+  url: {{DT_TENANT_URL}}/api/v2/settings/objects
+  body: json
+  auth: inherit
+}
+
+params:query {
+  ~validateOnly: 
+  ~adminAccess: 
+}
+
+body:json {
+  [
+    {
+      "externalId": "string",
+      "insertAfter": "Y2ktaGdyb3VwLTEyMythZjhjOThlOS0wN2I0LTMyMGEtOTQzNi02NTEyMmVlNWY4NGQ=",
+      "objectId": "Y2ktaGdyb3VwLTEyMythZjhjOThlOS0wN2I0LTMyMGEtOTQzNi02NTEyMmVlNWY4NGQ=",
+      "schemaId": "builtin:container.built-in-monitoring-rule",
+      "schemaVersion": "1.0.0",
+      "scope": "HOST-D3A3C5A146830A79",
+      "value": {
+        "autoMonitoring": true
+      }
+    }
+  ]
+}
+
+docs {
+  # Creates a new settings object
+
+  You can upload several objects at once. In that case each object returns its own response code. Check the response body for details.
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `settings:objects:write`
+
+  **API token scopes:** settings.write
+}

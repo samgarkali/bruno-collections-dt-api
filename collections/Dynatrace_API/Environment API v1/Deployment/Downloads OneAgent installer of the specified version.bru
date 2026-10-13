@@ -1,0 +1,42 @@
+meta {
+  name: Downloads OneAgent installer of the specified version
+  type: http
+  seq: 13
+}
+
+get {
+  url: {{DT_TENANT_URL}}/api/v1/deployment/installer/agent/:osType/:installerType/version/:version
+  body: none
+  auth: inherit
+}
+
+params:query {
+  ~flavor: 
+  ~arch: 
+  ~bitness: 
+  ~include: 
+  ~skipMetadata: 
+  ~networkZone: 
+}
+
+params:path {
+  osType: 
+  installerType: 
+  version: 
+}
+
+headers {
+  ~If-None-Match: 
+}
+
+docs {
+  # Downloads OneAgent installer of the specified version
+
+  For the `paas` or `paas-sh` installer types you can get a configuring installer, by passing additional parameters.
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `environment-api:deployment:download`, `fleet-management:oneagents:download`
+
+  **API token scopes:** InstallerDownload
+}

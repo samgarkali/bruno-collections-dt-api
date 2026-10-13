@@ -1,0 +1,27 @@
+meta {
+  name: Gets the global auto-update configuration of environment ActiveGates
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{DT_TENANT_URL}}/api/v2/activeGates/autoUpdate
+  body: none
+  auth: inherit
+}
+
+docs {
+  # Gets the global auto-update configuration of environment ActiveGates.
+
+  **Deprecated**
+
+  Gets the global auto-update configuration of environment ActiveGates.
+
+  **Deprecation notice:** This endpoint is deprecated. Use the Settings API endpoint `GET /api/v2/settings/objects` with schemaId `builtin:deployment.activegate.updates` and `scopes=tenant` to retrieve the global auto-update setting of environment ActiveGates.
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `environment-api:activegates:read`, `fleet-management:activegates:read`
+
+  **API token scopes:** activeGates.read
+}

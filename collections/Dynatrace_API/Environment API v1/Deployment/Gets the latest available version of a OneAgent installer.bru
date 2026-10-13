@@ -1,0 +1,36 @@
+meta {
+  name: Gets the latest available version of a OneAgent installer
+  type: http
+  seq: 12
+}
+
+get {
+  url: {{DT_TENANT_URL}}/api/v1/deployment/installer/agent/:osType/:installerType/latest/metainfo
+  body: none
+  auth: inherit
+}
+
+params:query {
+  ~flavor: 
+  ~arch: 
+  ~bitness: 
+}
+
+params:path {
+  osType: 
+  installerType: 
+}
+
+docs {
+  # Gets the latest available version of a OneAgent installer
+
+  If a [target version](https://dt-url.net/ml03yye) is configured, then this is the downloaded version. 
+
+  Non-required parameters are only applicable to the `paas` and `paas-sh` installer types.
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `environment-api:deployment:download`, `fleet-management:oneagents:download`
+
+  **API token scopes:** InstallerDownload
+}

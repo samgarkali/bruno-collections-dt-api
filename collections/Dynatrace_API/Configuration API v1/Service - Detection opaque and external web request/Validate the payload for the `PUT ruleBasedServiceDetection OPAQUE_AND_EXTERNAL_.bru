@@ -1,0 +1,78 @@
+meta {
+  name: Validate the payload for the `PUT ruleBasedServiceDetection OPAQUE_AND_EXTERNAL_
+  type: http
+  seq: 8
+}
+
+post {
+  url: {{DT_TENANT_URL}}/api/config/v1/service/detectionRules/OPAQUE_AND_EXTERNAL_WEB_REQUEST/:id/validator
+  body: json
+  auth: none
+}
+
+params:path {
+  id: 
+}
+
+headers {
+  Authorization: Api-Token {{DT_API_TOKEN}}
+}
+
+body:json {
+  {
+    "applicationId": {
+      "valueOverride": "abc"
+    },
+    "conditions": [
+      {
+        "attributeType": "URL_HOST_NAME",
+        "compareOperations": [
+          {
+            "ignoreCase": "false",
+            "type": "STRING_CONTAINS",
+            "values": [
+              "value1",
+              "value2"
+            ]
+          }
+        ]
+      }
+    ],
+    "contextRoot": {
+      "segmentsToCopyFromUrlPath": 2,
+      "transformations": [
+        {
+          "delimiter": "/",
+          "type": "BEFORE"
+        }
+      ]
+    },
+    "description": "REST API example",
+    "enabled": true,
+    "managementZones": [
+      "zone1"
+    ],
+    "name": "My sample rule",
+    "port": {
+      "doNotUseForServiceId": "true"
+    },
+    "publicDomainName": {
+      "copyFromHostName": "true",
+      "transformations": [
+        {
+          "delimiter": "/",
+          "type": "BEFORE"
+        }
+      ]
+    },
+    "type": "OPAQUE_AND_EXTERNAL_WEB_REQUEST"
+  }
+}
+
+docs {
+  # Validate the payload for the `PUT /ruleBasedServiceDetection/OPAQUE_AND_EXTERNAL_WEB_REQUEST/{id}` request
+
+  **Auth:** Api-Token only (OAuth not supported by this endpoint). Uses `{{DT_API_TOKEN}}`.
+
+  **API token scopes:** WriteConfig
+}

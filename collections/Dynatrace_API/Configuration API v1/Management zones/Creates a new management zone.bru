@@ -1,0 +1,104 @@
+meta {
+  name: Creates a new management zone
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{DT_TENANT_URL}}/api/config/v1/managementZones
+  body: json
+  auth: none
+}
+
+headers {
+  Authorization: Api-Token {{DT_API_TOKEN}}
+}
+
+body:json {
+  {
+    "description": "sampleDescription",
+    "dimensionalRules": [
+      {
+        "appliesTo": "METRIC",
+        "conditions": [
+          {
+            "conditionType": "DIMENSION",
+            "key": "alwaysRequired",
+            "ruleMatcher": "EQUALS",
+            "value": "requiredForDimension_forbiddenForMetricKeyAndLogFileName"
+          }
+        ],
+        "enabled": true
+      }
+    ],
+    "entitySelectorBasedRules": [
+      {
+        "enabled": true,
+        "entitySelector": "type(HOST) AND cpuCores(4)"
+      }
+    ],
+    "name": "sampleManagementZone",
+    "rules": [
+      {
+        "conditions": [
+          {
+            "comparisonInfo": {
+              "caseSensitive": false,
+              "negate": false,
+              "operator": "BEGINS_WITH",
+              "type": "STRING",
+              "value": "sample"
+            },
+            "key": {
+              "attribute": "SERVICE_DATABASE_NAME"
+            }
+          },
+          {
+            "comparisonInfo": {
+              "negate": false,
+              "operator": "EXISTS",
+              "type": "STRING"
+            },
+            "key": {
+              "attribute": "SERVICE_WEB_SERVER_NAME"
+            }
+          },
+          {
+            "comparisonInfo": {
+              "caseSensitive": false,
+              "negate": false,
+              "operator": "BEGINS_WITH",
+              "type": "STRING",
+              "value": "sample"
+            },
+            "key": {
+              "attribute": "PROCESS_GROUP_CUSTOM_METADATA",
+              "dynamicKey": {
+                "key": "kubernetes.io/limit-ranger",
+                "source": "KUBERNETES"
+              },
+              "type": "PROCESS_CUSTOM_METADATA_KEY"
+            }
+          }
+        ],
+        "enabled": true,
+        "propagationTypes": [
+          "SERVICE_TO_HOST_LIKE"
+        ],
+        "type": "SERVICE"
+      }
+    ]
+  }
+}
+
+docs {
+  # Creates a new management zone
+
+  **Deprecated**
+
+  The body must not provide an ID. An ID is assigned automatically by the Dynatrace server.
+
+  **Auth:** Api-Token only (OAuth not supported by this endpoint). Uses `{{DT_API_TOKEN}}`.
+
+  **API token scopes:** WriteConfig
+}

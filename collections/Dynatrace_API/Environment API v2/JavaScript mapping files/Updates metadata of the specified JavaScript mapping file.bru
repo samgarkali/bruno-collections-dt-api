@@ -1,0 +1,32 @@
+meta {
+  name: Updates metadata of the specified JavaScript mapping file
+  type: http
+  seq: 5
+}
+
+put {
+  url: {{DT_TENANT_URL}}/api/v2/jsMappingFiles/metadata
+  body: json
+  auth: inherit
+}
+
+params:query {
+  minifiedJsFileUrl: 
+  fileType: 
+}
+
+body:json {
+  {
+    "pinned": false
+  }
+}
+
+docs {
+  # Updates metadata of the specified JavaScript mapping file
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `deobfuscation:symbol-files:write`
+
+  **API token scopes:** javaScriptMappingFiles.write
+}

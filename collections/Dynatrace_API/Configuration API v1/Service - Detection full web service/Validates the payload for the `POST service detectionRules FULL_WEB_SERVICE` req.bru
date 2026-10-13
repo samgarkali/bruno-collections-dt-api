@@ -1,0 +1,78 @@
+meta {
+  name: Validates the payload for the `POST service detectionRules FULL_WEB_SERVICE` req
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{DT_TENANT_URL}}/api/config/v1/service/detectionRules/FULL_WEB_SERVICE/validator
+  body: json
+  auth: none
+}
+
+headers {
+  Authorization: Api-Token {{DT_API_TOKEN}}
+}
+
+body:json {
+  {
+    "applicationId": {
+      "valueOverride": "abc"
+    },
+    "conditions": [
+      {
+        "attributeType": "APPLICATION_ID",
+        "compareOperations": [
+          {
+            "ignoreCase": "false",
+            "invert": "false",
+            "type": "STRING_CONTAINS",
+            "values": [
+              "value1",
+              "value2"
+            ]
+          }
+        ]
+      }
+    ],
+    "contextRoot": {
+      "segmentsToCopyFromUrlPath": 2,
+      "transformations": [
+        {
+          "delimiter": "/",
+          "type": "BEFORE"
+        }
+      ]
+    },
+    "description": "REST API example",
+    "detectAsWebRequestService": false,
+    "enabled": true,
+    "managementZones": [
+      "zone 1"
+    ],
+    "name": "My sample rule",
+    "serverName": {
+      "transformations": [
+        {
+          "delimiter": "-",
+          "type": "BEFORE"
+        }
+      ]
+    },
+    "type": "FULL_WEB_SERVICE",
+    "webServiceName": {
+      "valueOverride": "abc"
+    },
+    "webServiceNameSpace": {
+      "valueOverride": "abc"
+    }
+  }
+}
+
+docs {
+  # Validates the payload for the `POST /service/detectionRules/FULL_WEB_SERVICE` request
+
+  **Auth:** Api-Token only (OAuth not supported by this endpoint). Uses `{{DT_API_TOKEN}}`.
+
+  **API token scopes:** WriteConfig
+}

@@ -1,0 +1,23 @@
+meta {
+  name: Implementation of the OTLP HTTP protocol for metric ingest
+  type: http
+  seq: 5
+}
+
+post {
+  url: {{DT_TENANT_URL}}/api/v2/otlp/v1/metrics
+  body: none
+  auth: inherit
+}
+
+docs {
+  # Implementation of the OTLP/HTTP protocol for metric ingest.
+
+  This endpoint can be targeted by OpenTelemetry metric exporters.
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `openpipeline:metrics:ingest`
+
+  **API token scopes:** metrics.ingest
+}

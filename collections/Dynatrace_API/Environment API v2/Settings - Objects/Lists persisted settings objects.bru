@@ -1,0 +1,41 @@
+meta {
+  name: Lists persisted settings objects
+  type: http
+  seq: 4
+}
+
+get {
+  url: {{DT_TENANT_URL}}/api/v2/settings/objects
+  body: none
+  auth: inherit
+}
+
+params:query {
+  ~schemaIds: 
+  ~scopes: 
+  ~externalIds: 
+  ~fields: 
+  ~filter: 
+  ~sort: 
+  ~nextPageKey: 
+  ~pageSize: 
+  ~adminAccess: 
+}
+
+docs {
+  # Lists persisted settings objects
+
+  Lists persisted settings objects for selected schemas at selected scopes (or entities).
+
+  If nothing is persisted or if all persisted settings objects are not accessible due to missing permissions, no items will be returned.
+
+  **Deprecation notice:** The ability to query values of any schema by leaving out the `schemaIds` parameter in the first-page query is deprecated and will eventually be removed.
+
+  To query the effective values (including schema defaults) please see [/settings/effectiveValues](#/Settings%20-%20Objects/getEffectiveSettingsValues).
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `settings:objects:read`
+
+  **API token scopes:** settings.read
+}

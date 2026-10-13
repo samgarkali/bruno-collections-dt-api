@@ -1,0 +1,61 @@
+meta {
+  name: Gets the list of hosts with OneAgent deployment information for each host
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{DT_TENANT_URL}}/api/v1/oneagents
+  body: none
+  auth: inherit
+}
+
+params:query {
+  ~includeDetails: 
+  ~startTimestamp: 
+  ~endTimestamp: 
+  ~relativeTime: 
+  ~tag: 
+  ~entity: 
+  ~managementZoneId: 
+  ~managementZone: 
+  ~networkZoneId: 
+  ~hostGroupId: 
+  ~hostGroupName: 
+  ~osType: 
+  ~cloudType: 
+  ~autoInjection: 
+  ~availabilityState: 
+  ~detailedAvailabilityState: 
+  ~monitoringType: 
+  ~agentVersionIs: 
+  ~agentVersionNumber: 
+  ~autoUpdateSetting: 
+  ~updateStatus: 
+  ~faultyVersion: 
+  ~unlicensed: 
+  ~activeGateId: 
+  ~technologyModuleType: 
+  ~technologyModuleVersionIs: 
+  ~technologyModuleVersionNumber: 
+  ~technologyModuleFaultyVersion: 
+  ~pluginName: 
+  ~pluginVersionIs: 
+  ~pluginVersionNumber: 
+  ~pluginState: 
+  ~nextPageKey: 
+}
+
+docs {
+  # Gets the list of hosts with OneAgent deployment information for each host
+
+  You can narrow down the output by specifying filtering parameters for the request. 
+
+  The response is limited to 500 items. Use the **nextPageKey** cursor to obtain subsequent results.
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `environment-api:oneagents:read`, `fleet-management:oneagents:read`
+
+  **API token scopes:** oneAgents.read, DataExport
+}

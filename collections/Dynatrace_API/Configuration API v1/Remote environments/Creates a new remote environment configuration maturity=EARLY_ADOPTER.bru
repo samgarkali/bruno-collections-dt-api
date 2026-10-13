@@ -1,0 +1,39 @@
+meta {
+  name: Creates a new remote environment configuration maturity=EARLY_ADOPTER
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{DT_TENANT_URL}}/api/config/v1/remoteEnvironments
+  body: json
+  auth: none
+}
+
+headers {
+  Authorization: Api-Token {{DT_API_TOKEN}}
+}
+
+body:json {
+  {
+    "displayName": "string",
+    "id": "string",
+    "networkScope": "EXTERNAL",
+    "token": "string",
+    "uri": "string"
+  }
+}
+
+docs {
+  # Creates a new remote environment configuration | maturity=EARLY_ADOPTER
+
+  **Deprecated**
+
+  The body must not provide an ID. An ID is assigned automatically by the Dynatrace server. 
+
+  Be sure to prepare a token with the **Fetch data from a remote environment** (`RestRequestForwarding`) scope. You can create such a token via [Tokens API](https://dt-url.net/ff23kmx).
+
+  **Auth:** Api-Token only (OAuth not supported by this endpoint). Uses `{{DT_API_TOKEN}}`.
+
+  **API token scopes:** WriteConfig
+}

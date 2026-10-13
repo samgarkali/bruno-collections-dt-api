@@ -1,0 +1,83 @@
+meta {
+  name: Updates the configuration of anomaly detection for VMware
+  type: http
+  seq: 2
+}
+
+put {
+  url: {{DT_TENANT_URL}}/api/config/v1/anomalyDetection/vmware
+  body: json
+  auth: none
+}
+
+headers {
+  Authorization: Api-Token {{DT_API_TOKEN}}
+}
+
+body:json {
+  {
+    "droppedPacketsDetection": {
+      "customThresholds": {
+        "droppedPacketsPerSecond": 4
+      },
+      "enabled": true
+    },
+    "esxiHighCpuSaturation": {
+      "customThresholds": {
+        "cpuPeakPercentage": 90,
+        "cpuUsagePercentage": 80,
+        "vmCpuReadyPercentage": 10
+      },
+      "enabled": true
+    },
+    "esxiHighMemoryDetection": {
+      "customThresholds": {
+        "compressionDecompressionRate": 120
+      },
+      "enabled": true
+    },
+    "lowDatastoreSpaceDetection": {
+      "customThresholds": {
+        "freeSpacePercentage": 5
+      },
+      "enabled": true
+    },
+    "metadata": {
+      "clusterVersion": "Mock version",
+      "configurationVersions": [
+        4,
+        2
+      ]
+    },
+    "overloadedStorageDetection": {
+      "customThresholds": {
+        "commandAbortsNumber": 1
+      },
+      "enabled": true
+    },
+    "slowPhysicalStorageDetection": {
+      "customThresholds": {
+        "avgReadWriteLatency": 150,
+        "peakReadWriteLatency": 400
+      },
+      "enabled": true
+    },
+    "undersizedStorageDetection": {
+      "customThresholds": {
+        "averageQueueCommandLatency": 15,
+        "peakQueueCommandLatency": 160
+      },
+      "enabled": true
+    }
+  }
+}
+
+docs {
+  # Updates the configuration of anomaly detection for VMware
+
+  **Deprecated**
+
+  **Auth:** Api-Token only (OAuth not supported by this endpoint). Uses `{{DT_API_TOKEN}}`.
+
+  **API token scopes:** WriteConfig
+}

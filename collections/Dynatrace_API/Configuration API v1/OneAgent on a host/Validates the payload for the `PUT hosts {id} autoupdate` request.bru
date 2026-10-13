@@ -1,0 +1,55 @@
+meta {
+  name: Validates the payload for the `PUT hosts {id} autoupdate` request
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{DT_TENANT_URL}}/api/config/v1/hosts/:id/autoupdate/validator
+  body: json
+  auth: none
+}
+
+params:path {
+  id: 
+}
+
+headers {
+  Authorization: Api-Token {{DT_API_TOKEN}}
+}
+
+body:json {
+  {
+    "metadata": {
+      "clusterVersion": "1.192.1",
+      "configurationVersions": [
+        4,
+        2
+      ],
+      "currentConfigurationVersions": [
+        "1.0.4",
+        "1.23"
+      ]
+    },
+    "setting": "DISABLED",
+    "targetVersion": "latest",
+    "updateWindows": {
+      "windows": [
+        {
+          "id": null
+        }
+      ]
+    },
+    "version": "1.191.0.20200326-161115"
+  }
+}
+
+docs {
+  # Validates the payload for the `PUT /hosts/{id}/autoupdate` request
+
+  **Deprecated**
+
+  **Auth:** Api-Token only (OAuth not supported by this endpoint). Uses `{{DT_API_TOKEN}}`.
+
+  **API token scopes:** WriteConfig
+}

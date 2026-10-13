@@ -1,0 +1,29 @@
+meta {
+  name: Gets the active environment configuration version of the specified extension 2.0
+  type: http
+  seq: 13
+}
+
+get {
+  url: {{DT_TENANT_URL}}/api/v2/extensions/:extensionName/environmentConfiguration
+  body: none
+  auth: inherit
+}
+
+params:path {
+  extensionName: 
+}
+
+docs {
+  # Gets the active environment configuration version of the specified extension 2.0
+
+  **Deprecated**
+
+  Deprecated since version 1.342. Use the successor API `/platform/extensions/v2` instead.
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `environment-api:extensions:read`
+
+  **API token scopes:** extensionEnvironment.read, extensions.read
+}

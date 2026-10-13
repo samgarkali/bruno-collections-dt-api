@@ -1,0 +1,21 @@
+meta {
+  name: Deletes all detected auto-update blocking problems for this environment
+  type: http
+  seq: 3
+}
+
+delete {
+  url: {{DT_TENANT_URL}}/api/v1/oneagents/autoUpdateProblems
+  body: none
+  auth: inherit
+}
+
+docs {
+  # Deletes all detected auto-update blocking problems for this environment.
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `environment-api:oneagents:read`, `fleet-management:oneagents:write`
+
+  **API token scopes:** oneAgents.write
+}

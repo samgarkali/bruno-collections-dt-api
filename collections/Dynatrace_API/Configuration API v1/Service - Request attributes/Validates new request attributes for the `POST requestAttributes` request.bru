@@ -1,0 +1,44 @@
+meta {
+  name: Validates new request attributes for the `POST requestAttributes` request
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{DT_TENANT_URL}}/api/config/v1/service/requestAttributes/validator
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "aggregation": "ALL_DISTINCT_VALUES",
+    "confidential": false,
+    "dataSources": [
+      {
+        "capturingAndStorageLocation": "CAPTURE_AND_STORE_ON_SERVER",
+        "enabled": true,
+        "parameterName": "query",
+        "scope": {
+          "tagOfProcessGroup": "SearchFrontend"
+        },
+        "source": "QUERY_PARAMETER"
+      }
+    ],
+    "dataType": "STRING",
+    "enabled": true,
+    "name": "Query Term",
+    "normalization": "TO_LOWER_CASE",
+    "skipPersonalDataMasking": false
+  }
+}
+
+docs {
+  # Validates new request attributes for the `POST /requestAttributes` request
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `settings:objects:write`
+
+  **API token scopes:** CaptureRequestData
+}

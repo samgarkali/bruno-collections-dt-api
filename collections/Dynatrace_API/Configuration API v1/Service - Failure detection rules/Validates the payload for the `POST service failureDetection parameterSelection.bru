@@ -1,0 +1,46 @@
+meta {
+  name: Validates the payload for the `POST service failureDetection parameterSelection
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{DT_TENANT_URL}}/api/config/v1/service/failureDetection/parameterSelection/rules/validator
+  body: json
+  auth: none
+}
+
+headers {
+  Authorization: Api-Token {{DT_API_TOKEN}}
+}
+
+body:json {
+  {
+    "conditions": [
+      {
+        "attribute": "SERVICE_NAME",
+        "predicate": {
+          "ignoreCase": false,
+          "type": "STRING_STARTS_WITH",
+          "values": [
+            "shp",
+            "stg_shp"
+          ]
+        }
+      }
+    ],
+    "description": "for requests from shipping module",
+    "enabled": true,
+    "fdpId": "FDP_9",
+    "id": "R_5",
+    "name": "shipping"
+  }
+}
+
+docs {
+  # Validates the payload for the `POST /service/failureDetection/parameterSelection/rules` request | maturity=EARLY_ADOPTER
+
+  **Auth:** Api-Token only (OAuth not supported by this endpoint). Uses `{{DT_API_TOKEN}}`.
+
+  **API token scopes:** WriteConfig
+}

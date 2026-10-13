@@ -1,0 +1,25 @@
+meta {
+  name: Gets properties of the specified location
+  type: http
+  seq: 11
+}
+
+get {
+  url: {{DT_TENANT_URL}}/api/v2/synthetic/locations/:locationId
+  body: none
+  auth: inherit
+}
+
+params:path {
+  locationId: 
+}
+
+docs {
+  # Gets properties of the specified location
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `environment-api:synthetic:read`
+
+  **API token scopes:** syntheticLocations.read
+}

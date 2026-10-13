@@ -1,0 +1,27 @@
+meta {
+  name: Changes the status of public synthetic locations
+  type: http
+  seq: 10
+}
+
+put {
+  url: {{DT_TENANT_URL}}/api/v2/synthetic/locations/status
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "publicLocationsEnabled": false
+  }
+}
+
+docs {
+  # Changes the status of public synthetic locations
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `environment-api:synthetic:write`
+
+  **API token scopes:** syntheticLocations.write
+}

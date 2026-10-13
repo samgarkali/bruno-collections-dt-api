@@ -1,0 +1,30 @@
+meta {
+  name: Lists all events of a security problem
+  type: http
+  seq: 5
+}
+
+get {
+  url: {{DT_TENANT_URL}}/api/v2/securityProblems/:id/events
+  body: none
+  auth: inherit
+}
+
+params:query {
+  ~from: 
+  ~to: 
+}
+
+params:path {
+  id: 
+}
+
+docs {
+  # Lists all events of a security problem
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `environment-api:security-problems:read`
+
+  **API token scopes:** securityProblems.read
+}

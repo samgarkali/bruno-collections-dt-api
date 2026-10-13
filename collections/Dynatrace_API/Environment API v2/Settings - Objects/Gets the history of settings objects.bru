@@ -1,0 +1,32 @@
+meta {
+  name: Gets the history of settings objects
+  type: http
+  seq: 3
+}
+
+get {
+  url: {{DT_TENANT_URL}}/api/v2/settings/history
+  body: none
+  auth: inherit
+}
+
+params:query {
+  ~schemaId: 
+  ~scope: 
+  ~filter: 
+  ~sort: 
+  ~fields: 
+  ~nextPageKey: 
+  ~pageSize: 
+  ~adminAccess: 
+}
+
+docs {
+  # Gets the history of settings objects
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `settings:objects:read`
+
+  **API token scopes:** settings.read
+}

@@ -1,0 +1,29 @@
+meta {
+  name: Gets a list of custom tags applied to the specified entities
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{DT_TENANT_URL}}/api/v2/tags
+  body: none
+  auth: inherit
+}
+
+params:query {
+  entitySelector: 
+  ~from: 
+  ~to: 
+}
+
+docs {
+  # Gets a list of custom tags applied to the specified entities
+
+  Automatically applied tags and imported tags are not included.
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `environment-api:entities:read`
+
+  **API token scopes:** entities.read
+}

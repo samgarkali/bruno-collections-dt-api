@@ -1,0 +1,31 @@
+meta {
+  name: Closes the specified problem and adds a closing comment on it
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{DT_TENANT_URL}}/api/v2/problems/:problemId/close
+  body: json
+  auth: inherit
+}
+
+params:path {
+  problemId: 
+}
+
+body:json {
+  {
+    "message": "string"
+  }
+}
+
+docs {
+  # Closes the specified problem and adds a closing comment on it
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `openpipeline:events.davis:ingest`, `environment-api:problems:write`
+
+  **API token scopes:** problems.write
+}

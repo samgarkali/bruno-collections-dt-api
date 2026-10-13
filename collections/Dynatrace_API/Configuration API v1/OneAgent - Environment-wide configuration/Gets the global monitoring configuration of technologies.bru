@@ -1,0 +1,25 @@
+meta {
+  name: Gets the global monitoring configuration of technologies
+  type: http
+  seq: 4
+}
+
+get {
+  url: {{DT_TENANT_URL}}/api/config/v1/technologies
+  body: none
+  auth: none
+}
+
+headers {
+  Authorization: Api-Token {{DT_API_TOKEN}}
+}
+
+docs {
+  # Gets the global monitoring configuration of technologies.
+
+  **Deprecated**
+
+  **Auth:** Api-Token only (OAuth not supported by this endpoint). Uses `{{DT_API_TOKEN}}`.
+
+  **API token scopes:** ReadConfig
+}

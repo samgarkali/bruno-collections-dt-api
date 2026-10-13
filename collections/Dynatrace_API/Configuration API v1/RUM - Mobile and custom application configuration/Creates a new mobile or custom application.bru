@@ -1,0 +1,47 @@
+meta {
+  name: Creates a new mobile or custom application
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{DT_TENANT_URL}}/api/config/v1/applications/mobile
+  body: json
+  auth: none
+}
+
+headers {
+  Authorization: Api-Token {{DT_API_TOKEN}}
+}
+
+body:json {
+  {
+    "apdexSettings": {
+      "frustratedOnError": false,
+      "frustratingThreshold": 0,
+      "toleratedThreshold": 0
+    },
+    "applicationId": "string",
+    "applicationType": "CUSTOM_APPLICATION",
+    "beaconEndpointType": "CLUSTER_ACTIVE_GATE",
+    "beaconEndpointUrl": "string",
+    "costControlUserSessionPercentage": 0,
+    "iconType": "AMAZON_ECHO",
+    "name": "string",
+    "optInModeEnabled": false,
+    "sessionReplayEnabled": false,
+    "sessionReplayOnCrashEnabled": false
+  }
+}
+
+docs {
+  # Creates a new mobile or custom application
+
+  The body must not provide an identifier. An identifier is assigned automatically by Dynatrace. 
+
+  You can, however, provide your own applicationId. If you don't specify an applicationId, it is assigned automatically by Dynatrace.
+
+  **Auth:** Api-Token only (OAuth not supported by this endpoint). Uses `{{DT_API_TOKEN}}`.
+
+  **API token scopes:** WriteConfig
+}

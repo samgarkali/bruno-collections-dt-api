@@ -1,0 +1,28 @@
+meta {
+  name: Gets the list of the ActiveGate-Endpoints to be used for Agents ordered by netwo
+  type: http
+  seq: 7
+}
+
+get {
+  url: {{DT_TENANT_URL}}/api/v1/deployment/installer/agent/connectioninfo/endpoints
+  body: none
+  auth: inherit
+}
+
+params:query {
+  ~networkZone: 
+  ~defaultZoneFallback: 
+}
+
+docs {
+  # Gets the list of the ActiveGate-Endpoints to be used for Agents ordered by networkzone-priorities.
+
+  Highest priority first, separated by a semicolon.If no network zone provided the default zone is used. Responds with 404 if network zone is not known.
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `environment-api:deployment:download`, `fleet-management:oneagent.connection-info:read`
+
+  **API token scopes:** InstallerDownload
+}

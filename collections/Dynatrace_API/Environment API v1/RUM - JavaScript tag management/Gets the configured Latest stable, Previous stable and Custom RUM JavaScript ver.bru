@@ -1,0 +1,21 @@
+meta {
+  name: Gets the configured Latest stable, Previous stable and Custom RUM JavaScript ver
+  type: http
+  seq: 4
+}
+
+get {
+  url: {{DT_TENANT_URL}}/api/v1/rum/jsConfiguredVersions
+  body: none
+  auth: inherit
+}
+
+docs {
+  # Gets the configured Latest stable, Previous stable and Custom RUM JavaScript versions
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `environment-api:rum:read`
+
+  **API token scopes:** RumJavaScriptTagManagement
+}

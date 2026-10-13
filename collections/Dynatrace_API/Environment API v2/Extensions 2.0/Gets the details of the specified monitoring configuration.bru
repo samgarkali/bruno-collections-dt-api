@@ -1,0 +1,30 @@
+meta {
+  name: Gets the details of the specified monitoring configuration
+  type: http
+  seq: 22
+}
+
+get {
+  url: {{DT_TENANT_URL}}/api/v2/extensions/:extensionName/monitoringConfigurations/:configurationId
+  body: none
+  auth: inherit
+}
+
+params:path {
+  extensionName: 
+  configurationId: 
+}
+
+docs {
+  # Gets the details of the specified monitoring configuration
+
+  **Deprecated**
+
+  Deprecated since version 1.342. Use the successor API `/platform/extensions/v2` instead.
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `environment-api:extension-configurations:read`
+
+  **API token scopes:** extensionConfigurations.read
+}

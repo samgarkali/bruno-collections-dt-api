@@ -1,0 +1,37 @@
+meta {
+  name: Subscribes to the specified report maturity=EARLY_ADOPTER
+  type: http
+  seq: 7
+}
+
+post {
+  url: {{DT_TENANT_URL}}/api/config/v1/reports/:id/subscribe
+  body: json
+  auth: none
+}
+
+params:path {
+  id: 
+}
+
+headers {
+  Authorization: Api-Token {{DT_API_TOKEN}}
+}
+
+body:json {
+  {
+    "recipients": [
+      "demo@email.com",
+      "demo2@email.com"
+    ],
+    "schedule": "WEEK"
+  }
+}
+
+docs {
+  # Subscribes to the specified report | maturity=EARLY_ADOPTER
+
+  **Auth:** Api-Token only (OAuth not supported by this endpoint). Uses `{{DT_API_TOKEN}}`.
+
+  **API token scopes:** WriteConfig
+}

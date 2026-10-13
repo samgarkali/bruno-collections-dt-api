@@ -1,0 +1,30 @@
+meta {
+  name: Lists all available ActiveGate tokens
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{DT_TENANT_URL}}/api/v2/activeGateTokens
+  body: none
+  auth: inherit
+}
+
+params:query {
+  ~nextPageKey: 
+  ~pageSize: 
+}
+
+docs {
+  # Lists all available ActiveGate tokens
+
+  You can limit the output by using pagination: 
+  1. Specify the number of results per page in the **pageSize** query parameter. 
+  2. Use the cursor from the **nextPageKey** field of the previous response in the **nextPageKey** query parameter to obtain subsequent pages.
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `environment-api:activegate-tokens:read`, `fleet-management:activegate.tokens:read`
+
+  **API token scopes:** activeGateTokenManagement.read
+}

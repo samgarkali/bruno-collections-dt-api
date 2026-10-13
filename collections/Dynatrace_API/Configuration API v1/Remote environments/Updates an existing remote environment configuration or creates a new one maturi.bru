@@ -1,0 +1,41 @@
+meta {
+  name: Updates an existing remote environment configuration or creates a new one maturi
+  type: http
+  seq: 5
+}
+
+put {
+  url: {{DT_TENANT_URL}}/api/config/v1/remoteEnvironments/:id
+  body: json
+  auth: none
+}
+
+params:path {
+  id: 
+}
+
+headers {
+  Authorization: Api-Token {{DT_API_TOKEN}}
+}
+
+body:json {
+  {
+    "displayName": "string",
+    "id": "string",
+    "networkScope": "EXTERNAL",
+    "token": "string",
+    "uri": "string"
+  }
+}
+
+docs {
+  # Updates an existing remote environment configuration or creates a new one | maturity=EARLY_ADOPTER
+
+  **Deprecated**
+
+  If a remote environment configuration with the specified ID doesn't exist, a new configuration is created.
+
+  **Auth:** Api-Token only (OAuth not supported by this endpoint). Uses `{{DT_API_TOKEN}}`.
+
+  **API token scopes:** WriteConfig
+}

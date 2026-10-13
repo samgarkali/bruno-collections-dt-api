@@ -1,0 +1,31 @@
+meta {
+  name: Gets list of commands to delete synthetic location in Kubernetes Openshift clust
+  type: http
+  seq: 14
+}
+
+get {
+  url: {{DT_TENANT_URL}}/api/v2/synthetic/locations/:locationId/commands/delete
+  body: none
+  auth: inherit
+}
+
+params:query {
+  ~platform: 
+  ~namespace: 
+  ~filename: 
+}
+
+params:path {
+  locationId: 
+}
+
+docs {
+  # Gets list of commands to delete synthetic location in Kubernetes/Openshift cluster
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `environment-api:synthetic:read`
+
+  **API token scopes:** syntheticLocations.read
+}

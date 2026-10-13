@@ -1,0 +1,86 @@
+meta {
+  name: Updates an existing metric event or creates a new one
+  type: http
+  seq: 5
+}
+
+put {
+  url: {{DT_TENANT_URL}}/api/config/v1/anomalyDetection/metricEvents/:id
+  body: json
+  auth: none
+}
+
+params:path {
+  id: 
+}
+
+headers {
+  Authorization: Api-Token {{DT_API_TOKEN}}
+}
+
+body:json {
+  {
+    "aggregationType": "AVG",
+    "alertingScope": [
+      {
+        "entityId": "HOST-000000000001E240",
+        "filterType": "ENTITY_ID"
+      },
+      {
+        "filterType": "TAG",
+        "tagFilter": {
+          "context": "CONTEXTLESS",
+          "key": "someKey",
+          "value": "someValue"
+        }
+      }
+    ],
+    "description": "This is the description for my metric event.",
+    "disabledReason": "NONE",
+    "enabled": true,
+    "metadata": {
+      "clusterVersion": "Mock version",
+      "configurationVersions": [
+        4,
+        2
+      ]
+    },
+    "metricDimensions": [
+      {
+        "filterType": "ENTITY",
+        "key": "dt.entity.disk",
+        "nameFilter": {
+          "operator": "EQUALS",
+          "value": "diskName"
+        }
+      }
+    ],
+    "metricId": "com.dynatrace.builtin:host.disk.bytesread",
+    "monitoringStrategy": {
+      "alertCondition": "ABOVE",
+      "dealertingSamples": 5,
+      "samples": 5,
+      "threshold": 80,
+      "type": "STATIC_THRESHOLD",
+      "unit": "KILO_BYTE_PER_SECOND",
+      "violatingSamples": 3
+    },
+    "name": "My metric event",
+    "severity": "CUSTOM_ALERT",
+    "warningReason": "NONE"
+  }
+}
+
+docs {
+  # Updates an existing metric event or creates a new one
+
+  **Deprecated**
+
+  If the metric event with the specified ID does not exist, a new metric event will be created. 
+
+   You can't update the **type** of the metric event.
+
+  **Auth:** Api-Token only (OAuth not supported by this endpoint). Uses `{{DT_API_TOKEN}}`.
+
+  **API token scopes:** WriteConfig
+}

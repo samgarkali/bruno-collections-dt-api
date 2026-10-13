@@ -1,0 +1,27 @@
+meta {
+  name: Gets the latest available Agent image
+  type: http
+  seq: 4
+}
+
+get {
+  url: {{DT_TENANT_URL}}/api/v1/deployment/image/agent/:agentImageType/latest
+  body: none
+  auth: inherit
+}
+
+params:path {
+  agentImageType: 
+}
+
+docs {
+  # Gets the latest available Agent image
+
+  Returns the latest available Agent image while considering target and minimal agent version
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `environment-api:deployment:download`
+
+  **API token scopes:** InstallerDownload
+}

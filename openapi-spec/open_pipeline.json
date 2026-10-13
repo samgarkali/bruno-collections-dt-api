@@ -1,0 +1,1378 @@
+{
+  "openapi" : "3.0.1",
+  "info" : {
+    "description" : "\nIngest generic events to OpenPipeline configurations for different data sources.\n\nTo read about use cases and examples, see [Dynatrace Documentation](https://dt-url.net/openpipeline-pipelines-docs).\n\nTo authorize, use a valid access token or personal access token. Make sure the access token has the openpipeline.events scope.\n\nNotes about compatibility:\n* Operations marked as early adopter or preview may be changed in non-compatible ways, although we try to avoid this.\n* We may add new enum constants without incrementing the API version; thus, clients need to handle unknown enum constants gracefully.",
+    "title" : "OpenPipeline - Ingest API",
+    "version" : "2.0.4",
+    "x-service-category" : "OpenPipeline",
+    "x-summary" : "Ingest generic events to OpenPipeline configurations for different data sources."
+  },
+  "servers" : [ {
+    "url" : "https://wvp48792.sprint.dynatracelabs.com/platform/ingest",
+    "variables" : { }
+  } ],
+  "tags" : [ {
+    "description" : "Ingest generic events through provided or custom endpoints.",
+    "name" : "Events"
+  }, {
+    "description" : "Ingest Software Development Lifecycle events through provided or custom endpoints.",
+    "name" : "SDLC Events"
+  }, {
+    "description" : "Ingest security events through provided or custom endpoints.",
+    "name" : "Security Events"
+  }, {
+    "description" : "Ingest Smartscape events through provided endpoints.",
+    "name" : "Smartscape Events"
+  } ],
+  "paths" : {
+    "/custom/events.sdlc/{endpoint}" : {
+      "post" : {
+        "description" : "The maximum payload size of a single request is **10 MiB**. Requests with a greater payload are rejected, and the API returns a 413 response code.\n\n<br />**Query Parameters**\n\nEach request query parameter becomes a top-level record attribute. In case there is already an attribute in the payload with the same name as the query parameter, the original value will be overridden.\n\nEvery time a field is overridden, the original value is preserved in a field named `overwritten<index>.<original field name>`\n\n<br />**Timestamp field**\n\nIf there is no `timestamp` field in the request payload, the current server time is used as timestamp.\n\nIf the `timestamp` field is present and it has a **numeric** value, the time unit is assumed based on the size of the value. Nano seconds by default.\n\nAfterwards, the field will be converted to a `Timestamp` type in nano seconds.\n\nIf the `timestamp` field is present and has a string value, attempts are made to parse it based on UNIX epoch milliseconds or seconds, RFC3339 or RFC3164 format, in this order.\n\nIf the `timestamp` has the wrong type (e.g. boolean, array) or cannot be properly parsed, it is overridden with the current server time and the original value is preserved.\n\n**Custom endpoints**\n\nCustom endpoints need to be defined first via the OpenPipeline Configuration API or the OpenPipeline app, see [Dynatrace Documentation](https://dt-url.net/openpipeline-pipelines-docs).",
+        "operationId" : "ingestCustomEventsSdlcEndpoint",
+        "parameters" : [ {
+          "description" : "The endpoint defined via OpenPipeline Configuration API or the OpenPipeline app.",
+          "in" : "path",
+          "name" : "endpoint",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json; charset=utf-8" : {
+              "example" : [ {
+                "event.id" : 1,
+                "additionalProp1" : "bar",
+                "additionalProp2" : "foo",
+                "additionalProp3" : [ {
+                  "prop1" : "string",
+                  "prop2" : 1.0
+                } ]
+              }, {
+                "event.id" : 2,
+                "additionalProp1" : 123.45,
+                "additionalProp2" : "lorem",
+                "additionalProp3" : [ {
+                  "prop1" : "string",
+                  "prop2" : 1.0
+                } ]
+              } ],
+              "schema" : {
+                "$ref" : "#/components/schemas/Events"
+              }
+            }
+          },
+          "description" : "The JSON body of the request. Contains the events for ingest.",
+          "required" : true
+        },
+        "responses" : {
+          "202" : {
+            "description" : "Accepted. Response doesn't have a body."
+          },
+          "400" : {
+            "content" : {
+              "application/json; charset=utf-8" : {
+                "example" : {
+                  "error" : {
+                    "code" : 400,
+                    "message" : "The input is invalid."
+                  }
+                },
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponseEnvelope"
+                }
+              }
+            },
+            "description" : "Failed. The input is invalid."
+          },
+          "404" : {
+            "content" : {
+              "application/json; charset=utf-8" : {
+                "example" : {
+                  "error" : {
+                    "code" : 404,
+                    "message" : "Endpoint not found."
+                  }
+                },
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponseEnvelope"
+                }
+              }
+            },
+            "description" : "Failed. Endpoint not found."
+          },
+          "413" : {
+            "content" : {
+              "application/json; charset=utf-8" : {
+                "example" : {
+                  "error" : {
+                    "code" : 413,
+                    "message" : "Content too large."
+                  }
+                },
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponseEnvelope"
+                }
+              }
+            },
+            "description" : "Failed. Content too large."
+          },
+          "429" : {
+            "content" : {
+              "application/json; charset=utf-8" : {
+                "example" : {
+                  "error" : {
+                    "code" : 429,
+                    "message" : "Too many requests."
+                  }
+                },
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponseEnvelope"
+                }
+              }
+            },
+            "description" : "Failed. Too many requests."
+          },
+          "4XX" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description" : "Client side error."
+          },
+          "5XX" : {
+            "content" : {
+              "application/json; charset=utf-8" : {
+                "example" : {
+                  "error" : {
+                    "code" : 500,
+                    "message" : "Internal server error."
+                  }
+                },
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponseEnvelope"
+                }
+              }
+            },
+            "description" : "Server-side error."
+          }
+        },
+        "security" : [ {
+          "Api-Token" : [ ]
+        }, {
+          "ssoAuth" : [ "openpipeline:events.sdlc.custom:ingest" ]
+        }, {
+          "ssoBearerAuth" : [ ]
+        } ],
+        "summary" : "Software Development Lifecycle Events Ingest custom endpoint | maturity=EARLY_ADOPTER",
+        "tags" : [ "SDLC Events" ],
+        "x-maturity" : "EARLY_ADOPTER",
+        "x-permissions" : [ "openpipeline:events.sdlc.custom:ingest" ],
+        "x-token-scopes" : [ "openpipeline.events_sdlc.custom" ]
+      }
+    },
+    "/custom/events/{endpoint}" : {
+      "post" : {
+        "description" : "The maximum payload size of a single request is **10 MiB**. Requests with a greater payload are rejected, and the API returns a 413 response code.\n\n<br />**Query Parameters**\n\nEach request query parameter becomes a top-level record attribute. In case there is already an attribute in the payload with the same name as the query parameter, the original value will be overridden.\n\nEvery time a field is overridden, the original value is preserved in a field named `overwritten<index>.<original field name>`\n\n<br />**Timestamp field**\n\nIf there is no `timestamp` field in the request payload, the current server time is used as timestamp.\n\nIf the `timestamp` field is present and it has a **numeric** value, the time unit is assumed based on the size of the value. Nano seconds by default.\n\nAfterwards, the field will be converted to a `Timestamp` type in nano seconds.\n\nIf the `timestamp` field is present and has a string value, attempts are made to parse it based on UNIX epoch milliseconds or seconds, RFC3339 or RFC3164 format, in this order.\n\nIf the `timestamp` has the wrong type (e.g. boolean, array) or cannot be properly parsed, it is overridden with the current server time and the original value is preserved.\n\n**Custom endpoints**\n\nCustom endpoints need to be defined first via the OpenPipeline Configuration API or the OpenPipeline app, see [Dynatrace Documentation](https://dt-url.net/openpipeline-pipelines-docs).",
+        "operationId" : "ingestCustomEventsEndpoint",
+        "parameters" : [ {
+          "description" : "The endpoint defined via OpenPipeline Configuration API or the OpenPipeline app.",
+          "in" : "path",
+          "name" : "endpoint",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json; charset=utf-8" : {
+              "example" : [ {
+                "event.id" : 1,
+                "additionalProp1" : "bar",
+                "additionalProp2" : "foo",
+                "additionalProp3" : [ {
+                  "prop1" : "string",
+                  "prop2" : 1.0
+                } ]
+              }, {
+                "event.id" : 2,
+                "additionalProp1" : 123.45,
+                "additionalProp2" : "lorem",
+                "additionalProp3" : [ {
+                  "prop1" : "string",
+                  "prop2" : 1.0
+                } ]
+              } ],
+              "schema" : {
+                "$ref" : "#/components/schemas/Events"
+              }
+            }
+          },
+          "description" : "The JSON body of the request. Contains the events for ingest.",
+          "required" : true
+        },
+        "responses" : {
+          "202" : {
+            "description" : "Accepted. Response doesn't have a body."
+          },
+          "400" : {
+            "content" : {
+              "application/json; charset=utf-8" : {
+                "example" : {
+                  "error" : {
+                    "code" : 400,
+                    "message" : "The input is invalid."
+                  }
+                },
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponseEnvelope"
+                }
+              }
+            },
+            "description" : "Failed. The input is invalid."
+          },
+          "404" : {
+            "content" : {
+              "application/json; charset=utf-8" : {
+                "example" : {
+                  "error" : {
+                    "code" : 404,
+                    "message" : "Endpoint not found."
+                  }
+                },
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponseEnvelope"
+                }
+              }
+            },
+            "description" : "Failed. Endpoint not found."
+          },
+          "413" : {
+            "content" : {
+              "application/json; charset=utf-8" : {
+                "example" : {
+                  "error" : {
+                    "code" : 413,
+                    "message" : "Content too large."
+                  }
+                },
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponseEnvelope"
+                }
+              }
+            },
+            "description" : "Failed. Content too large."
+          },
+          "429" : {
+            "content" : {
+              "application/json; charset=utf-8" : {
+                "example" : {
+                  "error" : {
+                    "code" : 429,
+                    "message" : "Too many requests."
+                  }
+                },
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponseEnvelope"
+                }
+              }
+            },
+            "description" : "Failed. Too many requests."
+          },
+          "4XX" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description" : "Client side error."
+          },
+          "5XX" : {
+            "content" : {
+              "application/json; charset=utf-8" : {
+                "example" : {
+                  "error" : {
+                    "code" : 500,
+                    "message" : "Internal server error."
+                  }
+                },
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponseEnvelope"
+                }
+              }
+            },
+            "description" : "Server-side error."
+          }
+        },
+        "security" : [ {
+          "Api-Token" : [ ]
+        }, {
+          "ssoAuth" : [ "openpipeline:events.custom:ingest" ]
+        }, {
+          "ssoBearerAuth" : [ ]
+        } ],
+        "summary" : "Generic Events Ingest custom endpoint | maturity=EARLY_ADOPTER",
+        "tags" : [ "Events" ],
+        "x-maturity" : "EARLY_ADOPTER",
+        "x-permissions" : [ "openpipeline:events.custom:ingest" ],
+        "x-token-scopes" : [ "openpipeline.events.custom" ]
+      }
+    },
+    "/custom/security.events/{endpoint}" : {
+      "post" : {
+        "description" : "The maximum payload size of a single request is **10 MiB**. Requests with a greater payload are rejected, and the API returns a 413 response code.\n\n<br />**Query Parameters**\n\nEach request query parameter becomes a top-level record attribute. In case there is already an attribute in the payload with the same name as the query parameter, the original value will be overridden.\n\nEvery time a field is overridden, the original value is preserved in a field named `overwritten<index>.<original field name>`\n\n<br />**Timestamp field**\n\nIf there is no `timestamp` field in the request payload, the current server time is used as timestamp.\n\nIf the `timestamp` field is present and it has a **numeric** value, the time unit is assumed based on the size of the value. Nano seconds by default.\n\nAfterwards, the field will be converted to a `Timestamp` type in nano seconds.\n\nIf the `timestamp` field is present and has a string value, attempts are made to parse it based on UNIX epoch milliseconds or seconds, RFC3339 or RFC3164 format, in this order.\n\nIf the `timestamp` has the wrong type (e.g. boolean, array) or cannot be properly parsed, it is overridden with the current server time and the original value is preserved.\n\n**Custom endpoints**\n\nCustom endpoints need to be defined first via the OpenPipeline Configuration API or the OpenPipeline app, see [Dynatrace Documentation](https://dt-url.net/openpipeline-pipelines-docs).",
+        "operationId" : "ingestCustomSecurityEventsEndpoint",
+        "parameters" : [ {
+          "description" : "The endpoint defined via OpenPipeline Configuration API or the OpenPipeline app.",
+          "in" : "path",
+          "name" : "endpoint",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json; charset=utf-8" : {
+              "example" : [ {
+                "event.id" : 1,
+                "additionalProp1" : "bar",
+                "additionalProp2" : "foo",
+                "additionalProp3" : [ {
+                  "prop1" : "string",
+                  "prop2" : 1.0
+                } ]
+              }, {
+                "event.id" : 2,
+                "additionalProp1" : 123.45,
+                "additionalProp2" : "lorem",
+                "additionalProp3" : [ {
+                  "prop1" : "string",
+                  "prop2" : 1.0
+                } ]
+              } ],
+              "schema" : {
+                "$ref" : "#/components/schemas/Events"
+              }
+            }
+          },
+          "description" : "The JSON body of the request. Contains the events for ingest.",
+          "required" : true
+        },
+        "responses" : {
+          "202" : {
+            "description" : "Accepted. Response doesn't have a body."
+          },
+          "400" : {
+            "content" : {
+              "application/json; charset=utf-8" : {
+                "example" : {
+                  "error" : {
+                    "code" : 400,
+                    "message" : "The input is invalid."
+                  }
+                },
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponseEnvelope"
+                }
+              }
+            },
+            "description" : "Failed. The input is invalid."
+          },
+          "404" : {
+            "content" : {
+              "application/json; charset=utf-8" : {
+                "example" : {
+                  "error" : {
+                    "code" : 404,
+                    "message" : "Endpoint not found."
+                  }
+                },
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponseEnvelope"
+                }
+              }
+            },
+            "description" : "Failed. Endpoint not found."
+          },
+          "413" : {
+            "content" : {
+              "application/json; charset=utf-8" : {
+                "example" : {
+                  "error" : {
+                    "code" : 413,
+                    "message" : "Content too large."
+                  }
+                },
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponseEnvelope"
+                }
+              }
+            },
+            "description" : "Failed. Content too large."
+          },
+          "429" : {
+            "content" : {
+              "application/json; charset=utf-8" : {
+                "example" : {
+                  "error" : {
+                    "code" : 429,
+                    "message" : "Too many requests."
+                  }
+                },
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponseEnvelope"
+                }
+              }
+            },
+            "description" : "Failed. Too many requests."
+          },
+          "4XX" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description" : "Client side error."
+          },
+          "5XX" : {
+            "content" : {
+              "application/json; charset=utf-8" : {
+                "example" : {
+                  "error" : {
+                    "code" : 500,
+                    "message" : "Internal server error."
+                  }
+                },
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponseEnvelope"
+                }
+              }
+            },
+            "description" : "Server-side error."
+          }
+        },
+        "security" : [ {
+          "Api-Token" : [ ]
+        }, {
+          "ssoAuth" : [ "openpipeline:security.events.custom:ingest" ]
+        }, {
+          "ssoBearerAuth" : [ ]
+        } ],
+        "summary" : "Security Events Ingest custom endpoint for the security.events table | maturity=EARLY_ADOPTER",
+        "tags" : [ "Security Events" ],
+        "x-maturity" : "EARLY_ADOPTER",
+        "x-permissions" : [ "openpipeline:security.events.custom:ingest" ],
+        "x-token-scopes" : [ "openpipeline.events_security.custom" ]
+      }
+    },
+    "/v1/events" : {
+      "post" : {
+        "description" : "The maximum payload size of a single request is **10 MiB**. Requests with a greater payload are rejected, and the API returns a 413 response code.\n\n<br />**Query Parameters**\n\nEach request query parameter becomes a top-level record attribute. In case there is already an attribute in the payload with the same name as the query parameter, the original value will be overridden.\n\nEvery time a field is overridden, the original value is preserved in a field named `overwritten<index>.<original field name>`\n\n<br />**Timestamp field**\n\nIf there is no `timestamp` field in the request payload, the current server time is used as timestamp.\n\nIf the `timestamp` field is present and it has a **numeric** value, the time unit is assumed based on the size of the value. Nano seconds by default.\n\nAfterwards, the field will be converted to a `Timestamp` type in nano seconds.\n\nIf the `timestamp` field is present and has a string value, attempts are made to parse it based on UNIX epoch milliseconds or seconds, RFC3339 or RFC3164 format, in this order.\n\nIf the `timestamp` has the wrong type (e.g. boolean, array) or cannot be properly parsed, it is overridden with the current server time and the original value is preserved.",
+        "operationId" : "ingestEvents",
+        "requestBody" : {
+          "content" : {
+            "application/json; charset=utf-8" : {
+              "example" : [ {
+                "event.id" : 1,
+                "additionalProp1" : "bar",
+                "additionalProp2" : "foo",
+                "additionalProp3" : [ {
+                  "prop1" : "string",
+                  "prop2" : 1.0
+                } ]
+              }, {
+                "event.id" : 2,
+                "additionalProp1" : 123.45,
+                "additionalProp2" : "lorem",
+                "additionalProp3" : [ {
+                  "prop1" : "string",
+                  "prop2" : 1.0
+                } ]
+              } ],
+              "schema" : {
+                "$ref" : "#/components/schemas/Events"
+              }
+            }
+          },
+          "description" : "The JSON body of the request. Contains the events for ingest.",
+          "required" : true
+        },
+        "responses" : {
+          "202" : {
+            "description" : "Accepted. Response doesn't have a body."
+          },
+          "400" : {
+            "content" : {
+              "application/json; charset=utf-8" : {
+                "example" : {
+                  "error" : {
+                    "code" : 400,
+                    "message" : "The input is invalid."
+                  }
+                },
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponseEnvelope"
+                }
+              }
+            },
+            "description" : "Failed. The input is invalid."
+          },
+          "404" : {
+            "content" : {
+              "application/json; charset=utf-8" : {
+                "example" : {
+                  "error" : {
+                    "code" : 404,
+                    "message" : "Endpoint not found."
+                  }
+                },
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponseEnvelope"
+                }
+              }
+            },
+            "description" : "Failed. Endpoint not found."
+          },
+          "413" : {
+            "content" : {
+              "application/json; charset=utf-8" : {
+                "example" : {
+                  "error" : {
+                    "code" : 413,
+                    "message" : "Content too large."
+                  }
+                },
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponseEnvelope"
+                }
+              }
+            },
+            "description" : "Failed. Content too large."
+          },
+          "429" : {
+            "content" : {
+              "application/json; charset=utf-8" : {
+                "example" : {
+                  "error" : {
+                    "code" : 429,
+                    "message" : "Too many requests."
+                  }
+                },
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponseEnvelope"
+                }
+              }
+            },
+            "description" : "Failed. Too many requests."
+          },
+          "4XX" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description" : "Client side error."
+          },
+          "5XX" : {
+            "content" : {
+              "application/json; charset=utf-8" : {
+                "example" : {
+                  "error" : {
+                    "code" : 500,
+                    "message" : "Internal server error."
+                  }
+                },
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponseEnvelope"
+                }
+              }
+            },
+            "description" : "Server-side error."
+          }
+        },
+        "security" : [ {
+          "Api-Token" : [ ]
+        }, {
+          "ssoAuth" : [ "openpipeline:events:ingest" ]
+        }, {
+          "ssoBearerAuth" : [ ]
+        } ],
+        "summary" : "Generic Events Ingest default endpoint | maturity=EARLY_ADOPTER",
+        "tags" : [ "Events" ],
+        "x-maturity" : "EARLY_ADOPTER",
+        "x-permissions" : [ "openpipeline:events:ingest" ],
+        "x-token-scopes" : [ "openpipeline.events" ]
+      }
+    },
+    "/v1/events.sdlc" : {
+      "post" : {
+        "description" : "The maximum payload size of a single request is **10 MiB**. Requests with a greater payload are rejected, and the API returns a 413 response code.\n\n<br />**Query Parameters**\n\nEach request query parameter becomes a top-level record attribute. In case there is already an attribute in the payload with the same name as the query parameter, the original value will be overridden.\n\nEvery time a field is overridden, the original value is preserved in a field named `overwritten<index>.<original field name>`\n\n<br />**Timestamp field**\n\nIf there is no `timestamp` field in the request payload, the current server time is used as timestamp.\n\nIf the `timestamp` field is present and it has a **numeric** value, the time unit is assumed based on the size of the value. Nano seconds by default.\n\nAfterwards, the field will be converted to a `Timestamp` type in nano seconds.\n\nIf the `timestamp` field is present and has a string value, attempts are made to parse it based on UNIX epoch milliseconds or seconds, RFC3339 or RFC3164 format, in this order.\n\nIf the `timestamp` has the wrong type (e.g. boolean, array) or cannot be properly parsed, it is overridden with the current server time and the original value is preserved.",
+        "operationId" : "ingestEventsSdlc",
+        "requestBody" : {
+          "content" : {
+            "application/json; charset=utf-8" : {
+              "example" : [ {
+                "event.id" : 1,
+                "additionalProp1" : "bar",
+                "additionalProp2" : "foo",
+                "additionalProp3" : [ {
+                  "prop1" : "string",
+                  "prop2" : 1.0
+                } ]
+              }, {
+                "event.id" : 2,
+                "additionalProp1" : 123.45,
+                "additionalProp2" : "lorem",
+                "additionalProp3" : [ {
+                  "prop1" : "string",
+                  "prop2" : 1.0
+                } ]
+              } ],
+              "schema" : {
+                "$ref" : "#/components/schemas/Events"
+              }
+            }
+          },
+          "description" : "The JSON body of the request. Contains the events for ingest.",
+          "required" : true
+        },
+        "responses" : {
+          "202" : {
+            "description" : "Accepted. Response doesn't have a body."
+          },
+          "400" : {
+            "content" : {
+              "application/json; charset=utf-8" : {
+                "example" : {
+                  "error" : {
+                    "code" : 400,
+                    "message" : "The input is invalid."
+                  }
+                },
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponseEnvelope"
+                }
+              }
+            },
+            "description" : "Failed. The input is invalid."
+          },
+          "404" : {
+            "content" : {
+              "application/json; charset=utf-8" : {
+                "example" : {
+                  "error" : {
+                    "code" : 404,
+                    "message" : "Endpoint not found."
+                  }
+                },
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponseEnvelope"
+                }
+              }
+            },
+            "description" : "Failed. Endpoint not found."
+          },
+          "413" : {
+            "content" : {
+              "application/json; charset=utf-8" : {
+                "example" : {
+                  "error" : {
+                    "code" : 413,
+                    "message" : "Content too large."
+                  }
+                },
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponseEnvelope"
+                }
+              }
+            },
+            "description" : "Failed. Content too large."
+          },
+          "429" : {
+            "content" : {
+              "application/json; charset=utf-8" : {
+                "example" : {
+                  "error" : {
+                    "code" : 429,
+                    "message" : "Too many requests."
+                  }
+                },
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponseEnvelope"
+                }
+              }
+            },
+            "description" : "Failed. Too many requests."
+          },
+          "4XX" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description" : "Client side error."
+          },
+          "5XX" : {
+            "content" : {
+              "application/json; charset=utf-8" : {
+                "example" : {
+                  "error" : {
+                    "code" : 500,
+                    "message" : "Internal server error."
+                  }
+                },
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponseEnvelope"
+                }
+              }
+            },
+            "description" : "Server-side error."
+          }
+        },
+        "security" : [ {
+          "Api-Token" : [ ]
+        }, {
+          "ssoAuth" : [ "openpipeline:events.sdlc:ingest" ]
+        }, {
+          "ssoBearerAuth" : [ ]
+        } ],
+        "summary" : "Software Development Lifecycle Events Ingest default endpoint | maturity=EARLY_ADOPTER",
+        "tags" : [ "SDLC Events" ],
+        "x-maturity" : "EARLY_ADOPTER",
+        "x-permissions" : [ "openpipeline:events.sdlc:ingest" ],
+        "x-token-scopes" : [ "openpipeline.events_sdlc" ]
+      }
+    },
+    "/v1/security.events" : {
+      "post" : {
+        "description" : "The maximum payload size of a single request is **10 MiB**. Requests with a greater payload are rejected, and the API returns a 413 response code.\n\n<br />**Query Parameters**\n\nEach request query parameter becomes a top-level record attribute. In case there is already an attribute in the payload with the same name as the query parameter, the original value will be overridden.\n\nEvery time a field is overridden, the original value is preserved in a field named `overwritten<index>.<original field name>`\n\n<br />**Timestamp field**\n\nIf there is no `timestamp` field in the request payload, the current server time is used as timestamp.\n\nIf the `timestamp` field is present and it has a **numeric** value, the time unit is assumed based on the size of the value. Nano seconds by default.\n\nAfterwards, the field will be converted to a `Timestamp` type in nano seconds.\n\nIf the `timestamp` field is present and has a string value, attempts are made to parse it based on UNIX epoch milliseconds or seconds, RFC3339 or RFC3164 format, in this order.\n\nIf the `timestamp` has the wrong type (e.g. boolean, array) or cannot be properly parsed, it is overridden with the current server time and the original value is preserved.",
+        "operationId" : "ingestSecurityEvents",
+        "requestBody" : {
+          "content" : {
+            "application/json; charset=utf-8" : {
+              "example" : [ {
+                "event.id" : 1,
+                "additionalProp1" : "bar",
+                "additionalProp2" : "foo",
+                "additionalProp3" : [ {
+                  "prop1" : "string",
+                  "prop2" : 1.0
+                } ]
+              }, {
+                "event.id" : 2,
+                "additionalProp1" : 123.45,
+                "additionalProp2" : "lorem",
+                "additionalProp3" : [ {
+                  "prop1" : "string",
+                  "prop2" : 1.0
+                } ]
+              } ],
+              "schema" : {
+                "$ref" : "#/components/schemas/Events"
+              }
+            }
+          },
+          "description" : "The JSON body of the request. Contains the events for ingest.",
+          "required" : true
+        },
+        "responses" : {
+          "202" : {
+            "description" : "Accepted. Response doesn't have a body."
+          },
+          "400" : {
+            "content" : {
+              "application/json; charset=utf-8" : {
+                "example" : {
+                  "error" : {
+                    "code" : 400,
+                    "message" : "The input is invalid."
+                  }
+                },
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponseEnvelope"
+                }
+              }
+            },
+            "description" : "Failed. The input is invalid."
+          },
+          "404" : {
+            "content" : {
+              "application/json; charset=utf-8" : {
+                "example" : {
+                  "error" : {
+                    "code" : 404,
+                    "message" : "Endpoint not found."
+                  }
+                },
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponseEnvelope"
+                }
+              }
+            },
+            "description" : "Failed. Endpoint not found."
+          },
+          "413" : {
+            "content" : {
+              "application/json; charset=utf-8" : {
+                "example" : {
+                  "error" : {
+                    "code" : 413,
+                    "message" : "Content too large."
+                  }
+                },
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponseEnvelope"
+                }
+              }
+            },
+            "description" : "Failed. Content too large."
+          },
+          "429" : {
+            "content" : {
+              "application/json; charset=utf-8" : {
+                "example" : {
+                  "error" : {
+                    "code" : 429,
+                    "message" : "Too many requests."
+                  }
+                },
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponseEnvelope"
+                }
+              }
+            },
+            "description" : "Failed. Too many requests."
+          },
+          "4XX" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description" : "Client side error."
+          },
+          "5XX" : {
+            "content" : {
+              "application/json; charset=utf-8" : {
+                "example" : {
+                  "error" : {
+                    "code" : 500,
+                    "message" : "Internal server error."
+                  }
+                },
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponseEnvelope"
+                }
+              }
+            },
+            "description" : "Server-side error."
+          }
+        },
+        "security" : [ {
+          "Api-Token" : [ ]
+        }, {
+          "ssoAuth" : [ "openpipeline:security.events:ingest" ]
+        }, {
+          "ssoBearerAuth" : [ ]
+        } ],
+        "summary" : "Security Events Ingest default endpoint for the security.events table | maturity=EARLY_ADOPTER",
+        "tags" : [ "Security Events" ],
+        "x-maturity" : "EARLY_ADOPTER",
+        "x-permissions" : [ "openpipeline:security.events:ingest" ],
+        "x-token-scopes" : [ "openpipeline.events_security" ]
+      }
+    },
+    "/v1/smartscape.events" : {
+      "post" : {
+        "description" : "The maximum payload size of a single request is **10 MiB**. Requests with a greater payload are rejected, and the API returns a 413 response code.\n\n<br />**Timestamp field**\n\nIf there is no `timestamp` field in the request payload, the current server time is used as timestamp.\n\nIf the `timestamp` field is present and it has a **numeric** value, the time unit is assumed based on the size of the value. Nano seconds by default.\n\nAfterwards, the field will be converted to a `Timestamp` type in nano seconds.\n\nIf the `timestamp` field is present and has a string value, attempts are made to parse it based on UNIX epoch milliseconds or seconds, RFC3339 or RFC3164 format, in this order.\n\nIf the `timestamp` has the wrong type (e.g. boolean, array) or cannot be properly parsed, it is overridden with the current server time and the original value is preserved.\n\n<br />**Smartscape event validation**\n\nEach event must identify an entity using exactly one of two modes:\n\n- **Mode 1** — supply a pre-computed `id` matching `[A-Z][A-Z0-9_]*-[0-9A-F]{16}` (e.g. `HOST-0000000000000001`).\n- **Mode 2** — supply `type` (matching `[A-Z][A-Z0-9_]*`) and `id_components` (a non-empty array of single-key objects whose values are strings). The two modes are mutually exclusive.\n\n- Structural keys (`type`, `id`, `id_components`, `dt.security_context`, `update_lifetime`, `timestamp`, `static_edges`, `dynamic_edges`, `event.version`) are reserved.\n- For core entity types (not `EXT_*` / `CUSTOM_*`), only `name`, `process.metadata[COMMAND_LINE_ARGS]`, and names starting with `ext.` or `custom.` are allowed.\n- Extended entity types (`EXT_*` / `CUSTOM_*`) bypass the allowlist (structural keys still reserved).\n- Field values must be scalar (string, number, boolean, or null) or a flat `string:string` object (both keys and values must be strings).\n\n**Tags** — tag contexts are top-level keys with a `tags:` prefix:\n\n- E.g. `\"tags:ext.source\": { \"env\": \"production\" }` defines a tag context `ext.source`.\n- For core entity types, context names (after stripping `tags:`) must start with `ext.` or `custom.`.\n- Extended entity types bypass this restriction.\n- Tag property values must be scalar (string, number, boolean, or null).\n\n**Schema versioning** — the optional `event.version` field (integer) declares which version of the smartscape event format your producer targets. Supplying it is strongly recommended: it guarantees a **stable interface** — if the format evolves under a new version, your events keep being processed exactly as before. Currently only version `1` is supported; unsupported values are rejected with a `400` response.\n\nInvalid events are rejected with a `400` response listing every offending field.",
+        "operationId" : "ingestSmartscapeEvents",
+        "requestBody" : {
+          "content" : {
+            "application/json; charset=utf-8" : {
+              "example" : [ {
+                "type" : "SOME_TYPE",
+                "id_components" : [ {
+                  "some" : "id_input"
+                }, {
+                  "some_other" : "other_id_input"
+                } ],
+                "timestamp" : "2024-01-01T00:00:00Z",
+                "event.version" : 1,
+                "dt.security_context" : "sensitive-data",
+                "name" : "smartscape node name",
+                "ext.custom_property" : "value",
+                "tags:ext.my_source" : {
+                  "key" : "value",
+                  "otherKey" : "otherValue"
+                },
+                "static_edges" : {
+                  "belongs_to" : [ {
+                    "type" : "SOME_OTHER_TYPE",
+                    "id_components" : [ {
+                      "another" : "id_input"
+                    } ]
+                  } ]
+                }
+              } ],
+              "schema" : {
+                "$ref" : "#/components/schemas/SmartscapeEvents"
+              }
+            }
+          },
+          "description" : "The JSON body of the request. Contains the events for ingest.",
+          "required" : true
+        },
+        "responses" : {
+          "202" : {
+            "description" : "Accepted. Response doesn't have a body."
+          },
+          "400" : {
+            "content" : {
+              "application/json; charset=utf-8" : {
+                "example" : {
+                  "error" : {
+                    "code" : 400,
+                    "message" : "The input is invalid."
+                  }
+                },
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponseEnvelope"
+                }
+              }
+            },
+            "description" : "Failed. The input is invalid."
+          },
+          "404" : {
+            "content" : {
+              "application/json; charset=utf-8" : {
+                "example" : {
+                  "error" : {
+                    "code" : 404,
+                    "message" : "Endpoint not found."
+                  }
+                },
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponseEnvelope"
+                }
+              }
+            },
+            "description" : "Failed. Endpoint not found."
+          },
+          "413" : {
+            "content" : {
+              "application/json; charset=utf-8" : {
+                "example" : {
+                  "error" : {
+                    "code" : 413,
+                    "message" : "Content too large."
+                  }
+                },
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponseEnvelope"
+                }
+              }
+            },
+            "description" : "Failed. Content too large."
+          },
+          "429" : {
+            "content" : {
+              "application/json; charset=utf-8" : {
+                "example" : {
+                  "error" : {
+                    "code" : 429,
+                    "message" : "Too many requests."
+                  }
+                },
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponseEnvelope"
+                }
+              }
+            },
+            "description" : "Failed. Too many requests."
+          },
+          "4XX" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description" : "Client side error."
+          },
+          "5XX" : {
+            "content" : {
+              "application/json; charset=utf-8" : {
+                "example" : {
+                  "error" : {
+                    "code" : 500,
+                    "message" : "Internal server error."
+                  }
+                },
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponseEnvelope"
+                }
+              }
+            },
+            "description" : "Server-side error."
+          }
+        },
+        "security" : [ {
+          "Api-Token" : [ ]
+        }, {
+          "ssoAuth" : [ "openpipeline:events.smartscape:ingest" ]
+        }, {
+          "ssoBearerAuth" : [ ]
+        } ],
+        "summary" : "Smartscape Events Ingest default endpoint",
+        "tags" : [ "Smartscape Events" ],
+        "x-permissions" : [ "openpipeline:events.smartscape:ingest" ],
+        "x-token-scopes" : [ "openpipeline.events_smartscape" ]
+      }
+    }
+  },
+  "components" : {
+    "schemas" : {
+      "AnyValue" : {
+        "anyOf" : [ {
+          "type" : "string"
+        }, {
+          "type" : "number"
+        }, {
+          "type" : "integer"
+        }, {
+          "type" : "boolean"
+        }, {
+          "type" : "array",
+          "items" : {
+            "type" : "object"
+          }
+        }, {
+          "type" : "object"
+        } ],
+        "description" : "A schema representing an arbitrary value type."
+      },
+      "ConstraintViolation" : {
+        "type" : "object",
+        "description" : "A list of constraint violations",
+        "properties" : {
+          "location" : {
+            "type" : "string"
+          },
+          "message" : {
+            "type" : "string"
+          },
+          "parameterLocation" : {
+            "type" : "string",
+            "enum" : [ "HEADER", "PATH", "PAYLOAD_BODY", "QUERY" ]
+          },
+          "path" : {
+            "type" : "string"
+          }
+        }
+      },
+      "ConstraintViolationDetails" : {
+        "type" : "object",
+        "allOf" : [ {
+          "$ref" : "#/components/schemas/ErrorResponseDetails"
+        }, {
+          "type" : "object",
+          "properties" : {
+            "constraintViolations" : {
+              "type" : "array",
+              "description" : "List of encountered constraint violations.",
+              "items" : {
+                "$ref" : "#/components/schemas/ConstraintViolation"
+              }
+            }
+          }
+        } ],
+        "description" : "List of encountered constraint violations.",
+        "required" : [ "constraintViolations" ]
+      },
+      "Error" : {
+        "type" : "object",
+        "properties" : {
+          "code" : {
+            "type" : "integer",
+            "format" : "int32",
+            "description" : "The HTTP status code"
+          },
+          "constraintViolations" : {
+            "type" : "array",
+            "description" : "A list of constraint violations",
+            "items" : {
+              "$ref" : "#/components/schemas/ConstraintViolation"
+            }
+          },
+          "message" : {
+            "type" : "string",
+            "description" : "The error message"
+          }
+        }
+      },
+      "ErrorEnvelope" : {
+        "type" : "object",
+        "properties" : {
+          "error" : {
+            "$ref" : "#/components/schemas/Error"
+          }
+        }
+      },
+      "ErrorResponse" : {
+        "type" : "object",
+        "description" : "Basic information of the encountered error.",
+        "properties" : {
+          "code" : {
+            "type" : "integer",
+            "format" : "int32",
+            "description" : "The returned HTTP status code."
+          },
+          "details" : {
+            "$ref" : "#/components/schemas/ErrorResponseDetails"
+          },
+          "message" : {
+            "type" : "string",
+            "description" : "Description of the encountered error."
+          },
+          "reason" : {
+            "type" : "string",
+            "description" : "Machine-readable reason for the error, if available."
+          }
+        },
+        "required" : [ "code", "message" ]
+      },
+      "ErrorResponseDetails" : {
+        "type" : "object",
+        "description" : "Detailed information of the error.",
+        "discriminator" : {
+          "mapping" : {
+            "constraintViolation" : "#/components/schemas/ConstraintViolationDetails"
+          },
+          "propertyName" : "type"
+        },
+        "properties" : {
+          "type" : {
+            "type" : "string",
+            "description" : "Defines the actual set of fields depending on the value. See one of the following objects: \n\n* `constraintViolation` -> ConstraintViolationDetails \n",
+            "enum" : [ "constraintViolation" ]
+          }
+        },
+        "required" : [ "type" ]
+      },
+      "ErrorResponseEnvelope" : {
+        "type" : "object",
+        "description" : "Encloses the encountered error.",
+        "properties" : {
+          "error" : {
+            "$ref" : "#/components/schemas/ErrorResponse"
+          }
+        },
+        "required" : [ "error" ]
+      },
+      "EventList" : {
+        "type" : "array",
+        "description" : "A top-level array of event objects.",
+        "items" : {
+          "$ref" : "#/components/schemas/SingleEvent"
+        },
+        "properties" : {
+          "empty" : {
+            "type" : "boolean"
+          }
+        }
+      },
+      "Events" : {
+        "type" : "object",
+        "description" : "The events to be ingested. The request body can either be a single event object or a top-level array of event objects.",
+        "oneOf" : [ {
+          "$ref" : "#/components/schemas/SingleEvent"
+        }, {
+          "$ref" : "#/components/schemas/EventList"
+        } ]
+      },
+      "SingleEvent" : {
+        "type" : "object",
+        "additionalProperties" : {
+          "anyOf" : [ {
+            "$ref" : "#/components/schemas/AnyValue"
+          } ],
+          "description" : "A single event object."
+        },
+        "description" : "A single event object.",
+        "properties" : {
+          "empty" : {
+            "type" : "boolean"
+          }
+        }
+      },
+      "SmartscapeEdge" : {
+        "type" : "object",
+        "description" : "A reference to a related Smartscape node used to define a topology edge. Either `id` (Mode 1) or `type` + `id_components` (Mode 2) must be present. The two modes are mutually exclusive.",
+        "properties" : {
+          "id" : {
+            "type" : "string",
+            "description" : "Pre-computed ID of the related node (**Mode 1**). Must match `[A-Z][A-Z0-9_]*-[0-9A-F]{16}`. Mutually exclusive with `type`."
+          },
+          "id_components" : {
+            "type" : "array",
+            "description" : "Identity components of the related node (**Mode 2**). Required when `type` is set; optional in Mode 1. Each entry must be a single-key object whose value is a **string** (e.g. `[{\"hostname\": \"myhost\"}]`).",
+            "items" : {
+              "type" : "object",
+              "additionalProperties" : {
+                "type" : "string",
+                "description" : "Identity components of the related node (**Mode 2**). Required when `type` is set; optional in Mode 1. Each entry must be a single-key object whose value is a **string** (e.g. `[{\"hostname\": \"myhost\"}]`)."
+              },
+              "description" : "Identity components of the related node (**Mode 2**). Required when `type` is set; optional in Mode 1. Each entry must be a single-key object whose value is a **string** (e.g. `[{\"hostname\": \"myhost\"}]`)."
+            }
+          },
+          "type" : {
+            "type" : "string",
+            "description" : "Type of the related node (**Mode 2**). Must match `[A-Z][A-Z0-9_]*`. Mutually exclusive with `id`."
+          }
+        }
+      },
+      "SmartscapeEvent" : {
+        "type" : "object",
+        "description" : "A Smartscape node upsert event. Exactly one identity mode must be used: **Mode 1** supplies a pre-computed `id`; **Mode 2** supplies `type` + `id_components` and the server computes the ID. The two modes are mutually exclusive — supplying both `id` and `type` is rejected.\n\nfields and tag contexts are top-level keys. Tag contexts use a `tags:` prefix (e.g. `tags:ext.source`).",
+        "properties" : {
+          "additionalProperties" : {
+            "type" : "object",
+            "additionalProperties" : true
+          },
+          "dt.security_context" : {
+            "anyOf" : [ {
+              "$ref" : "#/components/schemas/AnyValue"
+            } ],
+            "description" : "Security context. String or array of strings."
+          },
+          "dynamic_edges" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "array",
+              "description" : "Dynamic topology edges, keyed by relationship name. Each value is an array of target node references.",
+              "items" : {
+                "$ref" : "#/components/schemas/SmartscapeEdge"
+              }
+            },
+            "description" : "Dynamic topology edges, keyed by relationship name. Each value is an array of target node references."
+          },
+          "event.version" : {
+            "type" : "integer",
+            "format" : "int32",
+            "description" : "Schema version of this event. Optional — version 1 is applied when absent. Must be a known version; currently only 1 is accepted."
+          },
+          "id" : {
+            "type" : "string",
+            "description" : "Pre-computed Smartscape entity ID (**Mode 1**). Must match `[A-Z][A-Z0-9_]*-[0-9A-F]{16}` (e.g. `HOST-0000000000000001`). Mutually exclusive with `type`."
+          },
+          "id_components" : {
+            "type" : "array",
+            "description" : "Identity components used to compute the entity ID (**Mode 2**). Required when `type` is set; optional in Mode 1. Each entry must be a single-key object whose value is a **string** (e.g. `[{\"hostname\": \"myhost\"}]`).",
+            "items" : {
+              "type" : "object",
+              "additionalProperties" : {
+                "type" : "string",
+                "description" : "Identity components used to compute the entity ID (**Mode 2**). Required when `type` is set; optional in Mode 1. Each entry must be a single-key object whose value is a **string** (e.g. `[{\"hostname\": \"myhost\"}]`)."
+              },
+              "description" : "Identity components used to compute the entity ID (**Mode 2**). Required when `type` is set; optional in Mode 1. Each entry must be a single-key object whose value is a **string** (e.g. `[{\"hostname\": \"myhost\"}]`)."
+            }
+          },
+          "static_edges" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "array",
+              "description" : "Static topology edges, keyed by relationship name. Each value is an array of target node references.",
+              "items" : {
+                "$ref" : "#/components/schemas/SmartscapeEdge"
+              }
+            },
+            "description" : "Static topology edges, keyed by relationship name. Each value is an array of target node references."
+          },
+          "timestamp" : {
+            "anyOf" : [ {
+              "$ref" : "#/components/schemas/AnyValue"
+            } ],
+            "description" : "Event timestamp. Optional — current server time is used when absent. Accepted formats: RFC3339 string (e.g. `2024-01-01T00:00:00Z`) or a positive number. Zero and negative numbers are rejected."
+          },
+          "type" : {
+            "type" : "string",
+            "description" : "Entity type (**Mode 2**). Must match `[A-Z][A-Z0-9_]*` (e.g. `HOST`, `HOST_GROUP`). Mutually exclusive with `id`. Types starting with `EXT_` or `CUSTOM_` are treated as extended entity types and bypass the field-name allowlist."
+          },
+          "update_lifetime" : {
+            "type" : "boolean",
+            "description" : "Whether to advance the entity's last-seen timestamp. Defaults to true. Set to false to update fields without refreshing the last-seen time."
+          }
+        }
+      },
+      "SmartscapeEventList" : {
+        "type" : "array",
+        "description" : "A top-level array of Smartscape event objects.",
+        "items" : {
+          "$ref" : "#/components/schemas/SmartscapeEvent"
+        },
+        "properties" : {
+          "empty" : {
+            "type" : "boolean"
+          }
+        }
+      },
+      "SmartscapeEvents" : {
+        "type" : "object",
+        "description" : "The Smartscape events to be ingested. The request body can either be a single Smartscape event object or a top-level array of Smartscape event objects.",
+        "oneOf" : [ {
+          "$ref" : "#/components/schemas/SmartscapeEvent"
+        }, {
+          "$ref" : "#/components/schemas/SmartscapeEventList"
+        } ]
+      }
+    },
+    "securitySchemes" : {
+      "Api-Token" : {
+        "description" : "Dynatrace API Token\n\n The token is passed in the **Authorization** header in the following format: `Authorization: Api-Token abcdefjhij1234567890`.",
+        "in" : "header",
+        "name" : "Authorization",
+        "type" : "apiKey"
+      },
+      "ssoAuth" : {
+        "description" : "Dynatrace OAuth\n\n A Bearer token is passed in the **Authorization** header in the following format: `Authorization: Bearer abcdefjhij1234567890`.",
+        "flows" : {
+          "clientCredentials" : {
+            "scopes" : {
+              "openpipeline:events.custom:ingest" : "Ingest events into custom endpoints of OpenPipeline",
+              "openpipeline:events.sdlc.custom:ingest" : "Ingest software development lifecycle events into custom endpoints of OpenPipeline",
+              "openpipeline:events.sdlc:ingest" : "Ingest software development lifecycle events into OpenPipeline",
+              "openpipeline:events.smartscape:ingest" : "Ingest smartscape events into OpenPipeline",
+              "openpipeline:events:ingest" : "Ingest events into OpenPipeline",
+              "openpipeline:security.events.custom:ingest" : "Ingest security events into custom endpoints of OpenPipeline",
+              "openpipeline:security.events:ingest" : "Ingest security events into OpenPipeline"
+            },
+            "tokenUrl" : "https://hard.token.internal.dynatracelabs.com:443/sso/oauth2/token"
+          }
+        },
+        "type" : "oauth2"
+      },
+      "ssoBearerAuth" : {
+        "description" : "The value can be either an OAuth2 access token or a platform token.</br>For further information about platform tokens see <a href=\"https://dt-url.net/platform-tokens\" target=\"_blank\">Platform tokens - Dynatrace Docs</a>",
+        "scheme" : "bearer",
+        "type" : "http"
+      }
+    }
+  }
+}

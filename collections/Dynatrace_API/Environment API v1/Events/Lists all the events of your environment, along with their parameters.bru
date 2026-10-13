@@ -1,0 +1,38 @@
+meta {
+  name: Lists all the events of your environment, along with their parameters
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{DT_TENANT_URL}}/api/v1/events
+  body: none
+  auth: none
+}
+
+params:query {
+  ~from: 
+  ~to: 
+  ~relativeTime: 
+  ~eventType: 
+  ~entityId: 
+  ~cursor: 
+}
+
+headers {
+  Authorization: Api-Token {{DT_API_TOKEN}}
+}
+
+docs {
+  # Lists all the events of your environment, along with their parameters
+
+  **Deprecated**
+
+  Because the possible number of events can be huge, the response is limited to 150 events. You can focus the output by specifying filtering parameters for the request.
+
+  An event is included in the response, if either start or end timestamp of the event is within the defined timeframe.
+
+  **Auth:** Api-Token only (OAuth not supported by this endpoint). Uses `{{DT_API_TOKEN}}`.
+
+  **API token scopes:** DataExport
+}

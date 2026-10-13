@@ -1,0 +1,38 @@
+meta {
+  name: Validates the payload for the `PUT anomalyDetection processGroups {id}` request
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{DT_TENANT_URL}}/api/config/v1/anomalyDetection/processGroups/:id/validator
+  body: json
+  auth: none
+}
+
+params:path {
+  id: 
+}
+
+headers {
+  Authorization: Api-Token {{DT_API_TOKEN}}
+}
+
+body:json {
+  {
+    "availabilityMonitoring": {
+      "method": "MINIMUM_THRESHOLD",
+      "minimumThreshold": 5
+    }
+  }
+}
+
+docs {
+  # Validates the payload for the `PUT /anomalyDetection/processGroups/{id}` request | maturity=EARLY_ADOPTER
+
+  **Deprecated**
+
+  **Auth:** Api-Token only (OAuth not supported by this endpoint). Uses `{{DT_API_TOKEN}}`.
+
+  **API token scopes:** WriteConfig
+}

@@ -1,0 +1,37 @@
+meta {
+  name: Updates the specified comment on a problem
+  type: http
+  seq: 7
+}
+
+put {
+  url: {{DT_TENANT_URL}}/api/v2/problems/:problemId/comments/:commentId
+  body: json
+  auth: inherit
+}
+
+params:path {
+  problemId: 
+  commentId: 
+}
+
+body:json {
+  {
+    "context": "string",
+    "message": "string"
+  }
+}
+
+docs {
+  # Updates the specified comment on a problem
+
+  **Deprecated**
+
+  **Deprecation notice:** This endpoint is deprecated. Use [Annotation events](https://dt-url.net/1602vtp) instead.
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `environment-api:problems:write`
+
+  **API token scopes:** problems.write
+}

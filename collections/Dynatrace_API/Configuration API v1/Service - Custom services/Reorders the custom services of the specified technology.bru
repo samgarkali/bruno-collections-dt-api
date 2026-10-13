@@ -1,0 +1,46 @@
+meta {
+  name: Reorders the custom services of the specified technology
+  type: http
+  seq: 3
+}
+
+put {
+  url: {{DT_TENANT_URL}}/api/config/v1/service/customServices/:technology/order
+  body: json
+  auth: inherit
+}
+
+params:path {
+  technology: 
+}
+
+body:json {
+  {
+    "values": [
+      {
+        "description": "Dynatrace entity 1 for the REST API example",
+        "id": "6a98d7bc-abb9-44f8-ae6a-73e68e71812a",
+        "name": "Dynatrace entity 1"
+      },
+      {
+        "id": "ee70f7d3-9a4e-4f5f-94d2-c9d6156f1618",
+        "name": "Dynatrace entity 2"
+      },
+      {
+        "id": "8cdabe77-9e1a-4be8-b3df-269dd6fa9d7f"
+      }
+    ]
+  }
+}
+
+docs {
+  # Reorders the custom services of the specified technology
+
+  This request reorders the custom services of the specified technology according to the given list of IDs. Custom services not present in the body of the request will retain their relative ordering but will be ordered *after* all those present in the request.
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `settings:objects:write`
+
+  **API token scopes:** WriteConfig
+}

@@ -1,0 +1,30 @@
+meta {
+  name: Deletes the specified settings object
+  type: http
+  seq: 8
+}
+
+delete {
+  url: {{DT_TENANT_URL}}/api/v2/settings/objects/:objectId
+  body: none
+  auth: inherit
+}
+
+params:query {
+  ~updateToken: 
+  ~adminAccess: 
+}
+
+params:path {
+  objectId: 
+}
+
+docs {
+  # Deletes the specified settings object
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `settings:objects:write`
+
+  **API token scopes:** settings.write
+}

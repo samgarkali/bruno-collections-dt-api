@@ -1,0 +1,46 @@
+meta {
+  name: Creates a new request naming rule
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{DT_TENANT_URL}}/api/config/v1/service/requestNaming
+  body: json
+  auth: inherit
+}
+
+params:query {
+  ~position: 
+}
+
+body:json {
+  {
+    "conditions": [
+      {
+        "attribute": "WEBREQUEST_URL_PATH",
+        "comparisonInfo": {
+          "caseSensitive": false,
+          "comparison": "BEGINS_WITH",
+          "negate": false,
+          "type": "STRING",
+          "value": "/url"
+        }
+      }
+    ],
+    "enabled": true,
+    "namingPattern": "renamed request"
+  }
+}
+
+docs {
+  # Creates a new request naming rule
+
+  The new rule goes to the end of the rules list and will be the last to evaluate. Existing rules remain unaffected.
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `settings:objects:write`
+
+  **API token scopes:** WriteConfig
+}

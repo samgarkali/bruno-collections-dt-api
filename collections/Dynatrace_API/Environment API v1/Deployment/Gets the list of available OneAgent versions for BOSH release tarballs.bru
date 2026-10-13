@@ -1,0 +1,25 @@
+meta {
+  name: Gets the list of available OneAgent versions for BOSH release tarballs
+  type: http
+  seq: 3
+}
+
+get {
+  url: {{DT_TENANT_URL}}/api/v1/deployment/boshrelease/versions/:osType
+  body: none
+  auth: inherit
+}
+
+params:path {
+  osType: 
+}
+
+docs {
+  # Gets the list of available OneAgent versions for BOSH release tarballs
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `environment-api:deployment:download`, `fleet-management:oneagents:download`
+
+  **API token scopes:** InstallerDownload
+}

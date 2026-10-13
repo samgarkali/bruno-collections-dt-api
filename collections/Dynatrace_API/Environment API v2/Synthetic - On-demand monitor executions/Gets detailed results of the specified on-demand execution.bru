@@ -1,0 +1,25 @@
+meta {
+  name: Gets detailed results of the specified on-demand execution
+  type: http
+  seq: 6
+}
+
+get {
+  url: {{DT_TENANT_URL}}/api/v2/synthetic/executions/:executionId/fullReport
+  body: none
+  auth: inherit
+}
+
+params:path {
+  executionId: 
+}
+
+docs {
+  # Gets detailed results of the specified on-demand execution
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `environment-api:synthetic-execution:read`
+
+  **API token scopes:** syntheticExecutions.read, ExternalSyntheticIntegration, ReadSyntheticData
+}

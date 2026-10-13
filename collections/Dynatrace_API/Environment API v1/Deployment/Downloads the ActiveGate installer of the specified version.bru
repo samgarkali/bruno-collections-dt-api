@@ -1,0 +1,39 @@
+meta {
+  name: Downloads the ActiveGate installer of the specified version
+  type: http
+  seq: 19
+}
+
+get {
+  url: {{DT_TENANT_URL}}/api/v1/deployment/installer/gateway/:osType/version/:version
+  body: none
+  auth: inherit
+}
+
+params:query {
+  ~networkZone: 
+  ~arch: 
+}
+
+params:path {
+  osType: 
+  version: 
+}
+
+headers {
+  ~If-None-Match: 
+}
+
+docs {
+  # Downloads the ActiveGate installer of the specified version
+
+  **Deprecated**
+
+  **Deprecation notice:** This endpoint is deprecated. Use the Fleet Management API endpoint `/platform/fleet-management/v1/activegate/installer/{os-type}/{arch}/{version}`
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `environment-api:deployment:download`, `fleet-management:activegates:download`
+
+  **API token scopes:** InstallerDownload
+}

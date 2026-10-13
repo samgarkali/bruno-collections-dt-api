@@ -1,0 +1,35 @@
+meta {
+  name: Validates the payload for the `POST remoteEnvironments` request maturity=EARLY_A
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{DT_TENANT_URL}}/api/config/v1/remoteEnvironments/validator
+  body: json
+  auth: none
+}
+
+headers {
+  Authorization: Api-Token {{DT_API_TOKEN}}
+}
+
+body:json {
+  {
+    "displayName": "string",
+    "id": "string",
+    "networkScope": "EXTERNAL",
+    "token": "string",
+    "uri": "string"
+  }
+}
+
+docs {
+  # Validates the payload for the `POST /remoteEnvironments` request | maturity=EARLY_ADOPTER
+
+  **Deprecated**
+
+  **Auth:** Api-Token only (OAuth not supported by this endpoint). Uses `{{DT_API_TOKEN}}`.
+
+  **API token scopes:** WriteConfig
+}

@@ -1,0 +1,76 @@
+meta {
+  name: Software Development Lifecycle Events Ingest custom endpoint maturity=EARLY_ADOP
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{DT_TENANT_URL}}/platform/ingest/custom/events.sdlc/:endpoint
+  body: json
+  auth: inherit
+}
+
+params:path {
+  endpoint: 
+}
+
+body:json {
+  [
+    {
+      "event.id": 1,
+      "additionalProp1": "bar",
+      "additionalProp2": "foo",
+      "additionalProp3": [
+        {
+          "prop1": "string",
+          "prop2": 1
+        }
+      ]
+    },
+    {
+      "event.id": 2,
+      "additionalProp1": 123.45,
+      "additionalProp2": "lorem",
+      "additionalProp3": [
+        {
+          "prop1": "string",
+          "prop2": 1
+        }
+      ]
+    }
+  ]
+}
+
+docs {
+  # Software Development Lifecycle Events Ingest custom endpoint | maturity=EARLY_ADOPTER
+
+  The maximum payload size of a single request is **10 MiB**. Requests with a greater payload are rejected, and the API returns a 413 response code.
+
+  <br />**Query Parameters**
+
+  Each request query parameter becomes a top-level record attribute. In case there is already an attribute in the payload with the same name as the query parameter, the original value will be overridden.
+
+  Every time a field is overridden, the original value is preserved in a field named `overwritten<index>.<original field name>`
+
+  <br />**Timestamp field**
+
+  If there is no `timestamp` field in the request payload, the current server time is used as timestamp.
+
+  If the `timestamp` field is present and it has a **numeric** value, the time unit is assumed based on the size of the value. Nano seconds by default.
+
+  Afterwards, the field will be converted to a `Timestamp` type in nano seconds.
+
+  If the `timestamp` field is present and has a string value, attempts are made to parse it based on UNIX epoch milliseconds or seconds, RFC3339 or RFC3164 format, in this order.
+
+  If the `timestamp` has the wrong type (e.g. boolean, array) or cannot be properly parsed, it is overridden with the current server time and the original value is preserved.
+
+  **Custom endpoints**
+
+  Custom endpoints need to be defined first via the OpenPipeline Configuration API or the OpenPipeline app, see [Dynatrace Documentation](https://dt-url.net/openpipeline-pipelines-docs).
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `openpipeline:events.sdlc.custom:ingest`
+
+  **API token scopes:** openpipeline.events_sdlc.custom
+}

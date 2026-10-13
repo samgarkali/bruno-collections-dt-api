@@ -1,0 +1,95 @@
+meta {
+  name: Smartscape Events Ingest default endpoint
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{DT_TENANT_URL}}/platform/ingest/v1/smartscape.events
+  body: json
+  auth: inherit
+}
+
+body:json {
+  [
+    {
+      "type": "SOME_TYPE",
+      "id_components": [
+        {
+          "some": "id_input"
+        },
+        {
+          "some_other": "other_id_input"
+        }
+      ],
+      "timestamp": "2024-01-01T00:00:00Z",
+      "event.version": 1,
+      "dt.security_context": "sensitive-data",
+      "name": "smartscape node name",
+      "ext.custom_property": "value",
+      "tags:ext.my_source": {
+        "key": "value",
+        "otherKey": "otherValue"
+      },
+      "static_edges": {
+        "belongs_to": [
+          {
+            "type": "SOME_OTHER_TYPE",
+            "id_components": [
+              {
+                "another": "id_input"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}
+
+docs {
+  # Smartscape Events Ingest default endpoint
+
+  The maximum payload size of a single request is **10 MiB**. Requests with a greater payload are rejected, and the API returns a 413 response code.
+
+  <br />**Timestamp field**
+
+  If there is no `timestamp` field in the request payload, the current server time is used as timestamp.
+
+  If the `timestamp` field is present and it has a **numeric** value, the time unit is assumed based on the size of the value. Nano seconds by default.
+
+  Afterwards, the field will be converted to a `Timestamp` type in nano seconds.
+
+  If the `timestamp` field is present and has a string value, attempts are made to parse it based on UNIX epoch milliseconds or seconds, RFC3339 or RFC3164 format, in this order.
+
+  If the `timestamp` has the wrong type (e.g. boolean, array) or cannot be properly parsed, it is overridden with the current server time and the original value is preserved.
+
+  <br />**Smartscape event validation**
+
+  Each event must identify an entity using exactly one of two modes:
+
+  - **Mode 1** — supply a pre-computed `id` matching `[A-Z][A-Z0-9_]*-[0-9A-F]{16}` (e.g. `HOST-0000000000000001`).
+  - **Mode 2** — supply `type` (matching `[A-Z][A-Z0-9_]*`) and `id_components` (a non-empty array of single-key objects whose values are strings). The two modes are mutually exclusive.
+
+  - Structural keys (`type`, `id`, `id_components`, `dt.security_context`, `update_lifetime`, `timestamp`, `static_edges`, `dynamic_edges`, `event.version`) are reserved.
+  - For core entity types (not `EXT_*` / `CUSTOM_*`), only `name`, `process.metadata[COMMAND_LINE_ARGS]`, and names starting with `ext.` or `custom.` are allowed.
+  - Extended entity types (`EXT_*` / `CUSTOM_*`) bypass the allowlist (structural keys still reserved).
+  - Field values must be scalar (string, number, boolean, or null) or a flat `string:string` object (both keys and values must be strings).
+
+  **Tags** — tag contexts are top-level keys with a `tags:` prefix:
+
+  - E.g. `"tags:ext.source": { "env": "production" }` defines a tag context `ext.source`.
+  - For core entity types, context names (after stripping `tags:`) must start with `ext.` or `custom.`.
+  - Extended entity types bypass this restriction.
+  - Tag property values must be scalar (string, number, boolean, or null).
+
+  **Schema versioning** — the optional `event.version` field (integer) declares which version of the smartscape event format your producer targets. Supplying it is strongly recommended: it guarantees a **stable interface** — if the format evolves under a new version, your events keep being processed exactly as before. Currently only version `1` is supported; unsupported values are rejected with a `400` response.
+
+  Invalid events are rejected with a `400` response listing every offending field.
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `openpipeline:events.smartscape:ingest`
+
+  **API token scopes:** openpipeline.events_smartscape
+}

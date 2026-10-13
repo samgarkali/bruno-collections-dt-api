@@ -1,0 +1,29 @@
+meta {
+  name: Gets the parameters of the specified event
+  type: http
+  seq: 3
+}
+
+get {
+  url: {{DT_TENANT_URL}}/api/v1/events/:eventId
+  body: none
+  auth: none
+}
+
+params:path {
+  eventId: 
+}
+
+headers {
+  Authorization: Api-Token {{DT_API_TOKEN}}
+}
+
+docs {
+  # Gets the parameters of the specified event
+
+  **Deprecated**
+
+  **Auth:** Api-Token only (OAuth not supported by this endpoint). Uses `{{DT_API_TOKEN}}`.
+
+  **API token scopes:** DataExport
+}

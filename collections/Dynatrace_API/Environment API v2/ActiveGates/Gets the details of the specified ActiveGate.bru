@@ -1,0 +1,29 @@
+meta {
+  name: Gets the details of the specified ActiveGate
+  type: http
+  seq: 2
+}
+
+get {
+  url: {{DT_TENANT_URL}}/api/v2/activeGates/:agId
+  body: none
+  auth: inherit
+}
+
+params:path {
+  agId: 
+}
+
+docs {
+  # Gets the details of the specified ActiveGate
+
+  **Deprecated**
+
+  Deprecated since version 1.343. Use DQL Smartscape nodes to query ActiveGate data instead. See https://dt-url.net/mf03894
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `environment-api:activegates:read`, `fleet-management:activegates:read`
+
+  **API token scopes:** activeGates.read
+}

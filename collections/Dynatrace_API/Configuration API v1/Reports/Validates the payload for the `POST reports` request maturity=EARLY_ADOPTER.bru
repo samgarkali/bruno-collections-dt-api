@@ -1,0 +1,43 @@
+meta {
+  name: Validates the payload for the `POST reports` request maturity=EARLY_ADOPTER
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{DT_TENANT_URL}}/api/config/v1/reports/validator
+  body: json
+  auth: none
+}
+
+headers {
+  Authorization: Api-Token {{DT_API_TOKEN}}
+}
+
+body:json {
+  {
+    "dashboardId": "8dd67562-8bf5-4a09-830d-4e0ca992abd6",
+    "enabled": "true",
+    "id": "337d883e-98c3-4dac-b8f2-1a9cdbd05969",
+    "subscriptions": {
+      "MONTH": [
+        "demo@email.com",
+        "demo2@email.com"
+      ],
+      "WEEK": [
+        "demo@email.com"
+      ]
+    },
+    "type": "DASHBOARD"
+  }
+}
+
+docs {
+  # Validates the payload for the `POST /reports` request | maturity=EARLY_ADOPTER
+
+  The body must not provide an ID.
+
+  **Auth:** Api-Token only (OAuth not supported by this endpoint). Uses `{{DT_API_TOKEN}}`.
+
+  **API token scopes:** WriteConfig
+}

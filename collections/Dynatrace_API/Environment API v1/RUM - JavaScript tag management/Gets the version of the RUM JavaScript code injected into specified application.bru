@@ -1,0 +1,25 @@
+meta {
+  name: Gets the version of the RUM JavaScript code injected into specified application
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{DT_TENANT_URL}}/api/v1/rum/appRevision/:entity
+  body: none
+  auth: inherit
+}
+
+params:path {
+  entity: 
+}
+
+docs {
+  # Gets the version of the RUM JavaScript code injected into specified application
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `environment-api:rum:read`
+
+  **API token scopes:** RumJavaScriptTagManagement
+}

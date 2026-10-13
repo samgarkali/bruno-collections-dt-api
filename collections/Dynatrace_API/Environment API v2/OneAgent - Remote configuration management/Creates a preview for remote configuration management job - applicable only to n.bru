@@ -1,0 +1,37 @@
+meta {
+  name: Creates a preview for remote configuration management job - applicable only to n
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{DT_TENANT_URL}}/api/v2/oneagents/remoteConfigurationManagement/preview
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "entities": [
+      "HOST-D454A967666E7970",
+      "HOST-811760CFF2A5E872"
+    ],
+    "operations": [
+      {
+        "attribute": "networkZone",
+        "operation": "set",
+        "value": "exampleNetworkZoneName"
+      }
+    ]
+  }
+}
+
+docs {
+  # Creates a preview for remote configuration management job - applicable only to network zone and host group
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `fleet-management:oneagents:write`
+
+  **API token scopes:** oneAgents.write
+}

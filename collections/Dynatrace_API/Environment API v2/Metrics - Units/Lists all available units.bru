@@ -1,0 +1,28 @@
+meta {
+  name: Lists all available units
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{DT_TENANT_URL}}/api/v2/units
+  body: none
+  auth: inherit
+}
+
+params:query {
+  ~unitSelector: 
+  ~fields: 
+}
+
+docs {
+  # Lists all available units
+
+  You can narrow down the output by providing filter criteria in the **unitSelector** field.
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `environment-api:metrics:read`
+
+  **API token scopes:** metrics.read
+}

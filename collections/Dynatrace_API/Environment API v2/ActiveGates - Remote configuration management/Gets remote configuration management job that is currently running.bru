@@ -1,0 +1,23 @@
+meta {
+  name: Gets remote configuration management job that is currently running
+  type: http
+  seq: 3
+}
+
+get {
+  url: {{DT_TENANT_URL}}/api/v2/activeGates/remoteConfigurationManagement/current
+  body: none
+  auth: inherit
+}
+
+docs {
+  # Gets remote configuration management job that is currently running
+
+  The currently running remote configuration management job may be related to ActiveGates or OneAgents. There is a limit of one concurrent remote configuration management job, regardless of the entity type.
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `fleet-management:activegates:read`
+
+  **API token scopes:** activeGates.read
+}

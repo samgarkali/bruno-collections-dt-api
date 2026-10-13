@@ -1,0 +1,21 @@
+meta {
+  name: Lists all request naming rules along with their parameters
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{DT_TENANT_URL}}/api/config/v1/service/requestNaming
+  body: none
+  auth: inherit
+}
+
+docs {
+  # Lists all request naming rules along with their parameters
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `settings:objects:read`
+
+  **API token scopes:** ReadConfig
+}

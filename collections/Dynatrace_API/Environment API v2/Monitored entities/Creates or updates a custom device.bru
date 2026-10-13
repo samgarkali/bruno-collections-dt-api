@@ -1,0 +1,46 @@
+meta {
+  name: Creates or updates a custom device
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{DT_TENANT_URL}}/api/v2/entities/custom
+  body: json
+  auth: inherit
+}
+
+params:query {
+  ~uiBased: 
+}
+
+body:json {
+  {
+    "configUrl": "http://coffee-machine.dynatrace.internal.com/coffeemachine/manage",
+    "customDeviceId": "customDeviceId",
+    "displayName": "coffeeMachine",
+    "dnsNames": [
+      "coffee-machine.dynatrace.internal.com"
+    ],
+    "faviconUrl": "https://www.freefavicon.com/freefavicons/food/cup-of-coffee-152-78475.png",
+    "group": "myCustomDeviceGroup",
+    "ipAddresses": [
+      "10.0.0.1"
+    ],
+    "listenPorts": [
+      80
+    ],
+    "properties": {},
+    "type": "coffee machine"
+  }
+}
+
+docs {
+  # Creates or updates a custom device
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `environment-api:entities:write`
+
+  **API token scopes:** entities.write
+}

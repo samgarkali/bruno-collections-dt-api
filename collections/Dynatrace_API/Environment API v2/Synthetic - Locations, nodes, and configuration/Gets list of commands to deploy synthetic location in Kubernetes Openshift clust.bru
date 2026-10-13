@@ -1,0 +1,29 @@
+meta {
+  name: Gets list of commands to deploy synthetic location in Kubernetes Openshift clust
+  type: http
+  seq: 5
+}
+
+get {
+  url: {{DT_TENANT_URL}}/api/v2/synthetic/locations/commands/apply
+  body: none
+  auth: inherit
+}
+
+params:query {
+  ~platform: 
+  ~namespace: 
+  ~filename: 
+  ~fipsMode: 
+  ~squidProxyConfig: 
+}
+
+docs {
+  # Gets list of commands to deploy synthetic location in Kubernetes/Openshift cluster
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `environment-api:synthetic:read`
+
+  **API token scopes:** syntheticLocations.read
+}

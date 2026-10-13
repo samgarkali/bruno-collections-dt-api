@@ -1,0 +1,29 @@
+meta {
+  name: Gets the latest process module config
+  type: http
+  seq: 9
+}
+
+get {
+  url: {{DT_TENANT_URL}}/api/v1/deployment/installer/agent/processmoduleconfig
+  body: none
+  auth: inherit
+}
+
+params:query {
+  ~revision: 
+  ~sections: 
+  ~hostgroup: 
+}
+
+docs {
+  # Gets the latest process module config
+
+  Returns the latest process module config. Passing a previously gotten revision will first do a revision check, and return a 304 response if no changes were detected.
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `environment-api:deployment:download`, `fleet-management:oneagents:download`
+
+  **API token scopes:** InstallerDownload
+}

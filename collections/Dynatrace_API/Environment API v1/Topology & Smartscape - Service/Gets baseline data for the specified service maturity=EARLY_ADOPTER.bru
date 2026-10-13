@@ -1,0 +1,29 @@
+meta {
+  name: Gets baseline data for the specified service maturity=EARLY_ADOPTER
+  type: http
+  seq: 4
+}
+
+get {
+  url: {{DT_TENANT_URL}}/api/v1/entity/services/:meIdentifier/baseline
+  body: none
+  auth: none
+}
+
+params:path {
+  meIdentifier: 
+}
+
+headers {
+  Authorization: Api-Token {{DT_API_TOKEN}}
+}
+
+docs {
+  # Gets baseline data for the specified service | maturity=EARLY_ADOPTER
+
+  **Deprecated**
+
+  **Auth:** Api-Token only (OAuth not supported by this endpoint). Uses `{{DT_API_TOKEN}}`.
+
+  **API token scopes:** DataExport
+}

@@ -1,0 +1,30 @@
+meta {
+  name: Gets the configuration schema of the specified version of the extension 2.0
+  type: http
+  seq: 31
+}
+
+get {
+  url: {{DT_TENANT_URL}}/api/v2/extensions/:extensionName/:extensionVersion/schema
+  body: none
+  auth: inherit
+}
+
+params:path {
+  extensionName: 
+  extensionVersion: 
+}
+
+docs {
+  # Gets the configuration schema of the specified version of the extension 2.0
+
+  **Deprecated**
+
+  Deprecated since version 1.342. Use the successor API `/platform/extensions/v2` instead.
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `environment-api:extensions:read`, `environment-api:extension-configurations:read`
+
+  **API token scopes:** extensions.read
+}

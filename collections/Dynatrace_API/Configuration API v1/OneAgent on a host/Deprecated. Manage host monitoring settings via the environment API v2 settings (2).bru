@@ -1,0 +1,52 @@
+meta {
+  name: Deprecated. Manage host monitoring settings via the environment API v2 settings (2)
+  type: http
+  seq: 6
+}
+
+put {
+  url: {{DT_TENANT_URL}}/api/config/v1/hosts/:id/monitoring
+  body: json
+  auth: none
+}
+
+params:path {
+  id: 
+}
+
+headers {
+  Authorization: Api-Token {{DT_API_TOKEN}}
+}
+
+body:json {
+  {
+    "autoInjectionEnabled": false,
+    "metadata": {
+      "clusterVersion": "1.192.1",
+      "configurationVersions": [
+        4,
+        2
+      ],
+      "currentConfigurationVersions": [
+        "1.0.4",
+        "1.23"
+      ]
+    },
+    "monitoringEnabled": true,
+    "monitoringMode": "FULL_STACK"
+  }
+}
+
+docs {
+  # Deprecated. Manage host monitoring settings via the environment API v2 settings endpoint with schemaIds 'builtin:host.monitoring' and 'builtin:host.monitoring.mode' instead.
+
+  **Deprecated**
+
+  Deprecated. Manage host monitoring settings via the [Settings endpoint](index.jsp?urls.primaryName=Environment%20API%20v2#/Settings%20-%20Objects) with schemaId `builtin:host.monitoring` instead.
+
+  Updates the monitoring configuration of OneAgent on the specified host. The monitoring mode of OneAgent is updated several minutes after the change of configuration.
+
+  **Auth:** Api-Token only (OAuth not supported by this endpoint). Uses `{{DT_API_TOKEN}}`.
+
+  **API token scopes:** WriteConfig
+}

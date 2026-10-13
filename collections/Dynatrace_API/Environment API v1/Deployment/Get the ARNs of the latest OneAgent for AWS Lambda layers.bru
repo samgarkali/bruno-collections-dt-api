@@ -1,0 +1,30 @@
+meta {
+  name: Get the ARNs of the latest OneAgent for AWS Lambda layers
+  type: http
+  seq: 21
+}
+
+get {
+  url: {{DT_TENANT_URL}}/api/v1/deployment/lambda/layer
+  body: none
+  auth: inherit
+}
+
+params:query {
+  ~arch: 
+  ~techtype: 
+  ~withCollector: 
+  ~region: 
+}
+
+docs {
+  # Get the ARNs of the latest OneAgent for AWS Lambda layers
+
+  Get the ARNs of the latest OneAgent for AWS Lambda layers for the .Net, GO, Java, Node.js and Python AWS Lambda runtimes. Passing architecture, technology type or region as parameter will return only the relevant layers.
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `environment-api:deployment:download`, `fleet-management:oneagents:download`
+
+  **API token scopes:** InstallerDownload
+}

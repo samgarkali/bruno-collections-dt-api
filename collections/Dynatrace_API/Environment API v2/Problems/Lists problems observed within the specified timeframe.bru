@@ -1,0 +1,36 @@
+meta {
+  name: Lists problems observed within the specified timeframe
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{DT_TENANT_URL}}/api/v2/problems
+  body: none
+  auth: inherit
+}
+
+params:query {
+  ~fields: 
+  ~nextPageKey: 
+  ~pageSize: 
+  ~from: 
+  ~to: 
+  ~problemSelector: 
+  ~entitySelector: 
+  ~sort: 
+}
+
+docs {
+  # Lists problems observed within the specified timeframe
+
+  **Deprecated**
+
+  **Deprecation notice:** This endpoint is deprecated. Use the [Grail Query API](https://dt-url.net/zb0381u) instead.
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `environment-api:problems:read`
+
+  **API token scopes:** problems.read
+}

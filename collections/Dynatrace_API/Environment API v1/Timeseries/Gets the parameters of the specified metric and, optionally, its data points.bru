@@ -1,0 +1,52 @@
+meta {
+  name: Gets the parameters of the specified metric and, optionally, its data points
+  type: http
+  seq: 2
+}
+
+get {
+  url: {{DT_TENANT_URL}}/api/v1/timeseries/:timeseriesIdentifier
+  body: none
+  auth: none
+}
+
+params:query {
+  ~includeData: 
+  ~aggregationType: 
+  ~startTimestamp: 
+  ~endTimestamp: 
+  ~predict: 
+  ~relativeTime: 
+  ~queryMode: 
+  ~entity: 
+  ~tag: 
+  ~percentile: 
+  ~includeParentIds: 
+  ~considerMaintenanceWindowsForAvailability: 
+}
+
+params:path {
+  timeseriesIdentifier: 
+}
+
+headers {
+  Authorization: Api-Token {{DT_API_TOKEN}}
+}
+
+docs {
+  # Gets the parameters of the specified metric and, optionally, its data points
+
+  **Deprecated**
+
+  To obtain data points, set **includeData** to `true`. 
+
+  You can obtain either data points or the scalar result of the specified timeseries, depending on the **queryMode**. 
+
+  To obtain data points, you must specify the timeframe, either as **relativeTime** or as a combination of **startTimestamp** and **endTimestamp**. 
+
+  You must also provide the **aggregationType**, supported by the metric.
+
+  **Auth:** Api-Token only (OAuth not supported by this endpoint). Uses `{{DT_API_TOKEN}}`.
+
+  **API token scopes:** DataExport
+}

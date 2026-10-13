@@ -1,0 +1,21 @@
+meta {
+  name: Gets a list of cluster-side detected auto-update problems that may block further
+  type: http
+  seq: 2
+}
+
+get {
+  url: {{DT_TENANT_URL}}/api/v1/oneagents/autoUpdateProblems
+  body: none
+  auth: inherit
+}
+
+docs {
+  # Gets a list of cluster-side detected auto-update problems that may block further rollout of a OneAgent version on a particular OS.
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `environment-api:oneagents:read`, `fleet-management:oneagents:read`
+
+  **API token scopes:** oneAgents.read
+}

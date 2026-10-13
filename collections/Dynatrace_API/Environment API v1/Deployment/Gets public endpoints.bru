@@ -1,0 +1,25 @@
+meta {
+  name: Gets public endpoints
+  type: http
+  seq: 26
+}
+
+get {
+  url: {{DT_TENANT_URL}}/api/v1/deployment/public/network
+  body: none
+  auth: inherit
+}
+
+docs {
+  # Gets public endpoints
+
+  **Deprecated**
+
+  Returns the addresses of public endpoints, including the tenant domain, NLB domain names, and IP addresses. Outgoing connections to these addresses should be allowed. **Deprecation notice:** This endpoint is deprecated. Use the Fleet Management API endpoint `/platform/fleet-management/v1/network-addresses`
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `environment-api:deployment:download`, `fleet-management:public-addresses:read`
+
+  **API token scopes:** InstallerDownload
+}

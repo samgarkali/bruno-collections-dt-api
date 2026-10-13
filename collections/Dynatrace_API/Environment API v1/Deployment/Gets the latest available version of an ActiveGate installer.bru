@@ -1,0 +1,33 @@
+meta {
+  name: Gets the latest available version of an ActiveGate installer
+  type: http
+  seq: 18
+}
+
+get {
+  url: {{DT_TENANT_URL}}/api/v1/deployment/installer/gateway/:osType/latest/metainfo
+  body: none
+  auth: inherit
+}
+
+params:query {
+  ~arch: 
+}
+
+params:path {
+  osType: 
+}
+
+docs {
+  # Gets the latest available version of an ActiveGate installer
+
+  **Deprecated**
+
+  Returns the configured ActiveGate target version for the tenant. If no target version is configured, the latest available version is returned. **Deprecation notice:** This endpoint is deprecated. Use the Fleet Management API endpoint `/platform/fleet-management/v1/activegate/installer/version`
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `environment-api:deployment:download`, `fleet-management:activegates:download`
+
+  **API token scopes:** InstallerDownload
+}

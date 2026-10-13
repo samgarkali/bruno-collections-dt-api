@@ -1,0 +1,76 @@
+meta {
+  name: Triggers on-demand executions for synthetic monitors
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{DT_TENANT_URL}}/api/v2/synthetic/executions/batch
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "failOnPerformanceIssue": false,
+    "failOnSslWarning": true,
+    "group": {
+      "applications": [
+        "APPLICATION-CD4BEF05FA9DD044"
+      ],
+      "services": [
+        "SERVICE-01C6C1282960638B",
+        "SERVICE-B18840B4E3115C1A"
+      ],
+      "tags": [
+        "tag-production",
+        "another-tag"
+      ]
+    },
+    "metadata": {
+      "key": "value",
+      "version": "1.255.20221022"
+    },
+    "monitors": [
+      {
+        "customizedScript": {
+          "requests": [
+            {
+              "sequenceId": "1",
+              "url": "https://www.somepage.org",
+              "validation": {
+                "rules": [
+                  {
+                    "passIfFound": "true",
+                    "type": "httpStatusesList",
+                    "value": "=201"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "executionCount": 3,
+        "locations": [
+          "SYNTHETIC_LOCATION-9BB04DAEBA71B8CA",
+          "SYNTHETIC_LOCATION-ACCA399FAA1194DD"
+        ],
+        "monitorId": "HTTP_CHECK-6349B98E1CD87352",
+        "repeatMode": "SEQUENTIAL"
+      }
+    ],
+    "processingMode": "EXECUTIONS_DETAILS_ONLY",
+    "stopOnProblem": true,
+    "takeScreenshotsOnSuccess": true
+  }
+}
+
+docs {
+  # Triggers on-demand executions for synthetic monitors
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `environment-api:synthetic-execution:write`
+
+  **API token scopes:** syntheticExecutions.write, ExternalSyntheticIntegration
+}

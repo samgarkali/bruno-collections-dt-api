@@ -1,0 +1,47 @@
+meta {
+  name: Pushes third-party synthetic events to Dynatrace
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{DT_TENANT_URL}}/api/v1/synthetic/ext/events
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "open": [
+      {
+        "eventId": "string",
+        "eventType": "testOutage",
+        "locationIds": [
+          "string"
+        ],
+        "name": "string",
+        "reason": "string",
+        "startTimestamp": 0,
+        "testId": "string"
+      }
+    ],
+    "resolved": [
+      {
+        "endTimestamp": 0,
+        "eventId": "string",
+        "testId": "string"
+      }
+    ],
+    "syntheticEngineName": "string"
+  }
+}
+
+docs {
+  # Pushes third-party synthetic events to Dynatrace
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `environment-api:synthetic-third-party-monitors:write`
+
+  **API token scopes:** ExternalSyntheticIntegration
+}

@@ -1,0 +1,78 @@
+meta {
+  name: Validates the payload for the `POST anomalyDetection metricEvents` request
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{DT_TENANT_URL}}/api/config/v1/anomalyDetection/metricEvents/validator
+  body: json
+  auth: none
+}
+
+headers {
+  Authorization: Api-Token {{DT_API_TOKEN}}
+}
+
+body:json {
+  {
+    "aggregationType": "AVG",
+    "alertingScope": [
+      {
+        "entityId": "HOST-000000000001E240",
+        "filterType": "ENTITY_ID"
+      },
+      {
+        "filterType": "TAG",
+        "tagFilter": {
+          "context": "CONTEXTLESS",
+          "key": "someKey",
+          "value": "someValue"
+        }
+      }
+    ],
+    "description": "This is the description for my metric event.",
+    "disabledReason": "NONE",
+    "enabled": true,
+    "metadata": {
+      "clusterVersion": "Mock version",
+      "configurationVersions": [
+        4,
+        2
+      ]
+    },
+    "metricDimensions": [
+      {
+        "filterType": "ENTITY",
+        "key": "dt.entity.disk",
+        "nameFilter": {
+          "operator": "EQUALS",
+          "value": "diskName"
+        }
+      }
+    ],
+    "metricId": "com.dynatrace.builtin:host.disk.bytesread",
+    "monitoringStrategy": {
+      "alertCondition": "ABOVE",
+      "dealertingSamples": 5,
+      "samples": 5,
+      "threshold": 80,
+      "type": "STATIC_THRESHOLD",
+      "unit": "KILO_BYTE_PER_SECOND",
+      "violatingSamples": 3
+    },
+    "name": "My metric event",
+    "severity": "CUSTOM_ALERT",
+    "warningReason": "NONE"
+  }
+}
+
+docs {
+  # Validates the payload for the `POST /anomalyDetection/metricEvents` request
+
+  **Deprecated**
+
+  **Auth:** Api-Token only (OAuth not supported by this endpoint). Uses `{{DT_API_TOKEN}}`.
+
+  **API token scopes:** WriteConfig
+}

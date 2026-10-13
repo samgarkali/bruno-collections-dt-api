@@ -1,0 +1,27 @@
+meta {
+  name: Lists all existing network zones
+  type: http
+  seq: 3
+}
+
+get {
+  url: {{DT_TENANT_URL}}/api/v2/networkZones
+  body: none
+  auth: inherit
+}
+
+docs {
+  # Lists all existing network zones
+
+  **Deprecated**
+
+  Lists all existing network zones
+
+  **Deprecation notice:** This endpoint is deprecated. Use the Settings API endpoint `/api/v2/settings/objects` with schema `builtin:networkzones.zones` to list network zones.
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `environment-api:network-zones:read`, `fleet-management:network-zones:read`
+
+  **API token scopes:** networkZones.read
+}

@@ -1,0 +1,33 @@
+meta {
+  name: Retrieves details of a specified Java process discovered in the environment for (2)
+  type: http
+  seq: 6
+}
+
+get {
+  url: {{DT_TENANT_URL}}/api/v2/extensions/discovery/pmi/processes/:process-id
+  body: none
+  auth: inherit
+}
+
+params:query {
+  ~hostId: 
+}
+
+params:path {
+  process-id: 
+}
+
+docs {
+  # Retrieves details of a specified Java process discovered in the environment for PMI metric collection. | maturity=EARLY_ADOPTER
+
+  **Deprecated**
+
+  Deprecated since version 1.342. Use the successor API `/platform/extensions/v2` instead.
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `extensions:discovery.pmi:read`
+
+  **API token scopes:** extensionDiscoveryPmi.read
+}

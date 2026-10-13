@@ -1,0 +1,36 @@
+meta {
+  name: Updates the specified monitoring configuration
+  type: http
+  seq: 23
+}
+
+put {
+  url: {{DT_TENANT_URL}}/api/v2/extensions/:extensionName/monitoringConfigurations/:configurationId
+  body: json
+  auth: inherit
+}
+
+params:path {
+  extensionName: 
+  configurationId: 
+}
+
+body:json {
+  {
+    "value": {}
+  }
+}
+
+docs {
+  # Updates the specified monitoring configuration
+
+  **Deprecated**
+
+  Deprecated since version 1.342. Use the successor API `/platform/extensions/v2` instead.
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `environment-api:extension-configurations:write`
+
+  **API token scopes:** extensionConfigurations.write
+}

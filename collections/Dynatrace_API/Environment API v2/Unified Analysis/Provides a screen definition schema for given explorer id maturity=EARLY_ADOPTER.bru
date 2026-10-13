@@ -1,0 +1,25 @@
+meta {
+  name: Provides a screen definition schema for given explorer id maturity=EARLY_ADOPTER
+  type: http
+  seq: 6
+}
+
+get {
+  url: {{DT_TENANT_URL}}/api/v2/ua/schema/invex/:explorerId
+  body: none
+  auth: inherit
+}
+
+params:path {
+  explorerId: 
+}
+
+docs {
+  # Provides a screen definition schema for given explorer id | maturity=EARLY_ADOPTER
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `unified-analysis:screen-definition:read`
+
+  **API token scopes:** unifiedAnalysis.read
+}

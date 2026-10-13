@@ -1,0 +1,30 @@
+meta {
+  name: Deletes the specified version of the extension 2.0
+  type: http
+  seq: 29
+}
+
+delete {
+  url: {{DT_TENANT_URL}}/api/v2/extensions/:extensionName/:extensionVersion
+  body: none
+  auth: inherit
+}
+
+params:path {
+  extensionName: 
+  extensionVersion: 
+}
+
+docs {
+  # Deletes the specified version of the extension 2.0
+
+  **Deprecated**
+
+  Deprecated since version 1.342. Use the successor API `/platform/extensions/v2` instead.
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `environment-api:extensions:write`
+
+  **API token scopes:** extensions.write
+}

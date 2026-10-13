@@ -1,0 +1,31 @@
+meta {
+  name: Un-mutes several security problems
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{DT_TENANT_URL}}/api/v2/securityProblems/unmute
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "comment": "string",
+    "reason": "AFFECTED",
+    "securityProblemIds": [
+      "string"
+    ]
+  }
+}
+
+docs {
+  # Un-mutes several security problems
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `environment-api:security-problems:write`
+
+  **API token scopes:** securityProblems.write
+}

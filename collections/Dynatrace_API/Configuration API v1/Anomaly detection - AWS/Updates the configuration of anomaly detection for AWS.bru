@@ -1,0 +1,86 @@
+meta {
+  name: Updates the configuration of anomaly detection for AWS
+  type: http
+  seq: 2
+}
+
+put {
+  url: {{DT_TENANT_URL}}/api/config/v1/anomalyDetection/aws
+  body: json
+  auth: none
+}
+
+headers {
+  Authorization: Api-Token {{DT_API_TOKEN}}
+}
+
+body:json {
+  {
+    "ec2CandidateCpuSaturationDetection": {
+      "customThresholds": {
+        "cpuUsagePercentage": 98
+      },
+      "enabled": true
+    },
+    "elbHighConnectionErrorsDetection": {
+      "customThresholds": {
+        "connectionErrorsPerMinute": 4
+      },
+      "enabled": true
+    },
+    "lambdaHighErrorRateDetection": {
+      "customThresholds": {
+        "failedInvocationsRate": 2
+      },
+      "enabled": true
+    },
+    "metadata": {
+      "clusterVersion": "Mock version",
+      "configurationVersions": [
+        4,
+        2
+      ]
+    },
+    "rdsHighCpuDetection": {
+      "customThresholds": {
+        "cpuUsagePercentage": 99
+      },
+      "enabled": true
+    },
+    "rdsHighMemoryDetection": {
+      "customThresholds": {
+        "freeMemory": 96.99,
+        "swapUsage": 5.5
+      },
+      "enabled": true
+    },
+    "rdsHighWriteReadLatencyDetection": {
+      "customThresholds": {
+        "writeReadLatency": 800
+      },
+      "enabled": true
+    },
+    "rdsLowStorageDetection": {
+      "customThresholds": {
+        "freeStoragePercentage": 7
+      },
+      "enabled": true
+    },
+    "rdsRestartsSequenceDetection": {
+      "customThresholds": {
+        "restartsPerMinute": 3
+      },
+      "enabled": true
+    }
+  }
+}
+
+docs {
+  # Updates the configuration of anomaly detection for AWS
+
+  **Deprecated**
+
+  **Auth:** Api-Token only (OAuth not supported by this endpoint). Uses `{{DT_API_TOKEN}}`.
+
+  **API token scopes:** WriteConfig
+}

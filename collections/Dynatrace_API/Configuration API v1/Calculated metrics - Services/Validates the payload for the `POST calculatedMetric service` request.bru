@@ -1,0 +1,67 @@
+meta {
+  name: Validates the payload for the `POST calculatedMetric service` request
+  type: http
+  seq: 5
+}
+
+post {
+  url: {{DT_TENANT_URL}}/api/config/v1/calculatedMetrics/service/validator
+  body: json
+  auth: none
+}
+
+headers {
+  Authorization: Api-Token {{DT_API_TOKEN}}
+}
+
+body:json {
+  {
+    "conditions": [
+      {
+        "attribute": "WEBREQUEST_URL_PATH",
+        "comparisonInfo": {
+          "caseSensitive": false,
+          "comparison": "BEGINS_WITH",
+          "negate": false,
+          "type": "STRING",
+          "value": "/url_path"
+        }
+      }
+    ],
+    "dimensionDefinition": {
+      "dimension": "{myPlaceholder}",
+      "name": "my dimension",
+      "placeholders": [
+        {
+          "attribute": "WEBREQUEST_URL_PATH",
+          "delimiterOrRegex": "/booking",
+          "kind": "BEFORE_DELIMITER",
+          "name": "myPlaceholder",
+          "normalization": "ORIGINAL",
+          "useFromChildCalls": "false"
+        }
+      ],
+      "topX": 10,
+      "topXAggregation": "AVERAGE",
+      "topXDirection": "DESCENDING"
+    },
+    "enabled": true,
+    "managementZones": [
+      "zone1"
+    ],
+    "metricDefinition": {
+      "metric": "CPU_TIME"
+    },
+    "name": "My Metric",
+    "tsmMetricKey": "calc:service.mymetric",
+    "unit": "MICRO_SECOND"
+  }
+}
+
+docs {
+  # Validates the payload for the `POST /calculatedMetric/service` request
+
+  **Auth:** Api-Token only (OAuth not supported by this endpoint). Uses `{{DT_API_TOKEN}}`.
+
+  **API token scopes:** WriteConfig
+}

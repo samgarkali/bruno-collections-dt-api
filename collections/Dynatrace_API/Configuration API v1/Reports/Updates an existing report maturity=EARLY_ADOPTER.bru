@@ -1,0 +1,47 @@
+meta {
+  name: Updates an existing report maturity=EARLY_ADOPTER
+  type: http
+  seq: 5
+}
+
+put {
+  url: {{DT_TENANT_URL}}/api/config/v1/reports/:id
+  body: json
+  auth: none
+}
+
+params:path {
+  id: 
+}
+
+headers {
+  Authorization: Api-Token {{DT_API_TOKEN}}
+}
+
+body:json {
+  {
+    "dashboardId": "8dd67562-8bf5-4a09-830d-4e0ca992abd6",
+    "enabled": "true",
+    "id": "337d883e-98c3-4dac-b8f2-1a9cdbd05969",
+    "subscriptions": {
+      "MONTH": [
+        "demo@email.com",
+        "demo2@email.com"
+      ],
+      "WEEK": [
+        "demo@email.com"
+      ]
+    },
+    "type": "DASHBOARD"
+  }
+}
+
+docs {
+  # Updates an existing report | maturity=EARLY_ADOPTER
+
+  If a report with the specified ID doesn't exist, a new report is created.
+
+  **Auth:** Api-Token only (OAuth not supported by this endpoint). Uses `{{DT_API_TOKEN}}`.
+
+  **API token scopes:** WriteConfig
+}

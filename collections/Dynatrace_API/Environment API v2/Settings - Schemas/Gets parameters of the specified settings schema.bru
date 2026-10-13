@@ -1,0 +1,29 @@
+meta {
+  name: Gets parameters of the specified settings schema
+  type: http
+  seq: 2
+}
+
+get {
+  url: {{DT_TENANT_URL}}/api/v2/settings/schemas/:schemaId
+  body: none
+  auth: inherit
+}
+
+params:query {
+  ~schemaVersion: 
+}
+
+params:path {
+  schemaId: 
+}
+
+docs {
+  # Gets parameters of the specified settings schema
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `settings:schemas:read`
+
+  **API token scopes:** settings.read
+}

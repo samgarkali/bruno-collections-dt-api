@@ -1,0 +1,33 @@
+meta {
+  name: Updates the specified calculated metric for a mobile or custom app
+  type: http
+  seq: 5
+}
+
+put {
+  url: {{DT_TENANT_URL}}/api/config/v1/calculatedMetrics/mobile/:metricKey
+  body: json
+  auth: none
+}
+
+params:path {
+  metricKey: 
+}
+
+headers {
+  Authorization: Api-Token {{DT_API_TOKEN}}
+}
+
+body:json {
+  {
+    "enabled": false
+  }
+}
+
+docs {
+  # Updates the specified calculated metric for a mobile or custom app
+
+  **Auth:** Api-Token only (OAuth not supported by this endpoint). Uses `{{DT_API_TOKEN}}`.
+
+  **API token scopes:** WriteConfig
+}

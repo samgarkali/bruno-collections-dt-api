@@ -1,0 +1,59 @@
+meta {
+  name: Updates the configuration of error rules in the specified application
+  type: http
+  seq: 18
+}
+
+put {
+  url: {{DT_TENANT_URL}}/api/config/v1/applications/web/:id/errorRules
+  body: json
+  auth: none
+}
+
+params:path {
+  id: 
+}
+
+headers {
+  Authorization: Api-Token {{DT_API_TOKEN}}
+}
+
+body:json {
+  {
+    "customErrorRules": [
+      {
+        "capture": false,
+        "customAlerting": false,
+        "impactApdex": false,
+        "keyMatcher": "BEGINS_WITH",
+        "keyPattern": "string",
+        "valueMatcher": "BEGINS_WITH",
+        "valuePattern": "string"
+      }
+    ],
+    "httpErrorRules": [
+      {
+        "capture": false,
+        "considerBlockedRequests": false,
+        "considerForAi": false,
+        "considerUnknownErrorCode": false,
+        "errorCodes": "400",
+        "filter": "BEGINS_WITH",
+        "filterByUrl": false,
+        "impactApdex": false,
+        "url": "string"
+      }
+    ],
+    "ignoreCustomErrorsInApdexCalculation": false,
+    "ignoreHttpErrorsInApdexCalculation": false,
+    "ignoreJavaScriptErrorsInApdexCalculation": false
+  }
+}
+
+docs {
+  # Updates the configuration of error rules in the specified application
+
+  **Auth:** Api-Token only (OAuth not supported by this endpoint). Uses `{{DT_API_TOKEN}}`.
+
+  **API token scopes:** WriteConfig
+}

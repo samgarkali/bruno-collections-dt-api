@@ -1,0 +1,27 @@
+meta {
+  name: Validates a ZIP extension file for `POST extensions` request maturity=EARLY_ADOP
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{DT_TENANT_URL}}/api/config/v1/extensions/validator
+  body: none
+  auth: none
+}
+
+params:query {
+  ~jsonOnly: 
+}
+
+headers {
+  Authorization: Api-Token {{DT_API_TOKEN}}
+}
+
+docs {
+  # Validates a ZIP extension file for `POST/extensions` request | maturity=EARLY_ADOPTER
+
+  **Auth:** Api-Token only (OAuth not supported by this endpoint). Uses `{{DT_API_TOKEN}}`.
+
+  **API token scopes:** WriteConfig
+}

@@ -1,0 +1,25 @@
+meta {
+  name: Gets the parameters of the specified request naming rule
+  type: http
+  seq: 5
+}
+
+get {
+  url: {{DT_TENANT_URL}}/api/config/v1/service/requestNaming/:id
+  body: none
+  auth: inherit
+}
+
+params:path {
+  id: 
+}
+
+docs {
+  # Gets the parameters of the specified request naming rule
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `settings:objects:read`
+
+  **API token scopes:** ReadConfig
+}

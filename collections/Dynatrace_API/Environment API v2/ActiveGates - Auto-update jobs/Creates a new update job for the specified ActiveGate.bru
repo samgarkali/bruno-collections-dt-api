@@ -1,0 +1,31 @@
+meta {
+  name: Creates a new update job for the specified ActiveGate
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{DT_TENANT_URL}}/api/v2/activeGates/:agId/updateJobs
+  body: json
+  auth: inherit
+}
+
+params:path {
+  agId: 
+}
+
+body:json {
+  {
+    "targetVersion": "1.190.0.20200301-130000"
+  }
+}
+
+docs {
+  # Creates a new update job for the specified ActiveGate
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `environment-api:activegates:write`, `fleet-management:activegates:write`
+
+  **API token scopes:** activeGates.write
+}

@@ -1,0 +1,53 @@
+meta {
+  name: Updates the specified application detection rule
+  type: http
+  seq: 6
+}
+
+put {
+  url: {{DT_TENANT_URL}}/api/config/v1/applicationDetectionRules/:id
+  body: json
+  auth: none
+}
+
+params:path {
+  id: 
+}
+
+headers {
+  Authorization: Api-Token {{DT_API_TOKEN}}
+}
+
+body:json {
+  {
+    "applicationIdentifier": "APPLICATION-123456",
+    "filterConfig": {
+      "applicationMatchTarget": "DOMAIN",
+      "applicationMatchType": "EQUALS",
+      "pattern": "myapp.example.com"
+    },
+    "id": "12345678-abcd-1234-abcd-1234567890ab",
+    "metadata": {
+      "clusterVersion": "Mock version",
+      "configurationVersions": [
+        4,
+        2
+      ]
+    },
+    "name": "uniqueName"
+  }
+}
+
+docs {
+  # Updates the specified application detection rule
+
+  **Deprecated**
+
+  If the application detection rule with the specified ID doesn't exist, a new application is created and appended to the end of the rule list. 
+
+  If the **order** parameter is set for an existing rule, the request uses this value. Otherwise it keeps the existing order of rules.
+
+  **Auth:** Api-Token only (OAuth not supported by this endpoint). Uses `{{DT_API_TOKEN}}`.
+
+  **API token scopes:** WriteConfig
+}

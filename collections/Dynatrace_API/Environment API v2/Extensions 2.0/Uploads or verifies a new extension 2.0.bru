@@ -1,0 +1,29 @@
+meta {
+  name: Uploads or verifies a new extension 2.0
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{DT_TENANT_URL}}/api/v2/extensions
+  body: none
+  auth: inherit
+}
+
+params:query {
+  ~validateOnly: 
+}
+
+docs {
+  # Uploads or verifies a new extension 2.0
+
+  **Deprecated**
+
+  Deprecated since version 1.342. Use the successor API `/platform/extensions/v2` instead.
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `environment-api:extensions:write`
+
+  **API token scopes:** extensions.write
+}

@@ -1,0 +1,27 @@
+meta {
+  name: Lists all synthetic locations (both public and private) available for your envir
+  type: http
+  seq: 3
+}
+
+get {
+  url: {{DT_TENANT_URL}}/api/v2/synthetic/locations
+  body: none
+  auth: inherit
+}
+
+params:query {
+  ~cloudPlatform: 
+  ~type: 
+  ~capability: 
+}
+
+docs {
+  # Lists all synthetic locations (both public and private) available for your environment
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `environment-api:synthetic:read`
+
+  **API token scopes:** syntheticLocations.read
+}

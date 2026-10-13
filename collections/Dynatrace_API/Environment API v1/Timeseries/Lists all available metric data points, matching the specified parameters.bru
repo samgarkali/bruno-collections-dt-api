@@ -1,0 +1,51 @@
+meta {
+  name: Lists all available metric data points, matching the specified parameters
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{DT_TENANT_URL}}/api/v1/timeseries/:timeseriesIdentifier
+  body: json
+  auth: none
+}
+
+params:path {
+  timeseriesIdentifier: 
+}
+
+headers {
+  Authorization: Api-Token {{DT_API_TOKEN}}
+}
+
+body:json {
+  {
+    "aggregationType": "AVG",
+    "considerMaintenanceWindowsForAvailability": "false",
+    "endTimestamp": 1521542929000,
+    "entities": [
+      "HOST-0000000000000007"
+    ],
+    "includeParentIds": "false",
+    "predict": true,
+    "queryMode": "SERIES",
+    "relativeTime": "HOUR",
+    "startTimestamp": 1521042929000,
+    "tags": [
+      "office-linz"
+    ],
+    "timeseriesId": "com.dynatrace.builtin:host.cpu.idle"
+  }
+}
+
+docs {
+  # Lists all available metric data points, matching the specified parameters
+
+  **Deprecated**
+
+  Provides advanced filtering possibilities, comparing to the `GET /timeseries/{metricIdentifier}` request.
+
+  **Auth:** Api-Token only (OAuth not supported by this endpoint). Uses `{{DT_API_TOKEN}}`.
+
+  **API token scopes:** DataExport
+}

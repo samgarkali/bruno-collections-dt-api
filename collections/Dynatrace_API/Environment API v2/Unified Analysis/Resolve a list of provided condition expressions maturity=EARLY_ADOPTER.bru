@@ -1,0 +1,21 @@
+meta {
+  name: Resolve a list of provided condition expressions maturity=EARLY_ADOPTER
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{DT_TENANT_URL}}/api/v2/ua/conditions
+  body: none
+  auth: inherit
+}
+
+docs {
+  # Resolve a list of provided condition expressions | maturity=EARLY_ADOPTER
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `unified-analysis:screen-definition:read`
+
+  **API token scopes:** unifiedAnalysis.read
+}

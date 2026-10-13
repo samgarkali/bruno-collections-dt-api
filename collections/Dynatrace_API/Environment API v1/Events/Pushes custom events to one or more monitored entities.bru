@@ -1,0 +1,71 @@
+meta {
+  name: Pushes custom events to one or more monitored entities
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{DT_TENANT_URL}}/api/v1/events
+  body: json
+  auth: none
+}
+
+headers {
+  Authorization: Api-Token {{DT_API_TOKEN}}
+}
+
+body:json {
+  {
+    "annotationDescription": "The coffee machine is broken",
+    "annotationType": "defect",
+    "attachRules": {
+      "entityIds": [
+        "CUSTOM_DEVICE-0000000000000007"
+      ],
+      "tagRule": [
+        {
+          "meTypes": [
+            "HOST"
+          ],
+          "tags": [
+            {
+              "context": "CONTEXTLESS",
+              "key": "customTag"
+            }
+          ]
+        }
+      ]
+    },
+    "end": 1521542929000,
+    "eventType": "CUSTOM_ANNOTATION",
+    "source": "OpsControl",
+    "start": 1521042929000
+  }
+}
+
+docs {
+  # Pushes custom events to one or more monitored entities
+
+  **Deprecated**
+
+  You can use this endpoint to: 
+
+  * Push information-only events from third-party systems such as CI platforms (Jenkins, Bamboo, Electric Cloud, etc.) to provide additional information for Dynatrace automated root cause analysis. The time of event closure is already known and the event IDs are returned instantly. You can report these events for up to **30 days** into the past. The information-only event types are: 
+  `CUSTOM_ANNOTATION` 
+   `CUSTOM_CONFIGURATION` 
+   `CUSTOM_DEPLOYMENT` 
+   `CUSTOM_INFO` 
+   `MARKED_FOR_TERMINATION` 
+
+  * Push problem-opening events (for example, an error rate increase) to trigger the Dynatrace automated root cause analysis engine.  Correlation IDs are returned instead of event IDs. These events stay open until the specified timeout expires. To prevent expiration, you can refresh these events by sending the same payload again. You can report these events for up to **60 minutes** into the past. The problem-opening event types are (sorted by severity level, descending): 
+  `AVAILABILITY_EVENT` 
+   `ERROR_EVENT` 
+   `PERFORMANCE_EVENT` 
+   `RESOURCE_CONTENTION` 
+
+  The actual set of event parameters depends on the type of your event. To find the parameters mapping, see [POST an event](https://dt-url.net/1v63r77) in Dynatrace Documentation.
+
+  **Auth:** Api-Token only (OAuth not supported by this endpoint). Uses `{{DT_API_TOKEN}}`.
+
+  **API token scopes:** DataExport
+}

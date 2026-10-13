@@ -1,0 +1,25 @@
+meta {
+  name: Deletes a synthetic monitor definition for the given monitor ID. maturity=EARLY_
+  type: http
+  seq: 5
+}
+
+delete {
+  url: {{DT_TENANT_URL}}/api/v2/synthetic/monitors/:monitorId
+  body: none
+  auth: inherit
+}
+
+params:path {
+  monitorId: 
+}
+
+docs {
+  # Deletes a synthetic monitor definition for the given monitor ID. | maturity=EARLY_ADOPTER
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `environment-api:synthetic-monitors:write`
+
+  **API token scopes:** settings.write
+}

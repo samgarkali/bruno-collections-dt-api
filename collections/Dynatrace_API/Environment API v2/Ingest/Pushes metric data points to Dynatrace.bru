@@ -1,0 +1,24 @@
+meta {
+  name: Pushes metric data points to Dynatrace
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{DT_TENANT_URL}}/api/v2/metrics/ingest
+  body: text
+  auth: inherit
+}
+
+body:text {
+}
+
+docs {
+  # Pushes metric data points to Dynatrace
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `storage:metrics:write`, `openpipeline:metrics:ingest`
+
+  **API token scopes:** metrics.ingest
+}

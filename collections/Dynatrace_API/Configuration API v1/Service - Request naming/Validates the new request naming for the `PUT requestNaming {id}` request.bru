@@ -1,0 +1,46 @@
+meta {
+  name: Validates the new request naming for the `PUT requestNaming {id}` request
+  type: http
+  seq: 8
+}
+
+post {
+  url: {{DT_TENANT_URL}}/api/config/v1/service/requestNaming/:id/validator
+  body: json
+  auth: inherit
+}
+
+params:path {
+  id: 
+}
+
+body:json {
+  {
+    "conditions": [
+      {
+        "attribute": "WEBREQUEST_URL_PATH",
+        "comparisonInfo": {
+          "caseSensitive": false,
+          "comparison": "BEGINS_WITH",
+          "negate": false,
+          "type": "STRING",
+          "value": "/url"
+        }
+      }
+    ],
+    "enabled": true,
+    "namingPattern": "renamed request"
+  }
+}
+
+docs {
+  # Validates the new request naming for the `PUT /requestNaming/{id}` request
+
+  If the rule with the specified ID doesn't exist, a new rule will be created at the end of the rules list and will be the last to evaluate.
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `settings:objects:write`
+
+  **API token scopes:** WriteConfig
+}

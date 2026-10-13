@@ -1,0 +1,31 @@
+meta {
+  name: Deletes the symbol file belonging to the specified app, OS, and an app version
+  type: http
+  seq: 9
+}
+
+delete {
+  url: {{DT_TENANT_URL}}/api/config/v1/symfiles/:applicationId/:packageName/:os/:versionCode/:versionName
+  body: none
+  auth: none
+}
+
+params:path {
+  applicationId: 
+  packageName: 
+  os: 
+  versionCode: 
+  versionName: 
+}
+
+headers {
+  Authorization: Api-Token {{DT_API_TOKEN}}
+}
+
+docs {
+  # Deletes the symbol file belonging to the specified app, OS, and an app version
+
+  **Auth:** Api-Token only (OAuth not supported by this endpoint). Uses `{{DT_API_TOKEN}}`.
+
+  **API token scopes:** DssFileManagement
+}

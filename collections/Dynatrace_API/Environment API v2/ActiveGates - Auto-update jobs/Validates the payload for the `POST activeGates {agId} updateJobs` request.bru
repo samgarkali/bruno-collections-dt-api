@@ -1,0 +1,31 @@
+meta {
+  name: Validates the payload for the `POST activeGates {agId} updateJobs` request
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{DT_TENANT_URL}}/api/v2/activeGates/:agId/updateJobs/validator
+  body: json
+  auth: inherit
+}
+
+params:path {
+  agId: 
+}
+
+body:json {
+  {
+    "targetVersion": "1.190.0.20200301-130000"
+  }
+}
+
+docs {
+  # Validates the payload for the `POST /activeGates/{agId}/updateJobs` request.
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `environment-api:activegates:write`, `fleet-management:activegates:write`
+
+  **API token scopes:** activeGates.write
+}

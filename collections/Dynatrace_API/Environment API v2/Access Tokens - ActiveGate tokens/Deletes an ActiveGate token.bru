@@ -1,0 +1,25 @@
+meta {
+  name: Deletes an ActiveGate token
+  type: http
+  seq: 4
+}
+
+delete {
+  url: {{DT_TENANT_URL}}/api/v2/activeGateTokens/:activeGateTokenIdentifier
+  body: none
+  auth: inherit
+}
+
+params:path {
+  activeGateTokenIdentifier: 
+}
+
+docs {
+  # Deletes an ActiveGate token
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `environment-api:activegate-tokens:write`, `fleet-management:activegate.tokens:write`
+
+  **API token scopes:** activeGateTokenManagement.write
+}

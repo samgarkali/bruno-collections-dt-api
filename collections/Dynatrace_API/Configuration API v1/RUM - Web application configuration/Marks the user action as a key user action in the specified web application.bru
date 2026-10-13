@@ -1,0 +1,35 @@
+meta {
+  name: Marks the user action as a key user action in the specified web application
+  type: http
+  seq: 20
+}
+
+post {
+  url: {{DT_TENANT_URL}}/api/config/v1/applications/web/:id/keyUserActions
+  body: json
+  auth: none
+}
+
+params:path {
+  id: 
+}
+
+headers {
+  Authorization: Api-Token {{DT_API_TOKEN}}
+}
+
+body:json {
+  {
+    "actionType": "Load",
+    "domain": "test.com",
+    "name": "Loading of page /example"
+  }
+}
+
+docs {
+  # Marks the user action as a key user action in the specified web application
+
+  **Auth:** Api-Token only (OAuth not supported by this endpoint). Uses `{{DT_API_TOKEN}}`.
+
+  **API token scopes:** WriteConfig
+}

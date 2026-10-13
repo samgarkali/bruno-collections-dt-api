@@ -1,0 +1,27 @@
+meta {
+  name: Deletes an API token
+  type: http
+  seq: 6
+}
+
+delete {
+  url: {{DT_TENANT_URL}}/api/v2/apiTokens/:id
+  body: none
+  auth: inherit
+}
+
+params:path {
+  id: 
+}
+
+docs {
+  # Deletes an API token
+
+  **Deprecated**
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `environment-api:api-tokens:write`, `api-tokens:tokens:write`
+
+  **API token scopes:** apiTokens.write
+}

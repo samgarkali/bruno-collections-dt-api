@@ -1,0 +1,38 @@
+meta {
+  name: Lists effective settings values
+  type: http
+  seq: 2
+}
+
+get {
+  url: {{DT_TENANT_URL}}/api/v2/settings/effectiveValues
+  body: none
+  auth: inherit
+}
+
+params:query {
+  ~schemaIds: 
+  ~scope: 
+  ~fields: 
+  ~nextPageKey: 
+  ~pageSize: 
+  ~adminAccess: 
+}
+
+docs {
+  # Lists effective settings values
+
+  Lists effective settings values for selected schemas at a selected scope (or entity). This operation evaluates the hierarchy of persisted objects (see [/settings/objects](#/Settings%20-%20Objects/getSettingsObjects))
+
+  It will always return a result for a schema/scope combination, even if the schema would not be relevant to the given scope/entity.
+
+  If no object along the hierarchy is persisted, the default value as defined in the schema will be returned.
+
+  **Deprecation notice:** The ability to query values of any schema by leaving out the `schemaIds` parameter in the first-page query is deprecated and will eventually be removed.
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `settings:objects:read`
+
+  **API token scopes:** settings.read
+}

@@ -1,0 +1,27 @@
+meta {
+  name: Gets metadata of an ActiveGate token
+  type: http
+  seq: 3
+}
+
+get {
+  url: {{DT_TENANT_URL}}/api/v2/activeGateTokens/:activeGateTokenIdentifier
+  body: none
+  auth: inherit
+}
+
+params:path {
+  activeGateTokenIdentifier: 
+}
+
+docs {
+  # Gets metadata of an ActiveGate token
+
+  The token secret is **not** exposed.
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `environment-api:activegate-tokens:read`, `fleet-management:activegate.tokens:read`
+
+  **API token scopes:** activeGateTokenManagement.read
+}

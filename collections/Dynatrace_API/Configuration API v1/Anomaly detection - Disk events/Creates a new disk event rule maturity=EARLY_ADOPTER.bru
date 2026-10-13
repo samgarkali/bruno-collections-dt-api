@@ -1,0 +1,61 @@
+meta {
+  name: Creates a new disk event rule maturity=EARLY_ADOPTER
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{DT_TENANT_URL}}/api/config/v1/anomalyDetection/diskEvents
+  body: json
+  auth: none
+}
+
+headers {
+  Authorization: Api-Token {{DT_API_TOKEN}}
+}
+
+body:json {
+  {
+    "diskNameFilter": {
+      "operator": "CONTAINS",
+      "value": "string"
+    },
+    "enabled": false,
+    "hostGroupId": "string",
+    "metadata": {
+      "clusterVersion": "1.192.1",
+      "configurationVersions": [
+        4,
+        2
+      ],
+      "currentConfigurationVersions": [
+        "1.0.4",
+        "1.23"
+      ]
+    },
+    "metric": "LOW_DISK_SPACE",
+    "name": "string",
+    "samples": 10,
+    "tagFilters": [
+      {
+        "context": "AWS",
+        "key": "string",
+        "value": "string"
+      }
+    ],
+    "threshold": 0,
+    "violatingSamples": 8
+  }
+}
+
+docs {
+  # Creates a new disk event rule | maturity=EARLY_ADOPTER
+
+  **Deprecated**
+
+  The body must not provide an ID. An ID is assigned automatically by the Dynatrace server.
+
+  **Auth:** Api-Token only (OAuth not supported by this endpoint). Uses `{{DT_API_TOKEN}}`.
+
+  **API token scopes:** WriteConfig
+}

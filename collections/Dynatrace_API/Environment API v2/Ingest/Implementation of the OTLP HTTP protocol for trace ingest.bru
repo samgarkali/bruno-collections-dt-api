@@ -1,0 +1,23 @@
+meta {
+  name: Implementation of the OTLP HTTP protocol for trace ingest
+  type: http
+  seq: 6
+}
+
+post {
+  url: {{DT_TENANT_URL}}/api/v2/otlp/v1/traces
+  body: none
+  auth: inherit
+}
+
+docs {
+  # Implementation of the OTLP/HTTP protocol for trace ingest.
+
+  This endpoint can be targeted by OpenTelemetry trace exporters.
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `openpipeline:traces:ingest`
+
+  **API token scopes:** openTelemetryTrace.ingest
+}

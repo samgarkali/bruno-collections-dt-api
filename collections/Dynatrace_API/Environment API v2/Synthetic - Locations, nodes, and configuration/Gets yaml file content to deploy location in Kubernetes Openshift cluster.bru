@@ -1,0 +1,33 @@
+meta {
+  name: Gets yaml file content to deploy location in Kubernetes Openshift cluster
+  type: http
+  seq: 15
+}
+
+get {
+  url: {{DT_TENANT_URL}}/api/v2/synthetic/locations/:locationId/yaml
+  body: none
+  auth: inherit
+}
+
+params:query {
+  ~activeGateName: 
+  ~namespace: 
+  ~customRegistry: 
+  ~tagVersionActiveGate: 
+  ~tagVersionSynthetic: 
+}
+
+params:path {
+  locationId: 
+}
+
+docs {
+  # Gets yaml file content to deploy location in Kubernetes/Openshift cluster
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `environment-api:synthetic:read`
+
+  **API token scopes:** syntheticLocations.read
+}

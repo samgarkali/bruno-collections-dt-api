@@ -1,0 +1,55 @@
+meta {
+  name: Creates a new failure detection parameter set maturity=EARLY_ADOPTER
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{DT_TENANT_URL}}/api/config/v1/service/failureDetection/parameterSelection/parameterSets
+  body: json
+  auth: none
+}
+
+headers {
+  Authorization: Api-Token {{DT_API_TOKEN}}
+}
+
+body:json {
+  {
+    "brokenLinkDomains": [
+      "mydomain.com"
+    ],
+    "clientSideMissingHttpCodeIsFailure": false,
+    "description": "for requests from shipping module",
+    "failingHttpCodesClientSide": "400-599",
+    "failingHttpCodesServerSide": "500-599",
+    "http404NotFoundFailureEnabled": false,
+    "id": "FDP_9",
+    "name": "shipping",
+    "serverSideMissingHttpCodeIsFailure": false,
+    "successForcingExceptionPatterns": [
+      {
+        "classPattern": "NullPointerException",
+        "messagePattern": ""
+      }
+    ],
+    "tagConditions": [
+      {
+        "predicate": {
+          "ignoreCase": true,
+          "type": "STRING_EQUALS",
+          "value": "NG"
+        },
+        "tagKey": "myTag"
+      }
+    ]
+  }
+}
+
+docs {
+  # Creates a new failure detection parameter set | maturity=EARLY_ADOPTER
+
+  **Auth:** Api-Token only (OAuth not supported by this endpoint). Uses `{{DT_API_TOKEN}}`.
+
+  **API token scopes:** WriteConfig
+}

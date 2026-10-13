@@ -1,0 +1,41 @@
+meta {
+  name: Add the permissions for a single accessor on this object
+  type: http
+  seq: 10
+}
+
+post {
+  url: {{DT_TENANT_URL}}/api/v2/settings/objects/:objectId/permissions
+  body: json
+  auth: inherit
+}
+
+params:query {
+  ~adminAccess: 
+}
+
+params:path {
+  objectId: 
+}
+
+body:json {
+  {
+    "accessor": {
+      "id": "string",
+      "type": "user"
+    },
+    "permissions": [
+      "r"
+    ]
+  }
+}
+
+docs {
+  # Add the permissions for a single accessor on this object.
+
+  Add the permissions for a single accessor on this object, anyone with read/write permissions is allowed to add more permissions.
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `settings:objects:write`
+}

@@ -1,0 +1,29 @@
+meta {
+  name: Downloads JavaScript tag
+  type: http
+  seq: 8
+}
+
+get {
+  url: {{DT_TENANT_URL}}/api/v1/rum/jsTagComplete/:entity
+  body: none
+  auth: inherit
+}
+
+params:path {
+  entity: 
+}
+
+docs {
+  # Downloads JavaScript tag
+
+  **Deprecated**
+
+  Returns a JavaScript tag to be manually inserted into your web application code. The tag references a JavaScript file with full configuration and monitoring code, which causes a lower possible caching duration.
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `environment-api:rum:read`
+
+  **API token scopes:** RumJavaScriptTagManagement
+}

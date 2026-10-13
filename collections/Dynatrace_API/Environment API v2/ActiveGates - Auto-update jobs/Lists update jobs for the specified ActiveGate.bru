@@ -1,0 +1,38 @@
+meta {
+  name: Lists update jobs for the specified ActiveGate
+  type: http
+  seq: 2
+}
+
+get {
+  url: {{DT_TENANT_URL}}/api/v2/activeGates/:agId/updateJobs
+  body: none
+  auth: inherit
+}
+
+params:query {
+  ~from: 
+  ~to: 
+  ~startVersionCompareType: 
+  ~startVersion: 
+  ~updateType: 
+  ~targetVersionCompareType: 
+  ~targetVersion: 
+  ~lastUpdates: 
+}
+
+params:path {
+  agId: 
+}
+
+docs {
+  # Lists update jobs for the specified ActiveGate
+
+  The job can update the ActiveGate to the specified version or the latest available one.
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `environment-api:activegates:read`, `fleet-management:activegates:read`
+
+  **API token scopes:** activeGates.read
+}

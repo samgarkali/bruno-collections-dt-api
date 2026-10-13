@@ -1,0 +1,39 @@
+meta {
+  name: Gets data points of the specified metrics
+  type: http
+  seq: 3
+}
+
+get {
+  url: {{DT_TENANT_URL}}/api/v2/metrics/query
+  body: none
+  auth: inherit
+}
+
+params:query {
+  ~metricSelector: 
+  ~resolution: 
+  ~from: 
+  ~to: 
+  ~entitySelector: 
+  ~mzSelector: 
+}
+
+docs {
+  # Gets data points of the specified metrics
+
+  The following limits apply: 
+  * The amount of aggregated data points in the response is limited to 1,000 
+  * The amount of series in the response is limited to 1,000 
+     * The amount of data points per series is limited to 10,080 (minutes of one week) 
+     * The overall amount of data points is limited to 100,000 
+
+  The **dataPointCountRatio** specifies the ratio of queried data points divided by the maximum number of data points per metric that are allowed in a single query.
+  The **dimensionCountRatio** specifies the ratio of queried dimension tuples divided by the maximum number of dimension tuples allowed in a single query.
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `environment-api:metrics:read`
+
+  **API token scopes:** metrics.read
+}

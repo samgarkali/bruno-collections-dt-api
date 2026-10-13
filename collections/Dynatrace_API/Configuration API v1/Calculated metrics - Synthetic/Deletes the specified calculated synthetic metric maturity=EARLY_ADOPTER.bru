@@ -1,0 +1,27 @@
+meta {
+  name: Deletes the specified calculated synthetic metric maturity=EARLY_ADOPTER
+  type: http
+  seq: 6
+}
+
+delete {
+  url: {{DT_TENANT_URL}}/api/config/v1/calculatedMetrics/synthetic/:metricKey
+  body: none
+  auth: none
+}
+
+params:path {
+  metricKey: 
+}
+
+headers {
+  Authorization: Api-Token {{DT_API_TOKEN}}
+}
+
+docs {
+  # Deletes the specified calculated synthetic metric | maturity=EARLY_ADOPTER
+
+  **Auth:** Api-Token only (OAuth not supported by this endpoint). Uses `{{DT_API_TOKEN}}`.
+
+  **API token scopes:** WriteConfig
+}

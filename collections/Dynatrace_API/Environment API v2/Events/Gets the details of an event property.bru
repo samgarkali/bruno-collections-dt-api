@@ -1,0 +1,25 @@
+meta {
+  name: Gets the details of an event property
+  type: http
+  seq: 2
+}
+
+get {
+  url: {{DT_TENANT_URL}}/api/v2/eventProperties/:propertyKey
+  body: none
+  auth: inherit
+}
+
+params:path {
+  propertyKey: 
+}
+
+docs {
+  # Gets the details of an event property
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `storage:events:read`, `environment-api:events:read`
+
+  **API token scopes:** events.read
+}

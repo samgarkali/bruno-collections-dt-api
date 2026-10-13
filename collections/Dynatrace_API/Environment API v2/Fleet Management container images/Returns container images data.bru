@@ -1,0 +1,28 @@
+meta {
+  name: Returns container images data
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{DT_TENANT_URL}}/api/v2/fleetManagement/components/containerImages
+  body: none
+  auth: inherit
+}
+
+params:query {
+  ~registry: 
+  ~registryFilter: 
+}
+
+docs {
+  # Returns container images data
+
+  Returns container image references for Dynatrace components from the specified registry. Returned image versions are resolved based on the configured target versions: dynatrace-activegate, dynatrace-eec, dynatrace-sql-extension-executor, and dynatrace-database-datasource-executor image versions are resolved from the ActiveGate target version; dynatrace-oneagent, dynatrace-codemodules, and dynatrace-logmodule image versions are resolved from the OneAgent target version. If no target version is configured for a component, the latest available image is returned.
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `environment-api:deployment:download`, `fleet-management:container-images:read`
+
+  **API token scopes:** InstallerDownload
+}

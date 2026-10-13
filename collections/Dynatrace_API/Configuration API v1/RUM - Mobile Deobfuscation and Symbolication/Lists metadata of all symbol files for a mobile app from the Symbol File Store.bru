@@ -1,0 +1,29 @@
+meta {
+  name: Lists metadata of all symbol files for a mobile app from the Symbol File Store
+  type: http
+  seq: 5
+}
+
+get {
+  url: {{DT_TENANT_URL}}/api/config/v1/symfiles/:applicationId
+  body: none
+  auth: none
+}
+
+params:path {
+  applicationId: 
+}
+
+headers {
+  Authorization: Api-Token {{DT_API_TOKEN}}
+}
+
+docs {
+  # Lists metadata of all symbol files for a mobile app from the Symbol File Store
+
+  Symbol files are ProGuard files for Android or dSYM files for iOS.
+
+  **Auth:** Api-Token only (OAuth not supported by this endpoint). Uses `{{DT_API_TOKEN}}`.
+
+  **API token scopes:** DssFileManagement
+}

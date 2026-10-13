@@ -1,0 +1,43 @@
+meta {
+  name: Adds custom tags to the specified entities
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{DT_TENANT_URL}}/api/v2/tags
+  body: json
+  auth: inherit
+}
+
+params:query {
+  entitySelector: 
+  ~from: 
+  ~to: 
+}
+
+body:json {
+  {
+    "tags": [
+      {
+        "key": "mainApp"
+      },
+      {
+        "key": "bookings",
+        "value": "42"
+      }
+    ]
+  }
+}
+
+docs {
+  # Adds custom tags to the specified entities
+
+  All existing tags remain unaffected.
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `environment-api:entities:write`
+
+  **API token scopes:** entities.write
+}

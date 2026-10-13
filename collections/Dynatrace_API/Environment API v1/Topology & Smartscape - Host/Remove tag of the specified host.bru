@@ -1,0 +1,30 @@
+meta {
+  name: Remove tag of the specified host
+  type: http
+  seq: 4
+}
+
+delete {
+  url: {{DT_TENANT_URL}}/api/v1/entity/infrastructure/hosts/:meIdentifier/tags/:tag
+  body: none
+  auth: none
+}
+
+params:path {
+  meIdentifier: 
+  tag: 
+}
+
+headers {
+  Authorization: Api-Token {{DT_API_TOKEN}}
+}
+
+docs {
+  # Remove tag of the specified host
+
+  **Deprecated**
+
+  **Auth:** Api-Token only (OAuth not supported by this endpoint). Uses `{{DT_API_TOKEN}}`.
+
+  **API token scopes:** DataExport
+}

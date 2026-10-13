@@ -1,0 +1,33 @@
+meta {
+  name: Gets parameters and calculated values of a specific SLO
+  type: http
+  seq: 3
+}
+
+get {
+  url: {{DT_TENANT_URL}}/api/v2/slo/:id
+  body: none
+  auth: inherit
+}
+
+params:query {
+  ~from: 
+  ~to: 
+  ~timeFrame: 
+}
+
+params:path {
+  id: 
+}
+
+docs {
+  # Gets parameters and calculated values of a specific SLO
+
+  If **from** and **to** parameters are provided, the SLO is calculated for that timeframe; otherwise the SLO's own timeframe is used.
+
+  **Auth:** OAuth (inherited from collection)
+
+  **Required OAuth scopes:** `environment-api:slo:read`
+
+  **API token scopes:** slo.read
+}
