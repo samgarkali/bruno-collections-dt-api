@@ -36,7 +36,7 @@ All APIs are combined into a **single collection** so OAuth 2.0 (client credenti
    - **Additional parameter (token request body):** `resource` = `{{DT_URN}}`
 5. Select the environment in the top right and send a request.
 
-## Environment variables
+## Global Environment variables
 
 | Variable | Description | Example |
 |---|---|---|
