@@ -33,7 +33,7 @@ All APIs are combined into a **single collection** so OAuth 2.0 (client credenti
 3. Create an environment for each tenant (see #environment-variables).
 4. In **Collection Settings → Auth**:
    - **Scope:** add the scopes of your OAuth client (space-separated)
-   - **Additional parameter (token request body):** `resource` = `{{DT_URN}}`
+   - **Additional parameter (token request body):** `resource = {{DT_URN}}`
 5. Select the environment in the top right and send a request.
 
 ## Global Environment variables
